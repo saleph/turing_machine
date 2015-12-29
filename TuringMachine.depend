@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1451401230 source:/home/tomasz/Moje projekty/TuringMachine/main.cpp
+	<iostream>
+
+1451402968 source:/home/tomasz/Moje projekty/TuringMachine/src/MyExp.cpp
+	"MyExp.h"
+
+1451402968 /home/tomasz/Moje projekty/TuringMachine/include/MyExp.h
+

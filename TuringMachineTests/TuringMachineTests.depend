@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1451404213 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/main.cpp
+	"../include/MyExp.h"
+	<boost/test/included/unit_test.hpp>
+
+1451402968 /home/tomasz/Moje projekty/TuringMachine/include/MyExp.h
+
