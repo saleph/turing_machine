@@ -1,6 +1,5 @@
 #include "MyExp.h"
-
-double myExpFunc(double x)
+double MyExp::myExpFunc(double x)
 {
     return x*x;
 }

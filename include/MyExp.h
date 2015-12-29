@@ -1,7 +1,6 @@
 #ifndef MYEXP_H
 #define MYEXP_H
 
-
 class MyExp
 {
     public:
