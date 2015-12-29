@@ -1,9 +1,16 @@
 # depslib dependency file v1.0
-1451401230 source:/home/tomasz/Moje projekty/TuringMachine/main.cpp
+1451410875 source:/home/tomasz/Moje projekty/TuringMachine/main.cpp
 	<iostream>
 
-1451402968 source:/home/tomasz/Moje projekty/TuringMachine/src/MyExp.cpp
+1451410875 source:/home/tomasz/Moje projekty/TuringMachine/src/MyExp.cpp
 	"MyExp.h"
 
-1451402968 /home/tomasz/Moje projekty/TuringMachine/include/MyExp.h
+1451410872 /home/tomasz/Moje projekty/TuringMachine/include/MyExp.h
+
+1451427359 source:/home/tomasz/Moje projekty/TuringMachine/src/TMAlphabet.cpp
+	"TMAlphabet.h"
+
+1451426375 /home/tomasz/Moje projekty/TuringMachine/include/TMAlphabet.h
+	<string>
+	<unordered_set>
 

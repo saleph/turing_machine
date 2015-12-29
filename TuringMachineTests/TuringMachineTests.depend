@@ -3,5 +3,20 @@
 	"../include/MyExp.h"
 	<boost/test/included/unit_test.hpp>
 
-1451408240 /home/tomasz/Moje projekty/TuringMachine/include/MyExp.h
+1451410872 /home/tomasz/Moje projekty/TuringMachine/include/MyExp.h
+
+1451410875 source:/home/tomasz/Moje projekty/TuringMachine/src/MyExp.cpp
+	"MyExp.h"
+
+1451427359 source:/home/tomasz/Moje projekty/TuringMachine/src/TMAlphabet.cpp
+	"TMAlphabet.h"
+
+1451427622 /home/tomasz/Moje projekty/TuringMachine/include/TMAlphabet.h
+	<string>
+	<unordered_set>
+
+1451427396 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/TMAlphabetTest.cpp
+	"TMAlphabet.h"
+	<boost/test/included/unit_test.hpp>
+	<string>
 
