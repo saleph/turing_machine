@@ -1,22 +1,50 @@
 # depslib dependency file v1.0
-1451404213 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/main.cpp
-	"../include/MyExp.h"
-	<boost/test/included/unit_test.hpp>
+1451485743 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/main.cpp
+	<boost/test/unit_test.hpp>
 
 1451410872 /home/tomasz/Moje projekty/TuringMachine/include/MyExp.h
 
 1451410875 source:/home/tomasz/Moje projekty/TuringMachine/src/MyExp.cpp
 	"MyExp.h"
 
-1451427359 source:/home/tomasz/Moje projekty/TuringMachine/src/TMAlphabet.cpp
+1451565829 source:/home/tomasz/Moje projekty/TuringMachine/src/TMAlphabet.cpp
 	"TMAlphabet.h"
 
-1451427622 /home/tomasz/Moje projekty/TuringMachine/include/TMAlphabet.h
+1451565859 /home/tomasz/Moje projekty/TuringMachine/include/TMAlphabet.h
 	<string>
 	<unordered_set>
+	<algorithm>
 
-1451427396 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/TMAlphabetTest.cpp
+1451470888 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/TMAlphabetTest.cpp
 	"TMAlphabet.h"
 	<boost/test/included/unit_test.hpp>
 	<string>
+
+1451485671 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/TMAlphabet/has()Test.cpp
+	"TMAlphabet.h"
+	<boost/test/included/unit_test.hpp>
+	<string>
+
+1451485671 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/TMAlphabet/getAlphabet()Test.cpp
+	"TMAlphabet.h"
+	<boost/test/included/unit_test.hpp>
+	<string>
+
+1451564116 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/getAlphabet()Test.cpp
+	"TMAlphabet.h"
+	<string>
+	<boost/test/unit_test.hpp>
+
+1451564041 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/has()Test.cpp
+	"TMAlphabet.h"
+	<string>
+	<boost/test/included/unit_test.hpp>
+
+1451565918 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/TMAlphabetTests.cpp
+	"TMAlphabet.h"
+	<string>
+	<algorithm>
+	<boost/test/included/unit_test.hpp>
+
+1451223023 /usr/include/boost/algorithm
 

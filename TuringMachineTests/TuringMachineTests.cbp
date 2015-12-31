@@ -14,9 +14,13 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add directory="$(#boost)" />
+					<Add directory="../include" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add directory="$(#boost.lib)" />
+					<Add directory="../src" />
+					<Add directory="/usr/include/boost/test/impl" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -26,6 +30,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -36,6 +41,10 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="../src/TMAlphabet.cpp" />
+		<Unit filename="../src/TMHead.cpp" />
+		<Unit filename="TMAlphabetTests.cpp" />
+		<Unit filename="getAlphabet()Test.cpp" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

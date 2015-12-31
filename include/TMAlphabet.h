@@ -3,6 +3,7 @@
 
 #include <string>
 #include <unordered_set>
+#include <algorithm>
 
 
 class TMAlphabet
@@ -14,9 +15,10 @@ class TMAlphabet
         virtual ~TMAlphabet() {};
 
         std::string getAlphabet();
+        std::string getSortedAlphabet();
+        void setAlphabet(const std::string&);
 
         bool has(const char);
-    protected:
     private:
         std::unordered_set<char> alphabet;
 };
