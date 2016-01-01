@@ -8,13 +8,13 @@
 class TMTape : public TMHead
 {
     public:
-        TMTape(unsigned int len) : tapeLength(len), TMHead (tapeLength/2u) { initTape(len); }
+        TMTape(unsigned int len) : tapeLength(len), TMHead (len/2u) { initTape(len); }
         TMTape(unsigned int len, unsigned int headPos) : tapeLength(len), TMHead(headPos) { initTape(len); }
         TMTape(TMTape&) = default;
         TMTape(TMTape&&) = default;
         TMTape& operator= (TMTape&) = default;
         TMTape& operator= (TMTape&&) = default;
-        virtual ~TMTape() = default;
+        virtual ~TMTape();
 
         void doCmd (const char before, const char after, MoveType headMove)
             throw (MismatchCommandAndElementUnderHead);

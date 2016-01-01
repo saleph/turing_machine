@@ -13,7 +13,7 @@ class MismatchCommandAndElementUnderHead : public invalid_argument
 class TMHead
 { // this class has to be derivided by TMTape
     public:
-        TMHead() {};
+        TMHead() = default;
         TMHead(unsigned int pos) : position(pos) {};
         TMHead(TMHead&) = default;
         TMHead(TMHead&&) = default;
@@ -26,7 +26,7 @@ class TMHead
         enum MoveType { LEFT, RIGHT };
         // this method will use a tape with data and modify its content
         virtual void doCmd (const char before, const char after, MoveType headMove)
-                throw (MismatchCommandAndElementUnderHead) = 0;
+                throw (MismatchCommandAndElementUnderHead) {};
     protected:
         char *signUnderHead;
     private:
