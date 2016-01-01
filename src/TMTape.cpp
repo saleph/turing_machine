@@ -1,5 +1,15 @@
 #include "TMTape.h"
 
+TMTape::TMTape(unsigned int len) : tapeLength(len), TMHead (len/2u) {
+    initTape(len);
+}
+
+TMTape::TMTape(unsigned int len, unsigned int headPos) throw (ZeroLongTape) : tapeLength(len), TMHead(headPos) {
+    if (len == 0)
+        throw ZeroLongTape();
+    initTape(len);
+}
+
 TMTape::~TMTape() {
     // dtor def
 }

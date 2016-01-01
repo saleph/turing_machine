@@ -2,14 +2,22 @@
 #define TMTAPE_H
 
 #include <vector>
+#include <stdexcept>
 #include "TMHead.h"
+using std::invalid_argument;
+
+class ZeroLongTape : public invalid_argument
+{
+    public:
+        ZeroLongTape() : invalid_argument ( "The tape cannot be zero-element-long!" ) {}
+};
 
 
 class TMTape : public TMHead
 {
     public:
-        TMTape(unsigned int len) : tapeLength(len), TMHead (len/2u) { initTape(len); }
-        TMTape(unsigned int len, unsigned int headPos) : tapeLength(len), TMHead(headPos) { initTape(len); }
+        TMTape(unsigned int len);
+        TMTape(unsigned int len, unsigned int headPos) throw (ZeroLongTape);
         TMTape(TMTape&) = default;
         TMTape(TMTape&&) = default;
         TMTape& operator= (TMTape&) = default;
