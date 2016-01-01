@@ -1,6 +1,6 @@
 # depslib dependency file v1.0
-1451485743 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/main.cpp
-	<boost/test/unit_test.hpp>
+1451583990 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/main.cpp
+	<boost/test/included/unit_test.hpp>
 
 1451410872 /home/tomasz/Moje projekty/TuringMachine/include/MyExp.h
 
@@ -47,4 +47,30 @@
 	<boost/test/included/unit_test.hpp>
 
 1451223023 /usr/include/boost/algorithm
+
+1451663360 source:/home/tomasz/Moje projekty/TuringMachine/src/TMTape.cpp
+	"TMTape.h"
+
+1451670222 /home/tomasz/Moje projekty/TuringMachine/include/TMTape.h
+	<vector>
+	"TMHead.h"
+
+1451668727 /home/tomasz/Moje projekty/TuringMachine/include/TMHead.h
+	<stdexcept>
+
+1451664598 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/UnitTests/TMAlphabetTests.cpp
+	"TMAlphabet.h"
+	<string>
+	<algorithm>
+	<boost/test/unit_test.hpp>
+
+1451664401 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/UnitTests/TMHeadTests.cpp
+	"TMHead.h"
+	<string>
+	<boost/test/unit_test.hpp>
+
+1451668849 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/UnitTests/TMTapeTests.cpp
+	"TMTape.h"
+	<string>
+	<boost/test/unit_test.hpp>
 

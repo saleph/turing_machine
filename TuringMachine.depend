@@ -7,10 +7,21 @@
 
 1451410872 /home/tomasz/Moje projekty/TuringMachine/include/MyExp.h
 
-1451427359 source:/home/tomasz/Moje projekty/TuringMachine/src/TMAlphabet.cpp
+1451565829 source:/home/tomasz/Moje projekty/TuringMachine/src/TMAlphabet.cpp
 	"TMAlphabet.h"
 
-1451426375 /home/tomasz/Moje projekty/TuringMachine/include/TMAlphabet.h
+1451565859 /home/tomasz/Moje projekty/TuringMachine/include/TMAlphabet.h
 	<string>
 	<unordered_set>
+	<algorithm>
+
+1451663360 source:/home/tomasz/Moje projekty/TuringMachine/src/TMTape.cpp
+	"TMTape.h"
+
+1451666799 /home/tomasz/Moje projekty/TuringMachine/include/TMTape.h
+	<vector>
+	"TMHead.h"
+
+1451666746 /home/tomasz/Moje projekty/TuringMachine/include/TMHead.h
+	<stdexcept>
 

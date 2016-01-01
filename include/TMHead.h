@@ -6,24 +6,31 @@ using std::invalid_argument;
 class MismatchCommandAndElementUnderHead : public invalid_argument
 {
     public:
-        MismatchCommandAndElementUnderHead() : invalid_argument ( "Mismatch of command and the element under head!" );
-}
+        MismatchCommandAndElementUnderHead() : invalid_argument ( "Mismatch of command and the element under the head!" ) {};
+};
 
 
 class TMHead
-{
+{ // this class has to be derivided by TMTape
     public:
-        TMHead() = default;
-        TMHead(unsigned int pos) { setPosition(pos); };
+        TMHead() {};
+        TMHead(unsigned int pos) : position(pos) {};
+        TMHead(TMHead&) = default;
+        TMHead(TMHead&&) = default;
         virtual ~TMHead() = default;
+        TMHead& operator= (TMHead&) = default;
+        TMHead& operator= (TMHead&&) = default;
         unsigned int getPosition() { return position; }
         void setPosition(unsigned int val) { position = val; }
 
         enum MoveType { LEFT, RIGHT };
-        void proceed (const char before, const char after, MoveType headMove) throw (MismatchCommandAndElementUnderHead);
+        // this method will use a tape with data and modify its content
+        virtual void doCmd (const char before, const char after, MoveType headMove)
+                throw (MismatchCommandAndElementUnderHead) = 0;
+    protected:
+        char *signUnderHead;
     private:
         unsigned int position;
-        char *signUnderHead;
 };
 
 #endif // TMHEAD_H

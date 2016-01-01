@@ -37,9 +37,10 @@
 		<Unit filename="include/TMAlphabet.h" />
 		<Unit filename="include/TMHead.h" />
 		<Unit filename="include/TMInputiInterface.h" />
+		<Unit filename="include/TMTape.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/TMAlphabet.cpp" />
-		<Unit filename="src/TMHead.cpp" />
+		<Unit filename="src/TMTape.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
