@@ -38,8 +38,7 @@ BOOST_AUTO_TEST_SUITE_END();
 BOOST_AUTO_TEST_SUITE( tape_with_setting_position );
 
 BOOST_AUTO_TEST_CASE( head_position_after_construction_with_specified_pos_for_0_long_tape ) {
-    TMTape tape {0};
-    BOOST_CHECK_EQUAL(tape.getPosition(), 0/2);
+    BOOST_CHECK_THROW(TMTape {0, 0}, ZeroLongTape);
 }
 
 BOOST_AUTO_TEST_SUITE_END();

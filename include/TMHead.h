@@ -26,7 +26,7 @@ class TMHead
         enum MoveType { LEFT, RIGHT };
         // this method will use a tape with data and modify its content
         virtual void doCmd (const char before, const char after, MoveType headMove)
-                throw (MismatchCommandAndElementUnderHead) {};
+                throw (MismatchCommandAndElementUnderHead) = 0;
     protected:
         char *signUnderHead;
     private:

@@ -16,7 +16,7 @@ class ZeroLongTape : public invalid_argument
 class TMTape : public TMHead
 {
     public:
-        TMTape(unsigned int len);
+        TMTape(unsigned int len) throw (ZeroLongTape);
         TMTape(unsigned int len, unsigned int headPos) throw (ZeroLongTape);
         TMTape(TMTape&) = default;
         TMTape(TMTape&&) = default;
@@ -31,6 +31,7 @@ class TMTape : public TMHead
         unsigned int tapeLength;
         std::vector<char> tape;
 
+        void setTapeLength(unsigned int len);
         void initTape(unsigned int len);
 };
 

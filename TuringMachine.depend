@@ -1,6 +1,7 @@
 # depslib dependency file v1.0
-1451410875 source:/home/tomasz/Moje projekty/TuringMachine/main.cpp
+1451735034 source:/home/tomasz/Moje projekty/TuringMachine/main.cpp
 	<iostream>
+	"TMTape.h"
 
 1451410875 source:/home/tomasz/Moje projekty/TuringMachine/src/MyExp.cpp
 	"MyExp.h"
@@ -15,13 +16,14 @@
 	<unordered_set>
 	<algorithm>
 
-1451663360 source:/home/tomasz/Moje projekty/TuringMachine/src/TMTape.cpp
+1451724109 source:/home/tomasz/Moje projekty/TuringMachine/src/TMTape.cpp
 	"TMTape.h"
 
-1451674356 /home/tomasz/Moje projekty/TuringMachine/include/TMTape.h
+1451735114 /home/tomasz/Moje projekty/TuringMachine/include/TMTape.h
 	<vector>
+	<stdexcept>
 	"TMHead.h"
 
-1451670513 /home/tomasz/Moje projekty/TuringMachine/include/TMHead.h
+1451681351 /home/tomasz/Moje projekty/TuringMachine/include/TMHead.h
 	<stdexcept>
 

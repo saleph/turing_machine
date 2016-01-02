@@ -48,14 +48,15 @@
 
 1451223023 /usr/include/boost/algorithm
 
-1451677876 source:/home/tomasz/Moje projekty/TuringMachine/src/TMTape.cpp
+1451735161 source:/home/tomasz/Moje projekty/TuringMachine/src/TMTape.cpp
 	"TMTape.h"
 
-1451677478 /home/tomasz/Moje projekty/TuringMachine/include/TMTape.h
+1451735114 /home/tomasz/Moje projekty/TuringMachine/include/TMTape.h
 	<vector>
+	<stdexcept>
 	"TMHead.h"
 
-1451675470 /home/tomasz/Moje projekty/TuringMachine/include/TMHead.h
+1451681351 /home/tomasz/Moje projekty/TuringMachine/include/TMHead.h
 	<stdexcept>
 
 1451664598 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/UnitTests/TMAlphabetTests.cpp
@@ -69,7 +70,7 @@
 	<string>
 	<boost/test/unit_test.hpp>
 
-1451674378 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/UnitTests/TMTapeTests.cpp
+1451735216 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/UnitTests/TMTapeTests.cpp
 	"TMTape.h"
 	<boost/test/unit_test.hpp>
 

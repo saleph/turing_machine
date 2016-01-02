@@ -42,9 +42,9 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="../src/TMAlphabet.cpp" />
-		<Unit filename="../src/TMHead.cpp" />
-		<Unit filename="TMAlphabetTests.cpp" />
-		<Unit filename="getAlphabet()Test.cpp" />
+		<Unit filename="../src/TMTape.cpp" />
+		<Unit filename="UnitTests/TMAlphabetTests.cpp" />
+		<Unit filename="UnitTests/TMTapeTests.cpp" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
