@@ -14,14 +14,14 @@ class TMHead
 { // this class has to be derivided by TMTape
     public:
         TMHead() = default;
-        TMHead(unsigned int pos) : position(pos) {};
+        TMHead(unsigned int pos) : headPosition(pos) {};
         TMHead(TMHead&) = default;
         TMHead(TMHead&&) = default;
         virtual ~TMHead() = default;
         TMHead& operator= (TMHead&) = default;
         TMHead& operator= (TMHead&&) = default;
-        unsigned int getPosition() { return position; }
-        void setPosition(unsigned int val) { position = val; }
+        unsigned int getHeadPosition() const { return headPosition; }
+        void setHeadPosition(unsigned int val) { headPosition = val; }
 
         enum MoveType { LEFT, RIGHT };
         // this method will use a tape with data and modify its content
@@ -30,7 +30,7 @@ class TMHead
     protected:
         char *signUnderHead;
     private:
-        unsigned int position;
+        unsigned int headPosition;
 };
 
 #endif // TMHEAD_H
