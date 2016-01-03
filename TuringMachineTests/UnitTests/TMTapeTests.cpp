@@ -45,8 +45,15 @@ BOOST_AUTO_TEST_CASE( construction_with_head_at_1_for_0_long_tape ) {
     BOOST_CHECK_THROW(TMTape (0, 1), ZeroLongTape);
 }
 
-BOOST_AUTO_TEST_CASE( construction_with_head_at_2_for_1_long_tape ) {
+BOOST_AUTO_TEST_CASE( construction_with_head_at_1_for_1_long_tape ) {
     BOOST_CHECK_THROW(TMTape (1, 1), HeadOutOfTape);
 }
+
+BOOST_AUTO_TEST_CASE( construction_with_head_at_0_for_1_long_tape ) {
+    BOOST_CHECK_NO_THROW(TMTape (1, 0));
+    // TODO: validation of construction
+}
+
+
 
 BOOST_AUTO_TEST_SUITE_END();
