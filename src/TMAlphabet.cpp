@@ -23,7 +23,7 @@ void TMAlphabet::setAlphabet(const std::string& strVal) {
     alphabet.insert (strVal.begin(), strVal.end());
 }
 
-bool TMAlphabet::has(const char sign) {
+bool TMAlphabet::has(const char sign) const {
     int occurrences = alphabet.count(sign);
     return occurrences > 0 ? true : false;
 }

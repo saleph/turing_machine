@@ -1,4 +1,5 @@
 #include "TMAlphabet.h"
+#include "TMExceptions.h"
 #include <string>
 #include <algorithm>
 

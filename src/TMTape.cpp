@@ -42,9 +42,37 @@ unsigned int TMTape::getHeadPosition() const {
 
 void TMTape::initTape(unsigned int len) {
     tape.insert(tape.begin(), len, '#');
+    updateHeadPointer();
 }
 
-void TMTape::doCmd (const char before, const char after, MoveType headMove)
-    throw (MismatchCommandAndElementUnderHead) {
-    // TODO
+void TMTape::doCmd(const char before, const char after, MoveType headMove)
+    throw (MismatchCommandAndElementUnderHead, CharacterOutOfAlphabet) {
+    checkIfBelongsToAlphabet(before);
+    checkIfBelongsToAlphabet(after);
+    checkIfMatchWithCharOnTape(before);
+    changeCharUnderHeadTo(after);
+    moveHeadToThe(headMove);
+    checkHeadPosition();
+}
+
+void TMTape::changeCharUnderHeadTo(const char character) {
+    setValueUnderHead(character);
+}
+
+void TMTape::moveHeadToThe(MoveType direction) {
+    if (direction == LEFT) moveHeadLeft();
+    if (direction == RIGHT) moveHeadRight();
+    updateHeadPointer();
+}
+
+void TMTape::updateHeadPointer() {
+    setPointerForCharUnderHead(&tape[getHeadPosition()]);
+}
+
+void TMTape::checkIfBelongsToAlphabet(const char character) const throw (CharacterOutOfAlphabet) {
+    if (!alphabet.has(character)) throw CharacterOutOfAlphabet();
+}
+
+void TMTape::checkIfMatchWithCharOnTape(const char character) const throw (MismatchCommandAndElementUnderHead) {
+    if(getCharUnderHead() != character) throw MismatchCommandAndElementUnderHead();
 }
