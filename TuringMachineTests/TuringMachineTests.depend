@@ -70,7 +70,8 @@
 	<string>
 	<boost/test/unit_test.hpp>
 
-1451846075 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/UnitTests/TMTapeTests.cpp
+1451902145 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/UnitTests/TMTapeTests.cpp
 	"TMTape.h"
+	<memory>
 	<boost/test/unit_test.hpp>
 
