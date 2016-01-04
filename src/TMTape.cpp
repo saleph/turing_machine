@@ -22,7 +22,7 @@ void TMTape::checkTapeLength(unsigned int len) const throw (ZeroLongTape) {
 }
 
 void TMTape::checkHeadPosition() const throw (HeadOutOfTape) {
-    if (TMHead::getHeadPosition() > tapeLength - 1) throw HeadOutOfTape();
+    if (getHeadPosition() > tapeLength - 1) throw HeadOutOfTape();
 }
 
 TMTape::~TMTape() {}
@@ -46,7 +46,7 @@ void TMTape::initTape(unsigned int len) {
 }
 
 void TMTape::doCmd(const char before, const char after, MoveType headMove)
-    throw (MismatchCommandAndElementUnderHead, CharacterOutOfAlphabet) {
+    throw (MismatchCommandAndElementUnderHead, CharacterOutOfAlphabet, HeadOutOfTape) {
     checkIfBelongsToAlphabet(before);
     checkIfBelongsToAlphabet(after);
     checkIfMatchWithCharOnTape(before);

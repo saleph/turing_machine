@@ -52,14 +52,14 @@
 1451932825 source:/home/tomasz/Moje projekty/TuringMachine/src/TMTape.cpp
 	"TMTape.h"
 
-1451932825 /home/tomasz/Moje projekty/TuringMachine/include/TMTape.h
+1451933303 /home/tomasz/Moje projekty/TuringMachine/include/TMTape.h
 	<vector>
 	<stdexcept>
 	"TMHead.h"
 	"TMAlphabet.h"
 	"TMExceptions.h"
 
-1451927295 /home/tomasz/Moje projekty/TuringMachine/include/TMHead.h
+1451933318 /home/tomasz/Moje projekty/TuringMachine/include/TMHead.h
 	"TMExceptions.h"
 
 1451926507 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/UnitTests/TMAlphabetTests.cpp

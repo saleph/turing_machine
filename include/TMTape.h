@@ -25,7 +25,7 @@ class TMTape : public TMHead
         virtual unsigned int getHeadPosition() const;
 
         void doCmd (const char before, const char after, MoveType headMove)
-            throw (MismatchCommandAndElementUnderHead, CharacterOutOfAlphabet);
+            throw (MismatchCommandAndElementUnderHead, CharacterOutOfAlphabet, HeadOutOfTape);
 
         TMAlphabet alphabet;
     protected:

@@ -24,7 +24,7 @@ class TMHead
         void moveHeadLeft() { headPosition--; }
         // this method will use a tape with data and modify its content
         virtual void doCmd (const char before, const char after, MoveType headMove)
-                throw (MismatchCommandAndElementUnderHead, CharacterOutOfAlphabet) = 0;
+                throw (MismatchCommandAndElementUnderHead, CharacterOutOfAlphabet, HeadOutOfTape) = 0;
     private:
         unsigned int headPosition;
         char *charUnderHead;
