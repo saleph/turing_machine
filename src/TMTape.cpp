@@ -27,9 +27,21 @@ void TMTape::checkHeadPosition() const throw (HeadOutOfTape) {
 
 TMTape::~TMTape() {}
 
+void TMTape::setHeadPosition(unsigned int pos) throw (HeadOutOfTape) {
+    checkHeadPosition(pos);
+    TMHead::setHeadPosition(pos);
+}
+
+void TMTape::checkHeadPosition(unsigned int pos) const throw (HeadOutOfTape) {
+    if (pos > tapeLength - 1) throw HeadOutOfTape();
+}
+
+unsigned int TMTape::getHeadPosition() const {
+    return TMHead::getHeadPosition();
+}
+
 void TMTape::initTape(unsigned int len) {
-    // TODO
-    // tape.insert(tape.begin(), len, '#');
+    tape.insert(tape.begin(), len, '#');
 }
 
 void TMTape::doCmd (const char before, const char after, MoveType headMove)

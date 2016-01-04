@@ -22,15 +22,16 @@ class TMHead
         TMHead& operator= (TMHead&&) = default;
         unsigned int getHeadPosition() const { return headPosition; }
         void setHeadPosition(unsigned int val) { headPosition = val; }
+        char getCharUnderHead() const { return *charUnderHead; }
+        void setCharUnderHead(char& val) { charUnderHead = &val; }
 
         enum MoveType { LEFT, RIGHT };
         // this method will use a tape with data and modify its content
         virtual void doCmd (const char before, const char after, MoveType headMove)
                 throw (MismatchCommandAndElementUnderHead) = 0;
-    protected:
-        char *signUnderHead;
     private:
         unsigned int headPosition;
+        char *charUnderHead;
 };
 
 #endif // TMHEAD_H
