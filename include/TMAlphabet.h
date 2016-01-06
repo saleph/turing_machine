@@ -5,27 +5,29 @@
 #include <unordered_set>
 #include <algorithm>
 #include "TMExceptions.h"
+using std::string;
+using std::unordered_set;
 
 class TMAlphabet
 {
     public:
         TMAlphabet() = default;
-        TMAlphabet(const std::string&);
-        TMAlphabet(const std::unordered_set<char>&);
+        TMAlphabet(const string&);
+        TMAlphabet(const unordered_set<char>&);
         TMAlphabet(TMAlphabet&) = default;
         TMAlphabet(TMAlphabet&&) = default;
         TMAlphabet& operator= (TMAlphabet&) = default;
         TMAlphabet& operator= (TMAlphabet&&) = default;
-        TMAlphabet&& operator= (const std::string& val) { return TMAlphabet(val); }
+        TMAlphabet&& operator= (const string& val) { return TMAlphabet(val); }
         virtual ~TMAlphabet() = default;
 
-        std::string getAlphabet();
-        std::string getSortedAlphabet();
-        void setAlphabet(const std::string&);
+        string getAlphabet();
+        string getSortedAlphabet();
+        void setAlphabet(const string&);
 
         bool has(const char) const;
     private:
-        std::unordered_set<char> alphabet;
+        unordered_set<char> alphabet;
 };
 
 #endif // TMALPHABET_H

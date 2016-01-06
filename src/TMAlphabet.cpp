@@ -1,24 +1,24 @@
 #include "TMAlphabet.h"
 
-TMAlphabet::TMAlphabet(const std::string& strVal) {
+TMAlphabet::TMAlphabet(const string& strVal) {
     alphabet.insert (strVal.begin(), strVal.end());
 }
 
-TMAlphabet::TMAlphabet(const std::unordered_set<char>& usetVal) {
+TMAlphabet::TMAlphabet(const unordered_set<char>& usetVal) {
     alphabet = usetVal;
 }
 
-std::string TMAlphabet::getAlphabet() {
-    return std::string(alphabet.begin(), alphabet.end());
+string TMAlphabet::getAlphabet() {
+    return string(alphabet.begin(), alphabet.end());
 }
 
-std::string TMAlphabet::getSortedAlphabet() {
-    std::string strAlpha {getAlphabet()};
+string TMAlphabet::getSortedAlphabet() {
+    string strAlpha {getAlphabet()};
     std::sort (strAlpha.begin(), strAlpha.end());
     return strAlpha;
 }
 
-void TMAlphabet::setAlphabet(const std::string& strVal) {
+void TMAlphabet::setAlphabet(const string& strVal) {
     alphabet.clear();
     alphabet.insert (strVal.begin(), strVal.end());
 }

@@ -10,7 +10,7 @@
 1451932895 source:/home/tomasz/Moje projekty/TuringMachine/src/TMAlphabet.cpp
 	"TMAlphabet.h"
 
-1451932889 /home/tomasz/Moje projekty/TuringMachine/include/TMAlphabet.h
+1452001513 /home/tomasz/Moje projekty/TuringMachine/include/TMAlphabet.h
 	<string>
 	<unordered_set>
 	<algorithm>
@@ -49,12 +49,13 @@
 
 1451223023 /usr/include/boost/algorithm
 
-1451932825 source:/home/tomasz/Moje projekty/TuringMachine/src/TMTape.cpp
+1451998034 source:/home/tomasz/Moje projekty/TuringMachine/src/TMTape.cpp
 	"TMTape.h"
 
-1451933303 /home/tomasz/Moje projekty/TuringMachine/include/TMTape.h
+1452017021 /home/tomasz/Moje projekty/TuringMachine/include/TMTape.h
 	<vector>
 	<stdexcept>
+	<memory>
 	"TMHead.h"
 	"TMAlphabet.h"
 	"TMExceptions.h"
@@ -74,7 +75,7 @@
 	<string>
 	<boost/test/unit_test.hpp>
 
-1451932380 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/UnitTests/TMTapeTests.cpp
+1452001078 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/UnitTests/TMTapeTests.cpp
 	"TMTape.h"
 	"TMExceptions.h"
 	<memory>

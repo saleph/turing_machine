@@ -35,6 +35,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/TMAlphabet.h" />
+		<Unit filename="include/TMExceptions.h" />
 		<Unit filename="include/TMHead.h" />
 		<Unit filename="include/TMInputiInterface.h" />
 		<Unit filename="include/TMTape.h" />

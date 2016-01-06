@@ -8,7 +8,7 @@
 
 1451410872 /home/tomasz/Moje projekty/TuringMachine/include/MyExp.h
 
-1451932218 source:/home/tomasz/Moje projekty/TuringMachine/src/TMAlphabet.cpp
+1451932895 source:/home/tomasz/Moje projekty/TuringMachine/src/TMAlphabet.cpp
 	"TMAlphabet.h"
 
 1451932889 /home/tomasz/Moje projekty/TuringMachine/include/TMAlphabet.h
@@ -20,14 +20,15 @@
 1451724109 source:/home/tomasz/Moje projekty/TuringMachine/src/TMTape.cpp
 	"TMTape.h"
 
-1451932825 /home/tomasz/Moje projekty/TuringMachine/include/TMTape.h
+1451997904 /home/tomasz/Moje projekty/TuringMachine/include/TMTape.h
 	<vector>
 	<stdexcept>
+	<memory>
 	"TMHead.h"
 	"TMAlphabet.h"
 	"TMExceptions.h"
 
-1451927295 /home/tomasz/Moje projekty/TuringMachine/include/TMHead.h
+1451933318 /home/tomasz/Moje projekty/TuringMachine/include/TMHead.h
 	"TMExceptions.h"
 
 1451926397 /home/tomasz/Moje projekty/TuringMachine/include/TMExceptions.h

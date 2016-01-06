@@ -8,8 +8,10 @@ using namespace std;
 
 struct TMTapeTestFixtureFor1Arg {
     unique_ptr<TMTape> tape;
+    shared_ptr<TMAlphabet> alpha;
     void makeNewTapeWithLength(unsigned int len) {
-        tape = unique_ptr<TMTape>(new TMTape(len));
+        alpha = make_shared<TMAlphabet>("#");
+        tape = unique_ptr<TMTape>(new TMTape(len, alpha));
     }
 };
 
@@ -82,8 +84,10 @@ BOOST_AUTO_TEST_SUITE_END();
 
 struct TMTapeTestFixtureFor2Args {
     unique_ptr<TMTape> tape;
+    shared_ptr<TMAlphabet> alpha;
     void makeNewTapeWithLengthAndHeadAt(unsigned int len, unsigned int pos) {
-        tape = unique_ptr<TMTape>(new TMTape(len, pos));
+        alpha = make_shared<TMAlphabet>("#");
+        tape = unique_ptr<TMTape>(new TMTape(len, pos, alpha));
     }
 };
 BOOST_FIXTURE_TEST_SUITE( tape_with_setting_position, TMTapeTestFixtureFor2Args );
@@ -186,10 +190,11 @@ BOOST_AUTO_TEST_SUITE_END();
 
 struct TMTapeTestFixtureFor1001LongTapeAndHeadAt500 {
     TMTapeTestFixtureFor1001LongTapeAndHeadAt500() {
-        tape = unique_ptr<TMTape>(new TMTape(len, startPos));
-        tape->alphabet.setAlphabet("#$01");
+        alpha = make_shared<TMAlphabet>("#$01");
+        tape = unique_ptr<TMTape>(new TMTape(len, startPos, alpha));
     }
     unique_ptr<TMTape> tape;
+    shared_ptr<TMAlphabet> alpha;
     unsigned int len = 1001, startPos = 500;
 };
 BOOST_FIXTURE_TEST_SUITE( tape_1001LongWithHeadAt500, TMTapeTestFixtureFor1001LongTapeAndHeadAt500 );

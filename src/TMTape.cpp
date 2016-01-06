@@ -1,15 +1,18 @@
 #include "TMTape.h"
 
 // without setting headPosition the head go to the middle of tape
-TMTape::TMTape(unsigned int len) throw (ZeroLongTape) : TMHead (len/2u) {
+TMTape::TMTape(unsigned int len, shared_ptr<TMAlphabet> alphaSPtr) throw (ZeroLongTape) : TMHead (len/2u) {
     setTapeLength(len);
     initTape(len);
+    setAlphabetPtr(alphaSPtr);
 }
 
-TMTape::TMTape(unsigned int len, unsigned int headPos) throw (ZeroLongTape, HeadOutOfTape) : TMHead(headPos) {
+TMTape::TMTape(unsigned int len, unsigned int headPos, shared_ptr<TMAlphabet> alphaSPtr)
+        throw (ZeroLongTape, HeadOutOfTape) : TMHead(headPos) {
     setTapeLength(len);
     checkHeadPosition();
     initTape(len);
+    setAlphabetPtr(alphaSPtr);
 }
 
 void TMTape::setTapeLength(unsigned int len) throw (ZeroLongTape) {
@@ -45,8 +48,16 @@ void TMTape::initTape(unsigned int len) {
     updateHeadPointer();
 }
 
+void TMTape::updateHeadPointer() {
+    setPointerForCharUnderHead(&tape[getHeadPosition()]);
+}
+
+void TMTape::setAlphabetPtr(shared_ptr<TMAlphabet> alphaSPtr) {
+    alphabet = alphaSPtr;
+}
+
 void TMTape::doCmd(const char before, const char after, MoveType headMove)
-    throw (MismatchCommandAndElementUnderHead, CharacterOutOfAlphabet, HeadOutOfTape) {
+        throw (MismatchCommandAndElementUnderHead, CharacterOutOfAlphabet, HeadOutOfTape) {
     checkIfBelongsToAlphabet(before);
     checkIfBelongsToAlphabet(after);
     checkIfMatchWithCharOnTape(before);
@@ -65,12 +76,8 @@ void TMTape::moveHeadToThe(MoveType direction) {
     updateHeadPointer();
 }
 
-void TMTape::updateHeadPointer() {
-    setPointerForCharUnderHead(&tape[getHeadPosition()]);
-}
-
 void TMTape::checkIfBelongsToAlphabet(const char character) const throw (CharacterOutOfAlphabet) {
-    if (!alphabet.has(character)) throw CharacterOutOfAlphabet();
+    if (!alphabet.lock()->has(character)) throw CharacterOutOfAlphabet();
 }
 
 void TMTape::checkIfMatchWithCharOnTape(const char character) const throw (MismatchCommandAndElementUnderHead) {
