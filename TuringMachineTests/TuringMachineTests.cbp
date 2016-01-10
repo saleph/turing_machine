@@ -43,8 +43,11 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="../src/TMAlphabet.cpp" />
+		<Unit filename="../src/TMCommandParser.cpp" />
+		<Unit filename="../src/TMControlGraph.cpp" />
 		<Unit filename="../src/TMTape.cpp" />
 		<Unit filename="UnitTests/TMAlphabetTests.cpp" />
+		<Unit filename="UnitTests/TMCommandParserTests.cpp" />
 		<Unit filename="UnitTests/TMTapeTests.cpp" />
 		<Unit filename="main.cpp" />
 		<Extensions>

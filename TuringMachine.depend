@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1451925429 source:/home/tomasz/Moje projekty/TuringMachine/main.cpp
+1452456870 source:/home/tomasz/Moje projekty/TuringMachine/main.cpp
 	<iostream>
 	"TMTape.h"
 
@@ -17,7 +17,7 @@
 	<algorithm>
 	"TMExceptions.h"
 
-1451724109 source:/home/tomasz/Moje projekty/TuringMachine/src/TMTape.cpp
+1452444677 source:/home/tomasz/Moje projekty/TuringMachine/src/TMTape.cpp
 	"TMTape.h"
 
 1452443023 /home/tomasz/Moje projekty/TuringMachine/include/TMTape.h
@@ -32,26 +32,30 @@
 	"TMExceptions.h"
 	"TMHeadMoveType.h"
 
-1451926397 /home/tomasz/Moje projekty/TuringMachine/include/TMExceptions.h
+1452467363 /home/tomasz/Moje projekty/TuringMachine/include/TMExceptions.h
 	<stdexcept>
 
 1452444635 /home/tomasz/Moje projekty/TuringMachine/include/TMHeadMoveType.h
 
-1452443919 source:/home/tomasz/Moje projekty/TuringMachine/src/TMCommandParser.cpp
+1452468236 source:/home/tomasz/Moje projekty/TuringMachine/src/TMCommandParser.cpp
 	"TMCommandParser.h"
 
-1452444046 /home/tomasz/Moje projekty/TuringMachine/include/TMCommandParser.h
+1452468238 /home/tomasz/Moje projekty/TuringMachine/include/TMCommandParser.h
 	"TMCommand.h"
+	"TMExceptions.h"
 	<string>
+	<vector>
+	<array>
+	<cstring>
 
-1452443576 /home/tomasz/Moje projekty/TuringMachine/include/TMCommand.h
+1452466810 /home/tomasz/Moje projekty/TuringMachine/include/TMCommand.h
 	"TMHeadMoveType.h"
 	<string>
 
-1452442514 source:/home/tomasz/Moje projekty/TuringMachine/src/TMControlGraph.cpp
+1452457190 source:/home/tomasz/Moje projekty/TuringMachine/src/TMControlGraph.cpp
 	"TMControlGraph.h"
 
-1452444480 /home/tomasz/Moje projekty/TuringMachine/include/TMControlGraph.h
+1452468301 /home/tomasz/Moje projekty/TuringMachine/include/TMControlGraph.h
 	"TMCommand.h"
 	<unordered_map>
 	<string>

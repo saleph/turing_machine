@@ -1,5 +1,6 @@
 #include "TMTape.h"
 #include "TMExceptions.h"
+#include "TMHeadMoveType.h"
 #include <memory>
 
 #define BOOST_TEST_NO_LIB
@@ -204,7 +205,7 @@ BOOST_AUTO_TEST_CASE( charUnderHead_check_if_points_to_correct_element ) {
 }
 
 BOOST_AUTO_TEST_CASE( doCmd_with_both_chars_belong_to_alphabet_and_BEFORE_matching_with_tape_move_head_right ) {
-    BOOST_REQUIRE_NO_THROW(tape->doCmd('#', '1', tape->RIGHT));
+    BOOST_REQUIRE_NO_THROW(tape->doCmd('#', '1', TMHeadMoveType::RIGHT));
     BOOST_CHECK_EQUAL((*tape)[startPos], '1'); // state after command
     BOOST_CHECK_EQUAL((*tape)[startPos+1], '#'); // check if next el didn't modified
     BOOST_CHECK_EQUAL((*tape)[startPos-1], '#'); // check if prev el didn't modified
@@ -212,7 +213,7 @@ BOOST_AUTO_TEST_CASE( doCmd_with_both_chars_belong_to_alphabet_and_BEFORE_matchi
 }
 
 BOOST_AUTO_TEST_CASE( doCmd_with_both_chars_belong_to_alphabet_and_BEFORE_matching_with_tape_move_head_left ) {
-    BOOST_REQUIRE_NO_THROW(tape->doCmd('#', '1', tape->LEFT));
+    BOOST_REQUIRE_NO_THROW(tape->doCmd('#', '1', TMHeadMoveType::LEFT));
     BOOST_CHECK_EQUAL((*tape)[startPos], '1'); // state after command
     BOOST_CHECK_EQUAL((*tape)[startPos+1], '#'); // check if next el didn't modified
     BOOST_CHECK_EQUAL((*tape)[startPos-1], '#'); // check if prev el didn't modified
@@ -220,7 +221,7 @@ BOOST_AUTO_TEST_CASE( doCmd_with_both_chars_belong_to_alphabet_and_BEFORE_matchi
 }
 
 BOOST_AUTO_TEST_CASE( doCmd_with_both_chars_belong_to_alphabet_but_mismatch_BEFORE_and_on_tape_state_move_head_right ) {
-    BOOST_REQUIRE_THROW(tape->doCmd('$', '1', tape->RIGHT), MismatchCommandAndElementUnderHead);
+    BOOST_REQUIRE_THROW(tape->doCmd('$', '1', TMHeadMoveType::RIGHT), MismatchCommandAndElementUnderHead);
     BOOST_CHECK_EQUAL((*tape)[startPos], '#'); // state after command
     BOOST_CHECK_EQUAL((*tape)[startPos+1], '#'); // check if next el didn't modified
     BOOST_CHECK_EQUAL((*tape)[startPos-1], '#'); // check if prev el didn't modified
@@ -228,7 +229,7 @@ BOOST_AUTO_TEST_CASE( doCmd_with_both_chars_belong_to_alphabet_but_mismatch_BEFO
 }
 
 BOOST_AUTO_TEST_CASE( doCmd_with_BEFORE_not_belong_to_alphabet_move_head_right ) {
-    BOOST_REQUIRE_THROW(tape->doCmd('m', '1', tape->RIGHT), CharacterOutOfAlphabet);
+    BOOST_REQUIRE_THROW(tape->doCmd('m', '1', TMHeadMoveType::RIGHT), CharacterOutOfAlphabet);
     BOOST_CHECK_EQUAL((*tape)[startPos], '#'); // state after command
     BOOST_CHECK_EQUAL((*tape)[startPos+1], '#'); // check if next el didn't modified
     BOOST_CHECK_EQUAL((*tape)[startPos-1], '#'); // check if prev el didn't modified
@@ -236,7 +237,7 @@ BOOST_AUTO_TEST_CASE( doCmd_with_BEFORE_not_belong_to_alphabet_move_head_right )
 }
 
 BOOST_AUTO_TEST_CASE( doCmd_with_AFTER_not_belong_to_alphabet_and_BEFORE_matching_with_char_on_tape_move_head_right ) {
-    BOOST_REQUIRE_THROW(tape->doCmd('#', 'm', tape->RIGHT), CharacterOutOfAlphabet);
+    BOOST_REQUIRE_THROW(tape->doCmd('#', 'm', TMHeadMoveType::RIGHT), CharacterOutOfAlphabet);
     BOOST_CHECK_EQUAL((*tape)[startPos], '#'); // state after command
     BOOST_CHECK_EQUAL((*tape)[startPos+1], '#'); // check if next el didn't modified
     BOOST_CHECK_EQUAL((*tape)[startPos-1], '#'); // check if prev el didn't modified
@@ -244,7 +245,7 @@ BOOST_AUTO_TEST_CASE( doCmd_with_AFTER_not_belong_to_alphabet_and_BEFORE_matchin
 }
 
 BOOST_AUTO_TEST_CASE( doCmd_with_BEFORE_and_AFTER_not_belong_to_alphabet_move_head_right ) {
-    BOOST_REQUIRE_THROW(tape->doCmd('z', 'm', tape->RIGHT), CharacterOutOfAlphabet);
+    BOOST_REQUIRE_THROW(tape->doCmd('z', 'm', TMHeadMoveType::RIGHT), CharacterOutOfAlphabet);
     BOOST_CHECK_EQUAL((*tape)[startPos], '#'); // state after command
     BOOST_CHECK_EQUAL((*tape)[startPos+1], '#'); // check if next el didn't modified
     BOOST_CHECK_EQUAL((*tape)[startPos-1], '#'); // check if prev el didn't modified
