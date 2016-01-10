@@ -23,7 +23,7 @@ class TMTape : public TMHead
         virtual void setHeadPosition(unsigned int pos) throw (HeadOutOfTape);
         virtual unsigned int getHeadPosition() const;
 
-        void doCmd (const char before, const char after, MoveType headMove)
+        void doCmd (const char before, const char after, TMHeadMoveType headMove)
                 throw (MismatchCommandAndElementUnderHead, CharacterOutOfAlphabet, HeadOutOfTape);
     protected:
     private:
@@ -38,7 +38,7 @@ class TMTape : public TMHead
         void initTape(unsigned int len);
         void setAlphabetPtr(shared_ptr<TMAlphabet>);
         void changeCharUnderHeadTo(const char character);
-        void moveHeadToThe(MoveType direction);
+        void moveHeadToThe(TMHeadMoveType direction);
         void updateHeadPointer();
         void checkIfBelongsToAlphabet(const char character) const throw (CharacterOutOfAlphabet);
         void checkIfMatchWithCharOnTape(const char character) const throw (MismatchCommandAndElementUnderHead);

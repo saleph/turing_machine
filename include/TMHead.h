@@ -2,6 +2,7 @@
 #define TMHEAD_H
 
 #include "TMExceptions.h"
+#include "TMHeadMoveType.h"
 
 class TMHead
 { // this class has to be derivided by TMTape
@@ -19,11 +20,10 @@ class TMHead
         void setValueUnderHead(const char val) { *charUnderHead = val; }
         void setPointerForCharUnderHead(char *val) { charUnderHead = val; }
 
-        enum MoveType { LEFT, RIGHT };
         void moveHeadRight() { headPosition++; }
         void moveHeadLeft() { headPosition--; }
         // this method will use a tape with data and modify its content
-        virtual void doCmd (const char before, const char after, MoveType headMove)
+        virtual void doCmd (const char before, const char after, TMHeadMoveType headMove)
                 throw (MismatchCommandAndElementUnderHead, CharacterOutOfAlphabet, HeadOutOfTape) = 0;
     private:
         unsigned int headPosition;

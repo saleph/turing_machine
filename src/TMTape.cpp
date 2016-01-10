@@ -56,7 +56,7 @@ void TMTape::setAlphabetPtr(shared_ptr<TMAlphabet> alphaSPtr) {
     alphabet = alphaSPtr;
 }
 
-void TMTape::doCmd(const char before, const char after, MoveType headMove)
+void TMTape::doCmd(const char before, const char after, TMHeadMoveType headMove)
         throw (MismatchCommandAndElementUnderHead, CharacterOutOfAlphabet, HeadOutOfTape) {
     checkIfBelongsToAlphabet(before);
     checkIfBelongsToAlphabet(after);
@@ -70,14 +70,15 @@ void TMTape::changeCharUnderHeadTo(const char character) {
     setValueUnderHead(character);
 }
 
-void TMTape::moveHeadToThe(MoveType direction) {
-    if (direction == LEFT) moveHeadLeft();
-    if (direction == RIGHT) moveHeadRight();
+void TMTape::moveHeadToThe(TMHeadMoveType direction) {
+    if (direction == TMHeadMoveType::LEFT) moveHeadLeft();
+    if (direction == TMHeadMoveType::RIGHT) moveHeadRight();
     updateHeadPointer();
 }
 
 void TMTape::checkIfBelongsToAlphabet(const char character) const throw (CharacterOutOfAlphabet) {
-    if (!alphabet.lock()->has(character)) throw CharacterOutOfAlphabet();
+    shared_ptr<TMAlphabet> alpha (alphabet);
+    if (!alpha->has(character)) throw CharacterOutOfAlphabet();
 }
 
 void TMTape::checkIfMatchWithCharOnTape(const char character) const throw (MismatchCommandAndElementUnderHead) {

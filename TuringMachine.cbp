@@ -35,12 +35,18 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/TMAlphabet.h" />
+		<Unit filename="include/TMCommand.h" />
+		<Unit filename="include/TMCommandParser.h" />
+		<Unit filename="include/TMControlGraph.h" />
 		<Unit filename="include/TMExceptions.h" />
 		<Unit filename="include/TMHead.h" />
+		<Unit filename="include/TMHeadMoveType.h" />
 		<Unit filename="include/TMInputiInterface.h" />
 		<Unit filename="include/TMTape.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/TMAlphabet.cpp" />
+		<Unit filename="src/TMCommandParser.cpp" />
+		<Unit filename="src/TMControlGraph.cpp" />
 		<Unit filename="src/TMTape.cpp" />
 		<Extensions>
 			<code_completion />
