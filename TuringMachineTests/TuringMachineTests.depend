@@ -10,7 +10,7 @@
 1452001568 source:/home/tomasz/Moje projekty/TuringMachine/src/TMAlphabet.cpp
 	"TMAlphabet.h"
 
-1452001513 /home/tomasz/Moje projekty/TuringMachine/include/TMAlphabet.h
+1452548689 /home/tomasz/Moje projekty/TuringMachine/include/TMAlphabet.h
 	<string>
 	<unordered_set>
 	<algorithm>
@@ -76,14 +76,14 @@
 	<string>
 	<boost/test/unit_test.hpp>
 
-1452454186 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/UnitTests/TMTapeTests.cpp
+1452548887 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/UnitTests/TMTapeTests.cpp
 	"TMTape.h"
 	"TMExceptions.h"
 	"TMHeadMoveType.h"
 	<memory>
 	<boost/test/unit_test.hpp>
 
-1452467363 /home/tomasz/Moje projekty/TuringMachine/include/TMExceptions.h
+1452508995 /home/tomasz/Moje projekty/TuringMachine/include/TMExceptions.h
 	<stdexcept>
 
 1452444635 /home/tomasz/Moje projekty/TuringMachine/include/TMHeadMoveType.h
@@ -93,26 +93,29 @@
 	"TMHeadMoveType.h"
 	<boost/test/unit_test.hpp>
 
-1452468238 /home/tomasz/Moje projekty/TuringMachine/include/TMCommandParser.h
+1452548088 /home/tomasz/Moje projekty/TuringMachine/include/TMCommandParser.h
 	"TMCommand.h"
 	"TMExceptions.h"
 	<string>
 	<vector>
 	<array>
 	<cstring>
+	<regex>
 
 1452466810 /home/tomasz/Moje projekty/TuringMachine/include/TMCommand.h
 	"TMHeadMoveType.h"
 	<string>
 
-1452458783 source:/home/tomasz/Moje projekty/TuringMachine/src/TMCommandParser.cpp
+1452547687 source:/home/tomasz/Moje projekty/TuringMachine/src/TMCommandParser.cpp
 	"TMCommandParser.h"
 
-1452457190 source:/home/tomasz/Moje projekty/TuringMachine/src/TMControlGraph.cpp
+1452468339 source:/home/tomasz/Moje projekty/TuringMachine/src/TMControlGraph.cpp
 	"TMControlGraph.h"
 
-1452456942 /home/tomasz/Moje projekty/TuringMachine/include/TMControlGraph.h
+1452468301 /home/tomasz/Moje projekty/TuringMachine/include/TMControlGraph.h
 	"TMCommand.h"
 	<unordered_map>
 	<string>
+
+1451223023 /usr/include/boost/regex
 

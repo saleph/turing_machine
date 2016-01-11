@@ -12,11 +12,11 @@ struct TMTapeTestFixtureFor1Arg {
     shared_ptr<TMAlphabet> alpha;
     void makeNewTapeWithLength(unsigned int len) {
         alpha = make_shared<TMAlphabet>("#");
-        tape = unique_ptr<TMTape>(new TMTape(len, alpha));
+        tape = unique_ptr<TMTape>(make_unique<TMTape>(len, alpha));
     }
 };
 
-BOOST_FIXTURE_TEST_SUITE( tape_wo_setting_position, TMTapeTestFixtureFor1Arg );
+BOOST_FIXTURE_TEST_SUITE( tape_wo_setting_position, TMTapeTestFixtureFor1Arg )
 
 BOOST_AUTO_TEST_CASE( head_position_after_construction_wo_specified_pos_for_0_long_tape ) {
     BOOST_CHECK_THROW(makeNewTapeWithLength(0), ZeroLongTape);
@@ -81,17 +81,17 @@ BOOST_AUTO_TEST_CASE( filling_tape_with_hashes_during_construction_wo_specified_
     BOOST_CHECK_EQUAL((*tape)[1000], '#');
 }
 
-BOOST_AUTO_TEST_SUITE_END();
+BOOST_AUTO_TEST_SUITE_END()
 
 struct TMTapeTestFixtureFor2Args {
     unique_ptr<TMTape> tape;
     shared_ptr<TMAlphabet> alpha;
     void makeNewTapeWithLengthAndHeadAt(unsigned int len, unsigned int pos) {
         alpha = make_shared<TMAlphabet>("#");
-        tape = unique_ptr<TMTape>(new TMTape(len, pos, alpha));
+        tape = unique_ptr<TMTape>(make_unique<TMTape>(len, pos, alpha));
     }
 };
-BOOST_FIXTURE_TEST_SUITE( tape_with_setting_position, TMTapeTestFixtureFor2Args );
+BOOST_FIXTURE_TEST_SUITE( tape_with_setting_position, TMTapeTestFixtureFor2Args )
 
 BOOST_AUTO_TEST_CASE( head_position_after_construction_for_0_long_tape_with_head_at_0 ) {
     BOOST_CHECK_THROW(makeNewTapeWithLengthAndHeadAt(0, 0), ZeroLongTape);
@@ -187,18 +187,18 @@ BOOST_AUTO_TEST_CASE( filling_tape_with_hashes_during_construction_for_1001_long
     BOOST_CHECK_EQUAL((*tape)[1000], '#');
 }
 
-BOOST_AUTO_TEST_SUITE_END();
+BOOST_AUTO_TEST_SUITE_END()
 
 struct TMTapeTestFixtureFor1001LongTapeAndHeadAt500 {
     TMTapeTestFixtureFor1001LongTapeAndHeadAt500() {
         alpha = make_shared<TMAlphabet>("#$01");
-        tape = unique_ptr<TMTape>(new TMTape(len, startPos, alpha));
+        tape = unique_ptr<TMTape>(make_unique<TMTape>(len, startPos, alpha));
     }
     unique_ptr<TMTape> tape;
     shared_ptr<TMAlphabet> alpha;
     unsigned int len = 1001, startPos = 500;
 };
-BOOST_FIXTURE_TEST_SUITE( tape_1001LongWithHeadAt500, TMTapeTestFixtureFor1001LongTapeAndHeadAt500 );
+BOOST_FIXTURE_TEST_SUITE( tape_1001LongWithHeadAt500, TMTapeTestFixtureFor1001LongTapeAndHeadAt500 )
 
 BOOST_AUTO_TEST_CASE( charUnderHead_check_if_points_to_correct_element ) {
     BOOST_CHECK_EQUAL( tape->getCharUnderHead(), (*tape)[startPos] );
@@ -252,4 +252,4 @@ BOOST_AUTO_TEST_CASE( doCmd_with_BEFORE_and_AFTER_not_belong_to_alphabet_move_he
     BOOST_CHECK_EQUAL(tape->getHeadPosition(), startPos); // after unsuccessful cmd
 }
 
-BOOST_AUTO_TEST_SUITE_END();
+BOOST_AUTO_TEST_SUITE_END()

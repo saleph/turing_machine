@@ -1,7 +1,7 @@
 # depslib dependency file v1.0
-1452456870 source:/home/tomasz/Moje projekty/TuringMachine/main.cpp
+1452548070 source:/home/tomasz/Moje projekty/TuringMachine/main.cpp
 	<iostream>
-	"TMTape.h"
+	"TMCommandParser.h"
 
 1451410875 source:/home/tomasz/Moje projekty/TuringMachine/src/MyExp.cpp
 	"MyExp.h"
@@ -11,7 +11,7 @@
 1452001568 source:/home/tomasz/Moje projekty/TuringMachine/src/TMAlphabet.cpp
 	"TMAlphabet.h"
 
-1452001513 /home/tomasz/Moje projekty/TuringMachine/include/TMAlphabet.h
+1452548689 /home/tomasz/Moje projekty/TuringMachine/include/TMAlphabet.h
 	<string>
 	<unordered_set>
 	<algorithm>
@@ -32,27 +32,28 @@
 	"TMExceptions.h"
 	"TMHeadMoveType.h"
 
-1452467363 /home/tomasz/Moje projekty/TuringMachine/include/TMExceptions.h
+1452508995 /home/tomasz/Moje projekty/TuringMachine/include/TMExceptions.h
 	<stdexcept>
 
 1452444635 /home/tomasz/Moje projekty/TuringMachine/include/TMHeadMoveType.h
 
-1452468236 source:/home/tomasz/Moje projekty/TuringMachine/src/TMCommandParser.cpp
+1452547687 source:/home/tomasz/Moje projekty/TuringMachine/src/TMCommandParser.cpp
 	"TMCommandParser.h"
 
-1452468238 /home/tomasz/Moje projekty/TuringMachine/include/TMCommandParser.h
+1452548088 /home/tomasz/Moje projekty/TuringMachine/include/TMCommandParser.h
 	"TMCommand.h"
 	"TMExceptions.h"
 	<string>
 	<vector>
 	<array>
 	<cstring>
+	<regex>
 
 1452466810 /home/tomasz/Moje projekty/TuringMachine/include/TMCommand.h
 	"TMHeadMoveType.h"
 	<string>
 
-1452457190 source:/home/tomasz/Moje projekty/TuringMachine/src/TMControlGraph.cpp
+1452468339 source:/home/tomasz/Moje projekty/TuringMachine/src/TMControlGraph.cpp
 	"TMControlGraph.h"
 
 1452468301 /home/tomasz/Moje projekty/TuringMachine/include/TMControlGraph.h

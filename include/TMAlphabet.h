@@ -18,7 +18,7 @@ class TMAlphabet
         TMAlphabet(TMAlphabet&&) = default;
         TMAlphabet& operator= (TMAlphabet&) = default;
         TMAlphabet& operator= (TMAlphabet&&) = default;
-        TMAlphabet&& operator= (const string& val) { return TMAlphabet(val); }
+        TMAlphabet operator= (const string& val) { return TMAlphabet(val); }
         virtual ~TMAlphabet() = default;
 
         string getAlphabet();

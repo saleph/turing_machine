@@ -29,9 +29,5 @@ class InvalidCommand : invalid_argument {
         InvalidCommand() : invalid_argument ( "Invalid number of tokens in command!" ) {}
 };
 
-class InvalidHeadMoveType : invalid_argument {
-    public:
-        InvalidHeadMoveType() : invalid_argument ( "Move type has to be either 'R' or 'L'!" ) {}
-};
 
 #endif // TMEXCEPTIONS_H_INCLUDED

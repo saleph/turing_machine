@@ -1,15 +1,18 @@
 #include "TMCommandParser.h"
 
-pair<string, TMCommand> TMCommandParser::parseToCommandWithItsName(const string& line) throw (InvalidCommand, InvalidHeadMoveType) {
+pair<string, TMCommand> TMCommandParser::parseToCommandWithItsName(const string& line) throw (InvalidCommand) {
+    checkIfMatchToCmdPattern(line);
     splitToTokens(line);
     checkNumberOfTokens();
-    checkIfSingleCharTokensAreSingle();
-    checkIfMoveTypeIsRorL();
     //TODO: IF CMD ALREADY EXIST
     return {getCommandName(), constructNewCommand()};
 }
 
-char* makeCopyOf(const string& str);
+void TMCommandParser::checkIfMatchToCmdPattern(const string& str) const throw (InvalidCommand) {
+    if (!std::regex_match(str, CMD_PATTERN)) throw InvalidCommand();
+}
+
+static char* makeCopyOf(const string& str);
 
 void TMCommandParser::splitToTokens(const string& line) {
     const char *delimeters = " /;";
@@ -31,34 +34,11 @@ void TMCommandParser::checkNumberOfTokens() const throw (InvalidCommand) {
     if (tokens.size() != TOKENS_NUMBER) throw InvalidCommand();
 }
 
-void TMCommandParser::checkIfSingleCharTokensAreSingle() const throw (InvalidCommand) {
-    checkIfFromStateIsSingle();
-    checkIfToStateIsSingle();
-    checkIfMoveTypeIsSingle();
-}
-
-void TMCommandParser::checkIfFromStateIsSingle() const throw (InvalidCommand) {
-    if (tokens[FROM_STATE_POS].length() != 1) throw InvalidCommand();
-}
-
-void TMCommandParser::checkIfToStateIsSingle() const throw (InvalidCommand) {
-    if (tokens[TO_STATE_POS].length() != 1) throw InvalidCommand();
-}
-
-void TMCommandParser::checkIfMoveTypeIsSingle() const throw (InvalidCommand) {
-    if (tokens[MOVE_TYPE_POS].length() != 1) throw InvalidCommand();
-}
-
-void TMCommandParser::checkIfMoveTypeIsRorL() const throw (InvalidHeadMoveType) {
-    char mvType = getMoveTypeToken();
-    if (!(mvType == 'L' || mvType == 'R')) throw InvalidHeadMoveType();
-}
-
 string TMCommandParser::getCommandName() const {
     return tokens[CMD_NAME_POS];
 }
 
-TMCommand&& TMCommandParser::constructNewCommand() const {
+TMCommand TMCommandParser::constructNewCommand() const {
     char fromState = getFromState();
     char toState = getToState();
     TMHeadMoveType moveType = getMoveType();

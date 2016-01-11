@@ -7,7 +7,7 @@
 #include <boost/test/unit_test.hpp>
 using namespace std;
 
-BOOST_AUTO_TEST_SUITE( TMAlphabet_has_func );
+BOOST_AUTO_TEST_SUITE( TMAlphabet_has_func )
 
 BOOST_AUTO_TEST_CASE( has_func_with_existing_elements_for_lowercase ) {
     TMAlphabet alphabet {"abcd"};
@@ -51,7 +51,7 @@ BOOST_AUTO_TEST_CASE( has_func_with_lowercase_alphabet_and_existing_signs_but_up
         BOOST_CHECK(!alphabet.has(sign));
 }
 
-BOOST_AUTO_TEST_SUITE_END();
+BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE(TMAlphabet_getAlphabet_func)
 
 BOOST_AUTO_TEST_CASE( getAlphabet_func_for_single_char ) {
@@ -70,8 +70,8 @@ BOOST_AUTO_TEST_CASE( getAlphabet_func_for_five_char ) {
     BOOST_CHECK(!strAlphabet.compare(strFromObject));
 }
 
-BOOST_AUTO_TEST_SUITE_END();
-BOOST_AUTO_TEST_SUITE(TMAlphabet_getSortedAlphabet_func);
+BOOST_AUTO_TEST_SUITE_END()
+BOOST_AUTO_TEST_SUITE(TMAlphabet_getSortedAlphabet_func)
 
 BOOST_AUTO_TEST_CASE( getSortedAlphabet_func ) {
     TMAlphabet alphabet {"abcd"};
@@ -80,8 +80,8 @@ BOOST_AUTO_TEST_CASE( getSortedAlphabet_func ) {
     BOOST_CHECK(!strAlpha.compare(strAlphaFromObject));
 }
 
-BOOST_AUTO_TEST_SUITE_END();
-BOOST_AUTO_TEST_SUITE(TMAlphabet_setAlphabet_func);
+BOOST_AUTO_TEST_SUITE_END()
+BOOST_AUTO_TEST_SUITE(TMAlphabet_setAlphabet_func)
 
 BOOST_AUTO_TEST_CASE( setAlphabet_func_for_new_alphabet ) {
     TMAlphabet alphabet {"abcd"};
@@ -103,4 +103,4 @@ BOOST_AUTO_TEST_CASE( setAlphabet_func_for_new_but_the_same_alphabet ) {
     BOOST_CHECK(!newStrAlphabet.compare(newAlphaFromObject));
 }
 
-BOOST_AUTO_TEST_SUITE_END();
+BOOST_AUTO_TEST_SUITE_END()

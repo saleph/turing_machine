@@ -9,7 +9,7 @@ struct TMCommandParserTestFixture {
     TMCommandParser parser;
     pair<string, TMCommand> outputPair;
 };
-BOOST_FIXTURE_TEST_SUITE(command_parser, TMCommandParserTestFixture);
+BOOST_FIXTURE_TEST_SUITE(command_parser, TMCommandParserTestFixture)
 
 BOOST_AUTO_TEST_CASE( parse_correct_line ) {
     const string line ("state_name #/#;R go_to_state");
@@ -18,4 +18,4 @@ BOOST_AUTO_TEST_CASE( parse_correct_line ) {
     BOOST_CHECK(cmd.isTheSameAs(outputPair.second));
 }
 
-BOOST_AUTO_TEST_SUITE_END();
+BOOST_AUTO_TEST_SUITE_END()
