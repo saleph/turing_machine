@@ -64,7 +64,7 @@
 	"TMExceptions.h"
 	"TMHeadMoveType.h"
 
-1451926507 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/UnitTests/TMAlphabetTests.cpp
+1452548963 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/UnitTests/TMAlphabetTests.cpp
 	"TMAlphabet.h"
 	"TMExceptions.h"
 	<string>
@@ -88,12 +88,12 @@
 
 1452444635 /home/tomasz/Moje projekty/TuringMachine/include/TMHeadMoveType.h
 
-1452459359 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/UnitTests/TMCommandParserTests.cpp
+1452548963 source:/home/tomasz/Moje projekty/TuringMachine/TuringMachineTests/UnitTests/TMCommandParserTests.cpp
 	"TMCommandParser.h"
 	"TMHeadMoveType.h"
 	<boost/test/unit_test.hpp>
 
-1452548088 /home/tomasz/Moje projekty/TuringMachine/include/TMCommandParser.h
+1452549739 /home/tomasz/Moje projekty/TuringMachine/include/TMCommandParser.h
 	"TMCommand.h"
 	"TMExceptions.h"
 	<string>

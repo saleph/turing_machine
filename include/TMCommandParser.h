@@ -25,7 +25,7 @@ class TMCommandParser
     const size_t TO_STATE_POS = 2;
     const size_t MOVE_TYPE_POS = 3;
     const size_t NEXT_CMD_NAME_POS = 4;
-    const regex CMD_PATTERN = regex("^[^ ;/]+ [^ ;/]/[^ ;/];[RLrl] [^ ;/]+$");
+    const regex CMD_PATTERN = regex("^\\s*[^ ;\\/]+\\s*[^ ;\\/]/[^ ;\\/];[RLrl]\\s*[^ ;\\/]+\\s*$");
     public:
         pair<string, TMCommand> parseToCommandWithItsName(const string& line) throw (InvalidCommand);
     private:
