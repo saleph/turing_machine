@@ -1,6 +1,6 @@
 #include "TMCommandParser.h"
 
-pair<string, TMCommand> TMCommandParser::parseToCommandWithItsName(const string& line) throw (InvalidCommand) {
+pair<string, TMCommand> TMCommandParser::parseToCommandWithItsName(const string& line) throw (InvalidCommandSyntax) {
     checkIfMatchToCmdPattern(line);
     splitToTokens(line);
     checkNumberOfTokens();
@@ -8,8 +8,8 @@ pair<string, TMCommand> TMCommandParser::parseToCommandWithItsName(const string&
     return {getCommandName(), constructNewCommand()};
 }
 
-void TMCommandParser::checkIfMatchToCmdPattern(const string& str) const throw (InvalidCommand) {
-    if (!std::regex_match(str, CMD_PATTERN)) throw InvalidCommand();
+void TMCommandParser::checkIfMatchToCmdPattern(const string& str) const throw (InvalidCommandSyntax) {
+    if (!std::regex_match(str, CMD_PATTERN)) throw InvalidCommandSyntax();
 }
 
 static char* makeCopyOf(const string& str);
@@ -30,8 +30,8 @@ char* makeCopyOf(const string& str) {
     return strCopy;
 }
 
-void TMCommandParser::checkNumberOfTokens() const throw (InvalidCommand) {
-    if (tokens.size() != TOKENS_NUMBER) throw InvalidCommand();
+void TMCommandParser::checkNumberOfTokens() const throw (InvalidCommandSyntax) {
+    if (tokens.size() != TOKENS_NUMBER) throw InvalidCommandSyntax();
 }
 
 string TMCommandParser::getCommandName() const {

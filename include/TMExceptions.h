@@ -24,9 +24,14 @@ class CharacterOutOfAlphabet : invalid_argument {
         CharacterOutOfAlphabet() : invalid_argument ( "Character out of defined alphabet!" ) {}
 };
 
-class InvalidCommand : invalid_argument {
+class InvalidCommandSyntax : invalid_argument {
     public:
-        InvalidCommand() : invalid_argument ( "Invalid number of tokens in command!" ) {}
+        InvalidCommandSyntax() : invalid_argument ( "Invalid syntax of command!" ) {}
+};
+
+class CommandAlreadyExist : invalid_argument {
+    public:
+        CommandAlreadyExist() : invalid_argument ( "Command with this transition already exist!" ) {}
 };
 
 

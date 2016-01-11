@@ -83,7 +83,7 @@
 	<memory>
 	<boost/test/unit_test.hpp>
 
-1452508995 /home/tomasz/Moje projekty/TuringMachine/include/TMExceptions.h
+1452551722 /home/tomasz/Moje projekty/TuringMachine/include/TMExceptions.h
 	<stdexcept>
 
 1452444635 /home/tomasz/Moje projekty/TuringMachine/include/TMHeadMoveType.h
@@ -93,7 +93,7 @@
 	"TMHeadMoveType.h"
 	<boost/test/unit_test.hpp>
 
-1452549739 /home/tomasz/Moje projekty/TuringMachine/include/TMCommandParser.h
+1452552385 /home/tomasz/Moje projekty/TuringMachine/include/TMCommandParser.h
 	"TMCommand.h"
 	"TMExceptions.h"
 	<string>
@@ -106,7 +106,7 @@
 	"TMHeadMoveType.h"
 	<string>
 
-1452547687 source:/home/tomasz/Moje projekty/TuringMachine/src/TMCommandParser.cpp
+1452551717 source:/home/tomasz/Moje projekty/TuringMachine/src/TMCommandParser.cpp
 	"TMCommandParser.h"
 
 1452468339 source:/home/tomasz/Moje projekty/TuringMachine/src/TMControlGraph.cpp
