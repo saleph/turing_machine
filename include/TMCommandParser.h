@@ -26,7 +26,8 @@ class TMCommandParser
     const size_t MOVE_TYPE_POS = 3;
     const size_t NEXT_CMD_NAME_POS = 4;
     const regex CMD_PATTERN = regex(
-        "^\\s*"     // preceding spaces
+        "^"         // start of command
+        "\\s*"      // preceding spaces
         "[^ ;\\/]+" // name of the command
         "\\s+"      // space(s) after command
         "[^ ;\\/]"  // one character (current state on tape)
@@ -36,7 +37,8 @@ class TMCommandParser
         "[RLrl]"    // move type (R/L or r/l)
         "\\s+"      // space(s) after "to head" commands
         "[^ ;\\/]+" // name of next command
-        "\\s*$"     // maybe ending spaces
+        "\\s*"      // maybe ending spaces
+        "$"         // end of command
         );
     public:
         pair<string, TMCommand> parseToCommandWithItsName(const string& line) throw (InvalidCommandSyntax);
