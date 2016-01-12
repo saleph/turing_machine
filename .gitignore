@@ -1,3 +1,8 @@
+#CodeBlocks stuff
+*.layout
+*.depend
+*.cbp
+
 # bin dir
 bin/*
 TuringMachineTests/bin/*
