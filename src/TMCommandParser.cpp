@@ -1,37 +1,17 @@
 #include "TMCommandParser.h"
 
 pair<string, TMCommand> TMCommandParser::parseToCommandWithItsName(const string& line) throw (InvalidCommandSyntax) {
-    checkIfMatchToCmdPattern(line);
-    splitToTokens(line);
-    checkNumberOfTokens();
-    //TODO: IF CMD ALREADY EXIST
+    getTokensFrom(line);
+    checkIfRegexMatched();
     return {getCommandName(), constructNewCommand()};
 }
 
-void TMCommandParser::checkIfMatchToCmdPattern(const string& str) const throw (InvalidCommandSyntax) {
-    if (!std::regex_match(str, CMD_PATTERN)) throw InvalidCommandSyntax();
+void TMCommandParser::getTokensFrom(const string& str) {
+    std::regex_match(str, tokens, CMD_PATTERN);
 }
 
-static char* makeCopyOf(const string& str);
-
-void TMCommandParser::splitToTokens(const string& line) {
-    const char *delimeters = " /;";
-    char *lineCopy = makeCopyOf(line);
-    char *token = strtok(lineCopy, delimeters);
-    while (token) {
-        tokens.emplace_back(token);
-        token = strtok(NULL, delimeters);
-    }
-}
-
-char* makeCopyOf(const string& str) {
-    char *strCopy = new char[str.length()];
-    strcpy(strCopy, str.c_str());
-    return strCopy;
-}
-
-void TMCommandParser::checkNumberOfTokens() const throw (InvalidCommandSyntax) {
-    if (tokens.size() != TOKENS_NUMBER) throw InvalidCommandSyntax();
+void TMCommandParser::checkIfRegexMatched() const throw (InvalidCommandSyntax) {
+    if (!tokens.size()) throw InvalidCommandSyntax();
 }
 
 string TMCommandParser::getCommandName() const {
@@ -47,11 +27,15 @@ TMCommand TMCommandParser::constructNewCommand() const {
 }
 
 char TMCommandParser::getFromState() const {
-    return tokens[FROM_STATE_POS][0];
+    return getFirstCharOf(tokens[FROM_STATE_POS]);
+}
+
+char TMCommandParser::getFirstCharOf(const string& str) const {
+    return str[0];
 }
 
 char TMCommandParser::getToState() const {
-    return tokens[TO_STATE_POS][0];
+    return getFirstCharOf(tokens[TO_STATE_POS]);
 }
 
 TMHeadMoveType TMCommandParser::TMCommandParser::getMoveType() const {
@@ -59,13 +43,13 @@ TMHeadMoveType TMCommandParser::TMCommandParser::getMoveType() const {
 }
 
 TMHeadMoveType TMCommandParser::getHeadMoveTypeFromChar() const {
-    char moveTypeAsChar = getMoveTypeToken();
+    char moveTypeAsChar = getMoveTypeFromToken();
     if (moveTypeAsChar == 'R') return TMHeadMoveType::RIGHT; // validated in parse func
     return TMHeadMoveType::LEFT;
 }
 
-char TMCommandParser::getMoveTypeToken() const {
-    return tokens[MOVE_TYPE_POS][0];
+char TMCommandParser::getMoveTypeFromToken() const {
+    return getFirstCharOf(tokens[MOVE_TYPE_POS]);
 }
 
 string TMCommandParser::getNextCommandName() const {
