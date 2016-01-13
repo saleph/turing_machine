@@ -13,7 +13,7 @@ using std::move;
 class TMControlGraph
 {
     public:
-        TMControlGraph(TMControlGraph&) = default;
+        TMControlGraph(const TMControlGraph&) = default;
         TMCommand& operator[] (const string& val) { return graph[val]; }
         TMControlGraph operator+= (const pair<string, TMCommand>& cmd);
     protected:

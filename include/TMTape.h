@@ -17,7 +17,7 @@ class TMTape : public TMHead
     public:
         TMTape(unsigned int len, shared_ptr<TMAlphabet>) throw (ZeroLongTape);
         TMTape(unsigned int len, unsigned int headPos, shared_ptr<TMAlphabet>) throw (ZeroLongTape, HeadOutOfTape);
-        virtual ~TMTape();
+        virtual ~TMTape() noexcept;
 
         const char& operator[] (std::size_t idx) const { return tape[idx]; }
         virtual void setHeadPosition(unsigned int pos) throw (HeadOutOfTape);

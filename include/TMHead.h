@@ -9,10 +9,10 @@ class TMHead
     public:
         TMHead() = default;
         TMHead(unsigned int pos) : headPosition(pos) {};
-        TMHead(TMHead&) = default;
+        TMHead(const TMHead&) = default;
         TMHead(TMHead&&) = default;
         virtual ~TMHead() = default;
-        TMHead& operator= (TMHead&) = default;
+        TMHead& operator= (const TMHead&) = default;
         TMHead& operator= (TMHead&&) = default;
         unsigned int getHeadPosition() const { return headPosition; }
         void setHeadPosition(unsigned int val) { headPosition = val; }

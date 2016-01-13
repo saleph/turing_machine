@@ -14,9 +14,9 @@ class TMAlphabet
         TMAlphabet() = default;
         TMAlphabet(const string&);
         TMAlphabet(const unordered_set<char>&);
-        TMAlphabet(TMAlphabet&) = default;
+        TMAlphabet(const TMAlphabet&) = default;
         TMAlphabet(TMAlphabet&&) = default;
-        TMAlphabet& operator= (TMAlphabet&) = default;
+        TMAlphabet& operator= (const TMAlphabet&) = default;
         TMAlphabet& operator= (TMAlphabet&&) = default;
         TMAlphabet operator= (const string& val) { return TMAlphabet(val); }
         virtual ~TMAlphabet() = default;

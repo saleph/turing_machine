@@ -28,7 +28,7 @@ void TMTape::checkHeadPosition() const throw (HeadOutOfTape) {
     if (getHeadPosition() > tapeLength - 1) throw HeadOutOfTape();
 }
 
-TMTape::~TMTape() {}
+TMTape::~TMTape() noexcept {}
 
 void TMTape::setHeadPosition(unsigned int pos) throw (HeadOutOfTape) {
     checkHeadPosition(pos);
