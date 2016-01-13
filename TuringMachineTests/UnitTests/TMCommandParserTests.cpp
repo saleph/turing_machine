@@ -12,16 +12,30 @@ struct TMCommandParserTestFixture {
 };
 BOOST_FIXTURE_TEST_SUITE(command_parser, TMCommandParserTestFixture)
 
-BOOST_AUTO_TEST_CASE( parsing_correct_line ) {
+BOOST_AUTO_TEST_CASE( parsing_correct_line_move_right ) {
     const string line ("state_name #/#;R go_to_state");
     const TMCommand cmd ('#', '#', TMHeadMoveType::RIGHT, "go_to_state");
     outputPair = parser.parseToCommandWithItsName(line);
     BOOST_CHECK(cmd.isTheSameAs(outputPair.second));
 }
 
-BOOST_AUTO_TEST_CASE( parsing_correct_line_lowercase_move_type ) {
-    const string line ("state_name #/#;l go_to_state");
+BOOST_AUTO_TEST_CASE( parsing_correct_line_move_left ) {
+    const string line ("state_name #/#;L go_to_state");
+    const TMCommand cmd ('#', '#', TMHeadMoveType::LEFT, "go_to_state");
+    outputPair = parser.parseToCommandWithItsName(line);
+    BOOST_CHECK(cmd.isTheSameAs(outputPair.second));
+}
+
+BOOST_AUTO_TEST_CASE( parsing_correct_line_lowercase_move_type_move_right ) {
+    const string line ("state_name #/#;r go_to_state");
     const TMCommand cmd ('#', '#', TMHeadMoveType::RIGHT, "go_to_state");
+    outputPair = parser.parseToCommandWithItsName(line);
+    BOOST_CHECK(cmd.isTheSameAs(outputPair.second));
+}
+
+BOOST_AUTO_TEST_CASE( parsing_correct_line_lowercase_move_type_move_left ) {
+    const string line ("state_name #/#;l go_to_state");
+    const TMCommand cmd ('#', '#', TMHeadMoveType::LEFT, "go_to_state");
     outputPair = parser.parseToCommandWithItsName(line);
     BOOST_CHECK(cmd.isTheSameAs(outputPair.second));
 }
@@ -34,8 +48,8 @@ BOOST_AUTO_TEST_CASE( parsing_correct_line_with_additional_spaces ) {
 }
 
 BOOST_AUTO_TEST_CASE( parsing_correct_line_with_special_chars_in_names ) {
-    const string line ("!@#$%^&*()-=+\|[]{}:?<>state_name #/#;R go_to_state!@#$%^&*()-=+\|[]{}:?<>");
-    const TMCommand cmd ('#', '#', TMHeadMoveType::RIGHT, "go_to_state!@#$%^&*()-=+\|[]{}:?<>");
+    const string line ("!@#$%^&*()-=+|[]{}:?<>state_name #/#;R go_to_state!@#$%^&*()-=+|[]{}:?<>");
+    const TMCommand cmd ('#', '#', TMHeadMoveType::RIGHT, "go_to_state!@#$%^&*()-=+|[]{}:?<>");
     outputPair = parser.parseToCommandWithItsName(line);
     BOOST_CHECK(cmd.isTheSameAs(outputPair.second));
 }

@@ -43,7 +43,6 @@ class TMCommandParser
     private:
         std::smatch tokens;
 
-
         void getTokensFrom(const string&);
         void checkIfRegexMatched() const throw (InvalidCommandSyntax);
         string getCommandName() const;

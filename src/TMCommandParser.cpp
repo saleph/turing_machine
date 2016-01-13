@@ -44,8 +44,8 @@ TMHeadMoveType TMCommandParser::TMCommandParser::getMoveType() const {
 
 TMHeadMoveType TMCommandParser::getHeadMoveTypeFromChar() const {
     char moveTypeAsChar = getMoveTypeFromToken();
-    if (moveTypeAsChar == 'R') return TMHeadMoveType::RIGHT; // validated in parse func
-    return TMHeadMoveType::LEFT;
+    if (moveTypeAsChar == 'R' || moveTypeAsChar == 'r') return TMHeadMoveType::RIGHT; // validated in parse func
+    else return TMHeadMoveType::LEFT;
 }
 
 char TMCommandParser::getMoveTypeFromToken() const {
