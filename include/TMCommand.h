@@ -11,7 +11,9 @@ class TMCommand {
         TMCommand() {}
         TMCommand(char from, char to, TMHeadMoveType moveType, string name)
             : fromState(from), toState(to), headMove(moveType), nextCommandName(name) {}
+        TMCommand(const TMCommand&) = default;
         TMCommand(TMCommand&&) = default;
+        TMCommand& operator= (const TMCommand&) = default;
         TMCommand& operator= (TMCommand&&) = default;
 
         bool operator== (const TMCommand& other) const {

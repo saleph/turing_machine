@@ -2,6 +2,7 @@
 
 TMControlGraph TMControlGraph::operator+= (const pair<string, TMCommand>& cmd) {
     addNewCmd(cmd);
+    return *this;
 }
 
 void TMControlGraph::addNewCmd(const pair<string, TMCommand>& cmd) {

@@ -12,7 +12,7 @@ struct TMCommandParserTestFixture {
 };
 BOOST_FIXTURE_TEST_SUITE(command_parser, TMCommandParserTestFixture)
 
-BOOST_AUTO_TEST_CASE( parsing_correct_line_move_right ) {
+BOOST_AUTO_TEST_CASE( parsing_test_tools_with_correct_line_move_right ) {
     const string line ("state_name #/#;R go_to_state");
     const TMCommand cmd ('#', '#', TMHeadMoveType::RIGHT, "go_to_state");
     outputPair = parser.parseToCommandWithItsName(line);

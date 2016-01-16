@@ -24,54 +24,54 @@ BOOST_AUTO_TEST_CASE( head_position_after_construction_wo_specified_pos_for_0_lo
 
 BOOST_AUTO_TEST_CASE( head_position_after_construction_wo_specified_pos_for_1_long_tape ) {
     BOOST_REQUIRE_NO_THROW(makeNewTapeWithLength(1));
-    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 1/2);
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 1/2u);
 }
 
 BOOST_AUTO_TEST_CASE( head_position_after_construction_wo_specified_pos_for_11_long_tape ) {
     BOOST_REQUIRE_NO_THROW(makeNewTapeWithLength(11));
-    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 11/2);
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 11/2u);
 }
 
 BOOST_AUTO_TEST_CASE( head_position_after_construction_wo_specified_pos_for_111_long_tape ) {
     BOOST_REQUIRE_NO_THROW(makeNewTapeWithLength(111));
-    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 111/2);
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 111/2u);
 }
 
 BOOST_AUTO_TEST_CASE( head_position_after_construction_wo_specified_pos_for_1001_long_tape ) {
     BOOST_REQUIRE_NO_THROW(makeNewTapeWithLength(1001));
-    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 1001/2);
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 1001/2u);
 }
 
 BOOST_AUTO_TEST_CASE( setting_head_position_at_0_after_construction_wo_specified_pos_for_1001_long_tape ) {
     BOOST_REQUIRE_NO_THROW(makeNewTapeWithLength(1001));
-    BOOST_REQUIRE_NO_THROW(tape->setHeadPosition(0))
-    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 0);
+    BOOST_REQUIRE_NO_THROW(tape->setHeadPosition(0));
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 0u);
 }
 
 BOOST_AUTO_TEST_CASE( setting_head_position_at_500_after_construction_wo_specified_pos_for_1001_long_tape ) {
     BOOST_REQUIRE_NO_THROW(makeNewTapeWithLength(1001));
-    BOOST_REQUIRE_NO_THROW(tape->setHeadPosition(500))
-    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 500);
+    BOOST_REQUIRE_NO_THROW(tape->setHeadPosition(500));
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 500u);
 }
 
 BOOST_AUTO_TEST_CASE( setting_head_position_at_1000_after_construction_wo_specified_pos_for_1001_long_tape ) {
     BOOST_REQUIRE_NO_THROW(makeNewTapeWithLength(1001));
-    BOOST_REQUIRE_NO_THROW(tape->setHeadPosition(1000))
-    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 1000);
+    BOOST_REQUIRE_NO_THROW(tape->setHeadPosition(1000));
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 1000u);
 }
 
 BOOST_AUTO_TEST_CASE( setting_head_position_at_1001_after_construction_wo_specified_pos_for_1001_long_tape ) {
     BOOST_REQUIRE_NO_THROW(makeNewTapeWithLength(1001));
     BOOST_REQUIRE_THROW(tape->setHeadPosition(1001), HeadOutOfTape);
     // set unsuccessful, so head should be still at the middle
-    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 1001/2);
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 1001/2u);
 }
 
 BOOST_AUTO_TEST_CASE( setting_head_position_at_1050_after_construction_wo_specified_pos_for_1001_long_tape ) {
     BOOST_REQUIRE_NO_THROW(makeNewTapeWithLength(1001));
     BOOST_REQUIRE_THROW(tape->setHeadPosition(1050), HeadOutOfTape);
     // set unsuccessful, so head should be still at the middle
-    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 1001/2);
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 1001/2u);
 }
 
 BOOST_AUTO_TEST_CASE( filling_tape_with_hashes_during_construction_wo_specified_pos_for_1001_long_tape ) {
@@ -107,37 +107,37 @@ BOOST_AUTO_TEST_CASE( head_position_after_construction_for_1_long_tape_with_head
 
 BOOST_AUTO_TEST_CASE( head_position_after_construction_for_1_long_tape_with_head_at_0 ) {
     BOOST_REQUIRE_NO_THROW(makeNewTapeWithLengthAndHeadAt(1, 0));
-    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 0);
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 0u);
 }
 
 BOOST_AUTO_TEST_CASE( head_position_after_construction_for_5_long_tape_with_head_at_0 ) {
     BOOST_REQUIRE_NO_THROW(makeNewTapeWithLengthAndHeadAt(5, 0));
-    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 0);
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 0u);
 }
 
 BOOST_AUTO_TEST_CASE( head_position_after_construction_for_5_long_tape_with_head_at_3 ) {
     BOOST_REQUIRE_NO_THROW(makeNewTapeWithLengthAndHeadAt(5, 3));
-    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 3);
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 3u);
 }
 
 BOOST_AUTO_TEST_CASE( head_position_after_construction_for_5_long_tape_with_head_at_4 ) {
     BOOST_REQUIRE_NO_THROW(makeNewTapeWithLengthAndHeadAt(5, 4));
-    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 4);
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 4u);
 }
 
 BOOST_AUTO_TEST_CASE( head_position_after_construction_for_1001_long_tape_with_head_at_0 ) {
     BOOST_REQUIRE_NO_THROW(makeNewTapeWithLengthAndHeadAt(1001, 0));
-    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 0);
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 0u);
 }
 
 BOOST_AUTO_TEST_CASE( head_position_after_construction_for_1001_long_tape_with_head_at_720 ) {
     BOOST_REQUIRE_NO_THROW(makeNewTapeWithLengthAndHeadAt(1001, 720));
-    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 720);
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 720u);
 }
 
 BOOST_AUTO_TEST_CASE( head_position_after_construction_for_1001_long_tape_with_head_at_1000 ) {
     BOOST_REQUIRE_NO_THROW(makeNewTapeWithLengthAndHeadAt(1001, 1000));
-    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 1000);
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 1000u);
 }
 
 BOOST_AUTO_TEST_CASE( head_position_after_construction_for_1001_long_tape_with_head_at_1001 ) {
@@ -151,33 +151,33 @@ BOOST_AUTO_TEST_CASE( head_position_after_construction_for_1001_long_tape_with_h
 BOOST_AUTO_TEST_CASE( setting_head_position_at_0_after_construction_for_1001_long_tape_with_head_at_1000 ) {
     BOOST_REQUIRE_NO_THROW(makeNewTapeWithLengthAndHeadAt(1001, 1000));
     BOOST_REQUIRE_NO_THROW(tape->setHeadPosition(0));
-    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 0);
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 0u);
 }
 
 BOOST_AUTO_TEST_CASE( setting_head_position_at_720_after_construction_for_1001_long_tape_with_head_at_1000 ) {
     BOOST_REQUIRE_NO_THROW(makeNewTapeWithLengthAndHeadAt(1001, 1000));
     BOOST_REQUIRE_NO_THROW(tape->setHeadPosition(720));
-    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 720);
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 720u);
 }
 
 BOOST_AUTO_TEST_CASE( setting_head_position_at_1000_after_construction_for_1001_long_tape_with_head_at_900 ) {
     BOOST_REQUIRE_NO_THROW(makeNewTapeWithLengthAndHeadAt(1001, 900));
     BOOST_REQUIRE_NO_THROW(tape->setHeadPosition(1000));
-    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 1000);
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 1000u);
 }
 
 BOOST_AUTO_TEST_CASE( setting_head_position_at_1001_after_construction_for_1001_long_tape_with_head_at_900 ) {
     BOOST_REQUIRE_NO_THROW(makeNewTapeWithLengthAndHeadAt(1001, 900));
     BOOST_REQUIRE_THROW(tape->setHeadPosition(1001), HeadOutOfTape);
     // set unsuccessful, so head should be still at the same position
-    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 900);
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 900u);
 }
 
 BOOST_AUTO_TEST_CASE( setting_head_position_at_1050_after_construction_for_1001_long_tape_with_head_at_900 ) {
     BOOST_REQUIRE_NO_THROW(makeNewTapeWithLengthAndHeadAt(1001, 900));
     BOOST_REQUIRE_THROW(tape->setHeadPosition(1050), HeadOutOfTape);
     // set unsuccessful, so head should be still at the same position
-    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 900);
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), 900u);
 }
 
 BOOST_AUTO_TEST_CASE( filling_tape_with_hashes_during_construction_for_1001_long_tape_with_head_at_900 ) {

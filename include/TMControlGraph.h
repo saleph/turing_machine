@@ -4,7 +4,7 @@
 #include "TMCommand.h"
 #include <unordered_map>
 #include <string>
-using std::unordered_map;
+using std::unordered_multimap;
 using std::string;
 using std::pair;
 using std::move;
@@ -13,12 +13,14 @@ using std::move;
 class TMControlGraph
 {
     public:
+        TMControlGraph() = default;
         TMControlGraph(const TMControlGraph&) = default;
-        TMCommand& operator[] (const string& val) { return graph[val]; }
+        TMControlGraph& operator= (const TMControlGraph&) = default;
+        TMControlGraph& operator= (TMControlGraph&&) = default;
+
         TMControlGraph operator+= (const pair<string, TMCommand>& cmd);
-    protected:
     private:
-        unordered_map<string, TMCommand> graph;
+        unordered_multimap<string, TMCommand> graph;
 
         void addNewCmd(const pair<string, TMCommand>&);
         void checkIfIsUnique(const TMCommand&) const;
