@@ -15,14 +15,19 @@ class TMCommand {
         TMCommand(TMCommand&&) = default;
         TMCommand& operator= (const TMCommand&) = default;
         TMCommand& operator= (TMCommand&&) = default;
+        virtual ~TMCommand() = default;
+
+        char getFromState() { return fromState; }
+        char getToState() { return toState; }
+        const TMHeadMoveType& getHeadMove() { return headMove; }
+        const string& getNextCommandName() { return nextCommandName; }
 
         bool operator== (const TMCommand& other) const {
-            return this->fromState == other.fromState;
+            return fromState == other.fromState;
         }
         bool isTheSameAs (const TMCommand& other) const {
-            bool statement = (this->fromState == other.fromState && this->toState == other.toState &&
-                this->headMove == other.headMove && !(this->nextCommandName.compare(other.nextCommandName)));
-            return statement;
+            return (fromState == other.fromState && toState == other.toState &&
+                headMove == other.headMove && nextCommandName == other.nextCommandName);
         }
     private:
         char fromState;

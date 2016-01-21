@@ -7,9 +7,13 @@ struct TMStringCharPair {
     std::string name;
     char character;
 
+    TMStringCharPair(const std::string& newName, const char& newChar) :
+        name(newName), character(newChar) {}
+
     bool operator== (const TMStringCharPair& other) const {
         return (name == other.name && character == other.character);
     }
+
 };
 
 // injection of hash policy for TMStringCharPair (for unordered map purpose)
