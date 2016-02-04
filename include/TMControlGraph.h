@@ -23,11 +23,10 @@ class TMControlGraph
 
         const TMCommand& operator[] (const TMStringCharPair& val) { return graph[val]; }
         void operator+= (const pair<string, TMCommand>& cmd) throw (CommandAlreadyExist);
-        void addNewCmd(const pair<string, TMCommand>&) throw (CommandAlreadyExist);
     private:
         unordered_map<TMStringCharPair, TMCommand> graph;
 
-        //void addNewCmd(const pair<string, TMCommand>&) throw (CommandAlreadyExist);
+        void addNewCmd(const pair<string, TMCommand>&) throw (CommandAlreadyExist);
         void checkIfIsUnique(const TMStringCharPair&) throw (CommandAlreadyExist);
         void appendCmd(TMStringCharPair&, TMCommand&);
 };
