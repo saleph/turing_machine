@@ -13,7 +13,8 @@ void TMControlGraph::addNewCmd(const pair<string, TMCommand>& cmd) throw (Comman
 }
 
 void TMControlGraph::checkIfIsUnique(const TMStringCharPair& cmdNameAndFromState) throw (CommandAlreadyExist) {
-
+    size_t numberOfOccurences = graph.count(cmdNameAndFromState);
+    if (numberOfOccurences >= 1) throw CommandAlreadyExist();
 }
 
 void TMControlGraph::appendCmd(TMStringCharPair& cmdNameAndFromState, TMCommand& commandBody) {
