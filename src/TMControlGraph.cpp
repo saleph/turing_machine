@@ -1,22 +1,21 @@
 #include "TMControlGraph.h"
 
-TMControlGraph TMControlGraph::operator+= (const pair<string, TMCommand>& cmd) {
+void TMControlGraph::operator+= (const pair<string, TMCommand>& cmd) throw (CommandAlreadyExist) {
     addNewCmd(cmd);
-    return *this;
 }
 
-void TMControlGraph::addNewCmd(const pair<string, TMCommand>& cmd) {
-    /*const string commandName (move(cmd.first));
-    const TMCommand commandBody (move(cmd.second));
-    checkIfIsUnique(commandBody);
-    appendCmd(commandName, commandBody);*/
-    // TODO: WRITE TESTS
+void TMControlGraph::addNewCmd(const pair<string, TMCommand>& cmd) throw (CommandAlreadyExist) {
+    string commandName (cmd.first);
+    TMCommand commandBody (cmd.second);
+    TMStringCharPair cmdNameAndFromState (commandName, commandBody.getFromState());
+    checkIfIsUnique(cmdNameAndFromState);
+    appendCmd(cmdNameAndFromState, commandBody);
 }
 
-void TMControlGraph::checkIfIsUnique(const TMCommand& cmdBody) const {
+void TMControlGraph::checkIfIsUnique(const TMStringCharPair& cmdNameAndFromState) throw (CommandAlreadyExist) {
 
 }
 
-void TMControlGraph::appendCmd(const string& cmdName, const TMCommand& cmdBody) {
-
+void TMControlGraph::appendCmd(TMStringCharPair& cmdNameAndFromState, TMCommand& commandBody) {
+    graph[cmdNameAndFromState] = commandBody;
 }
