@@ -17,10 +17,10 @@ class TMCommand {
         TMCommand& operator= (TMCommand&&) = default;
         virtual ~TMCommand() = default;
 
-        char getFromState() { return fromState; }
-        char getToState() { return toState; }
-        const TMHeadMoveType& getHeadMove() { return headMove; }
-        const string& getNextCommandName() { return nextCommandName; }
+        char getFromState() const { return fromState; }
+        char getToState() const { return toState; }
+        const TMHeadMoveType& getHeadMove() const { return headMove; }
+        const string& getNextCommandName() const { return nextCommandName; }
 
         bool operator== (const TMCommand& other) const {
             return fromState == other.fromState;
