@@ -4,10 +4,6 @@ TMAlphabet::TMAlphabet(const string& strVal) {
     alphabet.insert (strVal.begin(), strVal.end());
 }
 
-TMAlphabet::TMAlphabet(const unordered_set<char>& usetVal) {
-    alphabet = usetVal;
-}
-
 string TMAlphabet::getAlphabet() {
     return string(alphabet.begin(), alphabet.end());
 }

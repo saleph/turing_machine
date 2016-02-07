@@ -14,8 +14,13 @@ using std::string;
 
 class TMTuringMachine
 {
+        const string startPhrase = "Start";
+        const string endPhrase = "Stop";
     public:
-        TMTuringMachine(unsigned int length);
+        shared_ptr<TMTape> tape;
+        shared_ptr<TMAlphabet> alphabet;
+
+        TMTuringMachine(size_t length=1001);
         virtual ~TMTuringMachine() {};
 
         void addToGraph(const string& commandAsText);
@@ -23,11 +28,10 @@ class TMTuringMachine
     private:
         unique_ptr<TMControlGraph> graph;
         unique_ptr<TMCommandParser> parser;
-        shared_ptr<TMTape> tape;
-        shared_ptr<TMAlphabet> alphabet;
         string currentCmdName;
 
         void doCommandOnTheTape(const TMCommand&);
+        void checkIfTheGraphReachedEnd() const throw (EndOfTheControlGraph);
 };
 
 #endif // TMTURINGMACHINE_H

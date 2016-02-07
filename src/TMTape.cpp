@@ -1,13 +1,13 @@
 #include "TMTape.h"
 
 // without setting headPosition the head go to the middle of tape
-TMTape::TMTape(unsigned int len, shared_ptr<TMAlphabet> alphaSPtr) throw (ZeroLongTape) : TMHead (len/2u) {
+TMTape::TMTape(size_t len, shared_ptr<TMAlphabet> alphaSPtr) throw (ZeroLongTape) : TMHead (len/2u) {
     setTapeLength(len);
     initTape(len);
     setAlphabetPtr(alphaSPtr);
 }
 
-TMTape::TMTape(unsigned int len, unsigned int headPos, shared_ptr<TMAlphabet> alphaSPtr)
+TMTape::TMTape(size_t len, size_t headPos, shared_ptr<TMAlphabet> alphaSPtr)
         throw (ZeroLongTape, HeadOutOfTape) : TMHead(headPos) {
     setTapeLength(len);
     checkHeadPosition();
@@ -15,12 +15,12 @@ TMTape::TMTape(unsigned int len, unsigned int headPos, shared_ptr<TMAlphabet> al
     setAlphabetPtr(alphaSPtr);
 }
 
-void TMTape::setTapeLength(unsigned int len) throw (ZeroLongTape) {
+void TMTape::setTapeLength(size_t len) throw (ZeroLongTape) {
     checkTapeLength(len);
     tapeLength = len;
 }
 
-void TMTape::checkTapeLength(unsigned int len) const throw (ZeroLongTape) {
+void TMTape::checkTapeLength(size_t len) const throw (ZeroLongTape) {
     if (len == 0u) throw ZeroLongTape();
 }
 
@@ -30,20 +30,20 @@ void TMTape::checkHeadPosition() const throw (HeadOutOfTape) {
 
 TMTape::~TMTape() noexcept {}
 
-void TMTape::setHeadPosition(unsigned int pos) throw (HeadOutOfTape) {
+void TMTape::setHeadPosition(size_t pos) throw (HeadOutOfTape) {
     checkHeadPosition(pos);
     TMHead::setHeadPosition(pos);
 }
 
-void TMTape::checkHeadPosition(unsigned int pos) const throw (HeadOutOfTape) {
+void TMTape::checkHeadPosition(size_t pos) const throw (HeadOutOfTape) {
     if (pos > tapeLength - 1) throw HeadOutOfTape();
 }
 
-unsigned int TMTape::getHeadPosition() const {
+size_t TMTape::getHeadPosition() const {
     return TMHead::getHeadPosition();
 }
 
-void TMTape::initTape(unsigned int len) {
+void TMTape::initTape(size_t len) {
     tape.insert(tape.begin(), len, '#');
     updateHeadPointer();
 }

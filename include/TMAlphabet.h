@@ -13,7 +13,6 @@ class TMAlphabet
     public:
         TMAlphabet() = default;
         TMAlphabet(const string&);
-        TMAlphabet(const unordered_set<char>&);
         TMAlphabet(const TMAlphabet&) = default;
         TMAlphabet(TMAlphabet&&) = default;
         TMAlphabet& operator= (const TMAlphabet&) = default;

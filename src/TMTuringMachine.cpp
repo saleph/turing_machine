@@ -1,11 +1,11 @@
 #include "TMTuringMachine.h"
 
-TMTuringMachine::TMTuringMachine(unsigned int length=1001u) {
+TMTuringMachine::TMTuringMachine(size_t length) {
     alphabet = make_shared<TMAlphabet>();
     tape = make_shared<TMTape>(length, alphabet);
     parser = make_unique<TMCommandParser>();
     graph = make_unique<TMControlGraph>();
-    currentCmdName = "Start";
+    currentCmdName = startPhrase;
 }
 
 void TMTuringMachine::addToGraph(const string& commandAsText) {
@@ -17,6 +17,7 @@ void TMTuringMachine::doStep() {
     TMStringCharPair currentCmdIndex (currentCmdName, currentState);
     TMCommand currentCmd = (*graph)[currentCmdIndex];
     doCommandOnTheTape(currentCmd);
+    checkIfTheGraphReachedEnd();
 }
 
 void TMTuringMachine::doCommandOnTheTape(const TMCommand& cmd) {
@@ -25,4 +26,8 @@ void TMTuringMachine::doCommandOnTheTape(const TMCommand& cmd) {
     TMHeadMoveType headMove = cmd.getHeadMove();
     tape->doCmd(currentState, toState, headMove);
     currentCmdName = cmd.getNextCommandName();
+}
+
+void TMTuringMachine::checkIfTheGraphReachedEnd() const throw (EndOfTheControlGraph) {
+    if (currentCmdName == endPhrase) throw EndOfTheControlGraph();
 }

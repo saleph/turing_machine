@@ -15,27 +15,27 @@ using std::vector;
 class TMTape : public TMHead
 {
     public:
-        TMTape(unsigned int len, shared_ptr<TMAlphabet>) throw (ZeroLongTape);
-        TMTape(unsigned int len, unsigned int headPos, shared_ptr<TMAlphabet>) throw (ZeroLongTape, HeadOutOfTape);
+        TMTape(size_t len, shared_ptr<TMAlphabet>) throw (ZeroLongTape);
+        TMTape(size_t len, size_t headPos, shared_ptr<TMAlphabet>) throw (ZeroLongTape, HeadOutOfTape);
         virtual ~TMTape();
 
         const char& operator[] (std::size_t idx) const { return tape[idx]; }
-        virtual void setHeadPosition(unsigned int pos) throw (HeadOutOfTape);
-        virtual unsigned int getHeadPosition() const;
+        virtual void setHeadPosition(size_t pos) throw (HeadOutOfTape);
+        virtual size_t getHeadPosition() const;
 
         void doCmd (const char before, const char after, TMHeadMoveType headMove)
                 throw (MismatchCommandAndElementUnderHead, CharacterOutOfAlphabet, HeadOutOfTape);
     protected:
     private:
-        unsigned int tapeLength;
+        size_t tapeLength;
         vector<char> tape;
         weak_ptr<TMAlphabet> alphabet;
 
-        void setTapeLength(unsigned int len) throw (ZeroLongTape);
-        void checkTapeLength(unsigned int len) const throw (ZeroLongTape);
+        void setTapeLength(size_t len) throw (ZeroLongTape);
+        void checkTapeLength(size_t len) const throw (ZeroLongTape);
         void checkHeadPosition() const throw (HeadOutOfTape);
-        void checkHeadPosition(unsigned int pos) const throw (HeadOutOfTape);
-        void initTape(unsigned int len);
+        void checkHeadPosition(size_t pos) const throw (HeadOutOfTape);
+        void initTape(size_t len);
         void setAlphabetPtr(shared_ptr<TMAlphabet>);
         void changeCharUnderHeadTo(const char character);
         void moveHeadToThe(TMHeadMoveType direction);

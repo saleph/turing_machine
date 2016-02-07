@@ -3,6 +3,7 @@
 
 #include <stdexcept>
 using std::invalid_argument;
+using std::logic_error;
 
 class MismatchCommandAndElementUnderHead : public invalid_argument {
     public:
@@ -32,6 +33,11 @@ class InvalidCommandSyntax : invalid_argument {
 class CommandAlreadyExist : invalid_argument {
     public:
         CommandAlreadyExist() : invalid_argument ( "Command with this transition already exist!" ) {}
+};
+
+class EndOfTheControlGraph : logic_error {
+    public:
+        EndOfTheControlGraph() : logic_error ( "End of the control graph (the machine reach state 'Stop'!" ) {}
 };
 
 
