@@ -9,7 +9,9 @@ using std::string;
 class TMCommand {
     public:
         TMCommand() {}
-        TMCommand(char from, char to, TMHeadMoveType moveType, string name)
+        TMCommand(char from, char to, TMHeadMoveType moveType, string& name)
+            : fromState(from), toState(to), headMove(moveType), nextCommandName(name) {}
+        TMCommand(char from, char to, TMHeadMoveType moveType, const char* name)
             : fromState(from), toState(to), headMove(moveType), nextCommandName(name) {}
         TMCommand(const TMCommand&) = default;
         TMCommand(TMCommand&&) = default;

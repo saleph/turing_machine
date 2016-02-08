@@ -21,13 +21,17 @@ void TMTuringMachine::doStep() {
 }
 
 void TMTuringMachine::doCommandOnTheTape(const TMCommand& cmd) {
-    char currentState = tape->getCharUnderHead();
+    char fromState = cmd.getFromState();
     char toState = cmd.getToState();
     TMHeadMoveType headMove = cmd.getHeadMove();
-    tape->doCmd(currentState, toState, headMove);
+    tape->doCmd(fromState, toState, headMove);
     currentCmdName = cmd.getNextCommandName();
 }
 
 void TMTuringMachine::checkIfTheGraphReachedEnd() const throw (EndOfTheControlGraph) {
     if (currentCmdName == endPhrase) throw EndOfTheControlGraph();
+}
+
+void TMTuringMachine::backTheGraphToTheBeginning() {
+    currentCmdName = startPhrase;
 }

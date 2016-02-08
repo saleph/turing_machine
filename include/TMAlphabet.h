@@ -13,11 +13,7 @@ class TMAlphabet
     public:
         TMAlphabet() = default;
         TMAlphabet(const string&);
-        TMAlphabet(const TMAlphabet&) = default;
-        TMAlphabet(TMAlphabet&&) = default;
-        TMAlphabet& operator= (const TMAlphabet&) = default;
-        TMAlphabet& operator= (TMAlphabet&&) = default;
-        TMAlphabet operator= (const string& val) { return TMAlphabet(val); }
+        void operator= (const string& val) { setAlphabet(val); }
         virtual ~TMAlphabet() = default;
 
         string getAlphabet();

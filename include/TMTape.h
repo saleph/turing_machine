@@ -10,6 +10,7 @@
 using std::weak_ptr;
 using std::shared_ptr;
 using std::vector;
+using std::fill;
 
 
 class TMTape : public TMHead
@@ -25,6 +26,7 @@ class TMTape : public TMHead
 
         void doCmd (const char before, const char after, TMHeadMoveType headMove)
                 throw (MismatchCommandAndElementUnderHead, CharacterOutOfAlphabet, HeadOutOfTape);
+        void reset();
     protected:
     private:
         size_t tapeLength;
@@ -42,6 +44,7 @@ class TMTape : public TMHead
         void updateHeadPointer();
         void checkIfBelongsToAlphabet(const char character) const throw (CharacterOutOfAlphabet);
         void checkIfMatchWithCharOnTape(const char character) const throw (MismatchCommandAndElementUnderHead);
+        void fillTheTapeWithHashes();
 };
 
 #endif // TMTAPE_H

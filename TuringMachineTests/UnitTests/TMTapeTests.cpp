@@ -12,7 +12,7 @@ struct TMTapeTestFixtureFor1Arg {
     shared_ptr<TMAlphabet> alpha;
     void makeNewTapeWithLength(unsigned int len) {
         alpha = make_shared<TMAlphabet>("#");
-        tape = unique_ptr<TMTape>(make_unique<TMTape>(len, alpha));
+        tape = make_unique<TMTape>(len, alpha);
     }
 };
 
@@ -88,7 +88,7 @@ struct TMTapeTestFixtureFor2Args {
     shared_ptr<TMAlphabet> alpha;
     void makeNewTapeWithLengthAndHeadAt(unsigned int len, unsigned int pos) {
         alpha = make_shared<TMAlphabet>("#");
-        tape = unique_ptr<TMTape>(make_unique<TMTape>(len, pos, alpha));
+        tape = make_unique<TMTape>(len, pos, alpha);
     }
 };
 BOOST_FIXTURE_TEST_SUITE( tape_with_setting_position, TMTapeTestFixtureFor2Args )
@@ -192,7 +192,7 @@ BOOST_AUTO_TEST_SUITE_END()
 struct TMTapeTestFixtureFor1001LongTapeAndHeadAt500 {
     TMTapeTestFixtureFor1001LongTapeAndHeadAt500() {
         alpha = make_shared<TMAlphabet>("#$01");
-        tape = unique_ptr<TMTape>(make_unique<TMTape>(len, startPos, alpha));
+        tape = make_unique<TMTape>(len, startPos, alpha);
     }
     unique_ptr<TMTape> tape;
     shared_ptr<TMAlphabet> alpha;
@@ -250,6 +250,15 @@ BOOST_AUTO_TEST_CASE( doCmd_with_BEFORE_and_AFTER_not_belong_to_alphabet_move_he
     BOOST_CHECK_EQUAL((*tape)[startPos+1], '#'); // check if next el didn't modified
     BOOST_CHECK_EQUAL((*tape)[startPos-1], '#'); // check if prev el didn't modified
     BOOST_CHECK_EQUAL(tape->getHeadPosition(), startPos); // after unsuccessful cmd
+}
+
+BOOST_AUTO_TEST_CASE( resetting_the_tape ) {
+    BOOST_REQUIRE_NO_THROW(tape->doCmd('#', '1', TMHeadMoveType::RIGHT));
+    BOOST_CHECK_EQUAL((*tape)[startPos], '1');
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), startPos+1);
+    tape->reset();
+    BOOST_CHECK_EQUAL((*tape)[startPos], '#');
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), startPos);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

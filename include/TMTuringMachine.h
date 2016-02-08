@@ -25,6 +25,7 @@ class TMTuringMachine
 
         void addToGraph(const string& commandAsText);
         void doStep();
+        void backTheGraphToTheBeginning();
     private:
         unique_ptr<TMControlGraph> graph;
         unique_ptr<TMCommandParser> parser;

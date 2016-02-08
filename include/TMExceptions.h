@@ -35,6 +35,11 @@ class CommandAlreadyExist : invalid_argument {
         CommandAlreadyExist() : invalid_argument ( "Command with this transition already exist!" ) {}
 };
 
+class CommandNotExist : invalid_argument {
+    public:
+        CommandNotExist() : invalid_argument ( "Command with this transition doesn't exist!" ) {}
+};
+
 class EndOfTheControlGraph : logic_error {
     public:
         EndOfTheControlGraph() : logic_error ( "End of the control graph (the machine reach state 'Stop'!" ) {}

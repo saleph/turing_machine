@@ -17,8 +17,9 @@ class TMControlGraph
     public:
         TMControlGraph() {}
 
-        const TMCommand& operator[] (const TMStringCharPair& val) { return graph[val]; }
+        const TMCommand& operator[] (const TMStringCharPair&) const throw (CommandNotExist);
         void operator+= (const pair<string, TMCommand>& cmd) throw (CommandAlreadyExist);
+        void clear();
     private:
         unordered_map<TMStringCharPair, TMCommand> graph;
 

@@ -30,7 +30,7 @@ class TMCommandParser
         "\\s+"        // space(s) after command
         "([^ ;\\/])"  // one character (current state on tape)
         "/"           // separator between current & after states
-        "([^ ;\\/])"  // one character (which repace current)
+        "([^ ;\\/])"  // one character (which will repace current)
         ";"           // separator between current and new chars & head move type
         "([RLrl])"    // move type (R/L or r/l)
         "\\s+"        // space(s) after "to head" commands

@@ -1,5 +1,13 @@
 #include "TMControlGraph.h"
 
+const TMCommand& TMControlGraph::operator[] (const TMStringCharPair& val) const throw (CommandNotExist) {
+    try {
+        return graph.at(val);
+    } catch (const std::out_of_range&) {
+        throw CommandNotExist();
+    }
+}
+
 void TMControlGraph::operator+= (const pair<string, TMCommand>& cmd) throw (CommandAlreadyExist) {
     addNewCmd(cmd);
 }
@@ -19,4 +27,8 @@ void TMControlGraph::checkIfIsUnique(const TMStringCharPair& cmdNameAndFromState
 
 void TMControlGraph::appendCmd(TMStringCharPair& cmdNameAndFromState, TMCommand& commandBody) {
     graph[cmdNameAndFromState] = commandBody;
+}
+
+void TMControlGraph::clear() {
+    graph.clear();
 }

@@ -84,3 +84,12 @@ void TMTape::checkIfBelongsToAlphabet(const char character) const throw (Charact
 void TMTape::checkIfMatchWithCharOnTape(const char character) const throw (MismatchCommandAndElementUnderHead) {
     if(getCharUnderHead() != character) throw MismatchCommandAndElementUnderHead();
 }
+
+void TMTape::reset() {
+    fillTheTapeWithHashes();
+    setHeadPosition(tapeLength/2);
+}
+
+void TMTape::fillTheTapeWithHashes() {
+    fill(tape.begin(), tape.end(), '#');
+}

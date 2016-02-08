@@ -54,4 +54,40 @@ BOOST_AUTO_TEST_CASE( reaching_end_of_the_control_graph ) {
     BOOST_CHECK_EQUAL(turingMachine.tape->getHeadPosition(), middlePos-2);
 }
 
+BOOST_AUTO_TEST_CASE( execution_1_command_with_different_fromState_and_char_on_tape ) {
+    turingMachine.addToGraph("Start 1/1;L next_cmd"); // under head is now '#'
+    BOOST_REQUIRE_THROW(turingMachine.doStep(), CommandNotExist);
+    BOOST_CHECK_EQUAL((*turingMachine.tape)[middlePos], '#');
+}
+
+BOOST_AUTO_TEST_CASE( execution_1_command_with_no_Start_name ) {
+    turingMachine.addToGraph("no-Start #/1;L next_cmd"); // under head is now '#'
+    BOOST_REQUIRE_THROW(turingMachine.doStep(), CommandNotExist);
+    BOOST_CHECK_EQUAL((*turingMachine.tape)[middlePos], '#');
+}
+
+BOOST_AUTO_TEST_CASE( execution_1_command_with_no_Start_name_and_mismatch_fromState_and_char_on_tape ) {
+    turingMachine.addToGraph("no-Start 1/1;L next_cmd"); // under head is now '#'
+    BOOST_REQUIRE_THROW(turingMachine.doStep(), CommandNotExist);
+    BOOST_CHECK_EQUAL((*turingMachine.tape)[middlePos], '#');
+}
+
+BOOST_AUTO_TEST_CASE( backTheGraphToTheBeginning_test ) {
+    turingMachine.addToGraph("Start #/1;L next_cmd");
+    turingMachine.addToGraph("next_cmd $/1;L next_next_cmd");
+    turingMachine.doStep(); // now tape looks: ##1##, so next_cmd has different fromStatus
+    // head                                     ^
+    BOOST_REQUIRE_THROW(turingMachine.doStep(), CommandNotExist);
+    turingMachine.backTheGraphToTheBeginning();
+    turingMachine.doStep(); // now should execute 1. cmd with Start name
+}
+
+BOOST_AUTO_TEST_CASE( notExist_next_cmd ) {
+    turingMachine.addToGraph("Start #/1;L next_cmd");
+    turingMachine.addToGraph("nextCmdDoesn'tExist $/1;L next_next_cmd");
+    turingMachine.doStep(); // now tape looks: ##1##
+    // head                                     ^
+    BOOST_REQUIRE_THROW(turingMachine.doStep(), CommandNotExist); // because in the graph isn't any next_cmd
+}
+
 BOOST_AUTO_TEST_SUITE_END()
