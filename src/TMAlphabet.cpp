@@ -1,20 +1,20 @@
 #include "TMAlphabet.h"
 
-TMAlphabet::TMAlphabet(const string& strVal) {
+TMAlphabet::TMAlphabet(const std::string& strVal) {
     alphabet.insert (strVal.begin(), strVal.end());
 }
 
-string TMAlphabet::getAlphabet() {
-    return string(alphabet.begin(), alphabet.end());
+std::string TMAlphabet::getAlphabet() {
+    return std::string(alphabet.begin(), alphabet.end());
 }
 
-string TMAlphabet::getSortedAlphabet() {
-    string strAlpha {getAlphabet()};
+std::string TMAlphabet::getSortedAlphabet() {
+    std::string strAlpha {getAlphabet()};
     std::sort (strAlpha.begin(), strAlpha.end());
     return strAlpha;
 }
 
-void TMAlphabet::setAlphabet(const string& strVal) {
+void TMAlphabet::setAlphabet(const std::string& strVal) {
     alphabet.clear();
     alphabet.insert (strVal.begin(), strVal.end());
 }

@@ -8,12 +8,12 @@ const TMCommand& TMControlGraph::operator[] (const TMStringCharPair& val) const 
     }
 }
 
-void TMControlGraph::operator+= (const pair<string, TMCommand>& cmd) throw (CommandAlreadyExist) {
+void TMControlGraph::operator+= (const std::pair<std::string, TMCommand>& cmd) throw (CommandAlreadyExist) {
     addNewCmd(cmd);
 }
 
-void TMControlGraph::addNewCmd(const pair<string, TMCommand>& cmd) throw (CommandAlreadyExist) {
-    string commandName (cmd.first);
+void TMControlGraph::addNewCmd(const std::pair<std::string, TMCommand>& cmd) throw (CommandAlreadyExist) {
+    std::string commandName (cmd.first);
     TMCommand commandBody (cmd.second);
     TMStringCharPair cmdNameAndFromState (commandName, commandBody.getFromState());
     checkIfIsUnique(cmdNameAndFromState);

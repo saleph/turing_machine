@@ -1,14 +1,14 @@
 #include "TMTuringMachine.h"
 
 TMTuringMachine::TMTuringMachine(size_t length) {
-    alphabet = make_shared<TMAlphabet>();
-    tape = make_shared<TMTape>(length, alphabet);
-    parser = make_unique<TMCommandParser>();
-    graph = make_unique<TMControlGraph>();
+    alphabet = std::make_shared<TMAlphabet>();
+    tape = std::make_shared<TMTape>(length, alphabet);
+    parser = std::make_unique<TMCommandParser>();
+    graph = std::make_unique<TMControlGraph>();
     currentCmdName = startPhrase;
 }
 
-void TMTuringMachine::addToGraph(const string& commandAsText) {
+void TMTuringMachine::addToGraph(const std::string& commandAsText) {
     *graph += parser->parseToCommandWithItsName(commandAsText);
 }
 

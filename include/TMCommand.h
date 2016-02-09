@@ -3,13 +3,12 @@
 
 #include "TMHeadMoveType.h"
 #include <string>
-using std::string;
 
 
 class TMCommand {
     public:
         TMCommand() {}
-        TMCommand(char from, char to, TMHeadMoveType moveType, string& name)
+        TMCommand(char from, char to, TMHeadMoveType moveType, std::string& name)
             : fromState(from), toState(to), headMove(moveType), nextCommandName(name) {}
         TMCommand(char from, char to, TMHeadMoveType moveType, const char* name)
             : fromState(from), toState(to), headMove(moveType), nextCommandName(name) {}
@@ -22,7 +21,7 @@ class TMCommand {
         char getFromState() const { return fromState; }
         char getToState() const { return toState; }
         const TMHeadMoveType& getHeadMove() const { return headMove; }
-        const string& getNextCommandName() const { return nextCommandName; }
+        const std::string& getNextCommandName() const { return nextCommandName; }
 
         bool operator== (const TMCommand& other) const {
             return fromState == other.fromState;
@@ -35,7 +34,7 @@ class TMCommand {
         char fromState;
         char toState;
         TMHeadMoveType headMove;
-        string nextCommandName;
+        std::string nextCommandName;
 };
 
 #endif // TMCOMMAND_H

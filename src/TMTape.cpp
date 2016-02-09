@@ -1,13 +1,13 @@
 #include "TMTape.h"
 
 // without setting headPosition the head go to the middle of tape
-TMTape::TMTape(size_t len, shared_ptr<TMAlphabet> alphaSPtr) throw (ZeroLongTape) : TMHead (len/2u) {
+TMTape::TMTape(size_t len, std::shared_ptr<TMAlphabet> alphaSPtr) throw (ZeroLongTape) : TMHead (len/2u) {
     setTapeLength(len);
     initTape(len);
     setAlphabetPtr(alphaSPtr);
 }
 
-TMTape::TMTape(size_t len, size_t headPos, shared_ptr<TMAlphabet> alphaSPtr)
+TMTape::TMTape(size_t len, size_t headPos, std::shared_ptr<TMAlphabet> alphaSPtr)
         throw (ZeroLongTape, HeadOutOfTape) : TMHead(headPos) {
     setTapeLength(len);
     checkHeadPosition();
@@ -52,7 +52,7 @@ void TMTape::updateHeadPointer() {
     setPointerForCharUnderHead(&tape[getHeadPosition()]);
 }
 
-void TMTape::setAlphabetPtr(shared_ptr<TMAlphabet> alphaSPtr) {
+void TMTape::setAlphabetPtr(std::shared_ptr<TMAlphabet> alphaSPtr) {
     alphabet = alphaSPtr;
 }
 
@@ -77,7 +77,7 @@ void TMTape::moveHeadToThe(TMHeadMoveType direction) {
 }
 
 void TMTape::checkIfBelongsToAlphabet(const char character) const throw (CharacterOutOfAlphabet) {
-    shared_ptr<TMAlphabet> alpha (alphabet);
+    std::shared_ptr<TMAlphabet> alpha (alphabet);
     if (!alpha->has(character)) throw CharacterOutOfAlphabet();
 }
 
@@ -91,5 +91,5 @@ void TMTape::reset() {
 }
 
 void TMTape::fillTheTapeWithHashes() {
-    fill(tape.begin(), tape.end(), '#');
+    std::fill(tape.begin(), tape.end(), '#');
 }

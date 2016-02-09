@@ -4,16 +4,7 @@
 #include "TMCommand.h"
 #include "TMExceptions.h"
 #include <string>
-#include <vector>
-#include <array>
-#include <cstring>
 #include <regex>
-using std::string;
-using std::pair;
-using std::vector;
-using std::array;
-using std::size_t;
-using std::regex;
 
 
 class TMCommandParser
@@ -23,7 +14,7 @@ class TMCommandParser
     const size_t TO_STATE_POS = 3;
     const size_t MOVE_TYPE_POS = 4;
     const size_t NEXT_CMD_NAME_POS = 5;
-    const regex CMD_PATTERN = regex(
+    const std::regex CMD_PATTERN = std::regex(
         "^"           // start of command
         "\\s*"        // preceding spaces
         "([^ ;\\/]+)" // name of the command
@@ -39,21 +30,21 @@ class TMCommandParser
         "$"           // end of command
         );
     public:
-        pair<string, TMCommand> parseToCommandWithItsName(const string& line) throw (InvalidCommandSyntax);
+        std::pair<std::string, TMCommand> parseToCommandWithItsName(const std::string& line) throw (InvalidCommandSyntax);
     private:
         std::smatch tokens;
 
-        void getTokensFrom(const string&);
+        void getTokensFrom(const std::string&);
         void checkIfRegexMatched() const throw (InvalidCommandSyntax);
-        string getCommandName() const;
+        std::string getCommandName() const;
         TMCommand constructNewCommand() const;
         char getFromState() const;
-        char getFirstCharOf(const string&) const;
+        char getFirstCharOf(const std::string&) const;
         char getToState() const;
         TMHeadMoveType getMoveType() const;
         TMHeadMoveType getHeadMoveTypeFromChar() const;
         char getMoveTypeFromToken() const;
-        string getNextCommandName() const;
+        std::string getNextCommandName() const;
 };
 
 #endif // TMCOMMANDPARSER_H

@@ -7,17 +7,13 @@
 #include "TMHead.h"
 #include "TMAlphabet.h"
 #include "TMExceptions.h"
-using std::weak_ptr;
-using std::shared_ptr;
-using std::vector;
-using std::fill;
 
 
 class TMTape : public TMHead
 {
     public:
-        TMTape(size_t len, shared_ptr<TMAlphabet>) throw (ZeroLongTape);
-        TMTape(size_t len, size_t headPos, shared_ptr<TMAlphabet>) throw (ZeroLongTape, HeadOutOfTape);
+        TMTape(size_t len, std::shared_ptr<TMAlphabet>) throw (ZeroLongTape);
+        TMTape(size_t len, size_t headPos, std::shared_ptr<TMAlphabet>) throw (ZeroLongTape, HeadOutOfTape);
         virtual ~TMTape();
 
         char& operator[] (size_t idx) { return tape[idx]; }
@@ -35,16 +31,16 @@ class TMTape : public TMHead
         void reset();
     private:
         size_t tapeLength;
-        vector<char> tape;
-        weak_ptr<TMAlphabet> alphabet;
+        std::vector<char> tape;
+        std::weak_ptr<TMAlphabet> alphabet;
 
         void setTapeLength(size_t len) throw (ZeroLongTape);
         void checkTapeLength(size_t len) const throw (ZeroLongTape);
         void checkHeadPosition() const throw (HeadOutOfTape);
         void checkHeadPosition(size_t pos) const throw (HeadOutOfTape);
         void initTape(size_t len);
-        void setAlphabetPtr(shared_ptr<TMAlphabet>);
-        void setTapePtr(shared_ptr<vector<char>> tapePtr);
+        void setAlphabetPtr(std::shared_ptr<TMAlphabet>);
+        void setTapePtr(std::shared_ptr<std::vector<char>> tapePtr);
         void changeCharUnderHeadTo(const char character);
         void moveHeadToThe(TMHeadMoveType direction);
         void updateHeadPointer();

@@ -6,10 +6,6 @@
 #include "TMExceptions.h"
 #include <unordered_map>
 #include <string>
-using std::unordered_map;
-using std::string;
-using std::pair;
-using std::move;
 
 
 class TMControlGraph
@@ -18,12 +14,12 @@ class TMControlGraph
         TMControlGraph() {}
 
         const TMCommand& operator[] (const TMStringCharPair&) const throw (CommandNotExist);
-        void operator+= (const pair<string, TMCommand>& cmd) throw (CommandAlreadyExist);
+        void operator+= (const std::pair<std::string, TMCommand>& cmd) throw (CommandAlreadyExist);
         void clear();
     private:
-        unordered_map<TMStringCharPair, TMCommand> graph;
+        std::unordered_map<TMStringCharPair, TMCommand> graph;
 
-        void addNewCmd(const pair<string, TMCommand>&) throw (CommandAlreadyExist);
+        void addNewCmd(const std::pair<std::string, TMCommand>&) throw (CommandAlreadyExist);
         void checkIfIsUnique(const TMStringCharPair&) throw (CommandAlreadyExist);
         void appendCmd(TMStringCharPair&, TMCommand&);
 };
