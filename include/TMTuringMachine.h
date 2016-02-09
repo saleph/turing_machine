@@ -25,7 +25,7 @@ class TMTuringMachine
 
         void addToGraph(const string& commandAsText);
         void doStep();
-        void backTheGraphToTheBeginning();
+        void backTheGraphToTheBeginning(); // after it the current cmdName is 'Start'
     private:
         unique_ptr<TMControlGraph> graph;
         unique_ptr<TMCommandParser> parser;

@@ -20,14 +20,19 @@ class TMTape : public TMHead
         TMTape(size_t len, size_t headPos, shared_ptr<TMAlphabet>) throw (ZeroLongTape, HeadOutOfTape);
         virtual ~TMTape();
 
-        const char& operator[] (std::size_t idx) const { return tape[idx]; }
+        char& operator[] (size_t idx) { return tape[idx]; }
+        using TapeIterator = std::vector<char>::iterator;
+        TapeIterator begin() { return tape.begin(); }
+        TapeIterator end() { return tape.end(); }
+        using ConstTapeIterator = std::vector<char>::const_iterator;
+        const ConstTapeIterator cbegin() const { return tape.cbegin(); }
+        const ConstTapeIterator cend() const { return tape.cend(); }
         virtual void setHeadPosition(size_t pos) throw (HeadOutOfTape);
         virtual size_t getHeadPosition() const;
 
         void doCmd (const char before, const char after, TMHeadMoveType headMove)
                 throw (MismatchCommandAndElementUnderHead, CharacterOutOfAlphabet, HeadOutOfTape);
         void reset();
-    protected:
     private:
         size_t tapeLength;
         vector<char> tape;
@@ -39,6 +44,7 @@ class TMTape : public TMHead
         void checkHeadPosition(size_t pos) const throw (HeadOutOfTape);
         void initTape(size_t len);
         void setAlphabetPtr(shared_ptr<TMAlphabet>);
+        void setTapePtr(shared_ptr<vector<char>> tapePtr);
         void changeCharUnderHeadTo(const char character);
         void moveHeadToThe(TMHeadMoveType direction);
         void updateHeadPointer();
