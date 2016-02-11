@@ -7,9 +7,9 @@
 class TMInterface
 {
     public:
-        // turingMachine offers direct manipulation on its tape by (*turingMachine.tape)[]
-        // with alphabet - it is possible to simlply set new one: turingMachine.alphabet->setAlphabet()
+        // this tape pointer will get ownership of the tape at turingMachine construction
         std::shared_ptr<TMTape> tape;
+
         TMInterface() : turingMachine(tape) {}; // tape will be 1001 long
         TMInterface(size_t len) : turingMachine(tape, len) {};
 
