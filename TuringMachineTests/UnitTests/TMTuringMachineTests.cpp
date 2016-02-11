@@ -8,9 +8,10 @@ using namespace std;
 struct TMTuringMachineTestFixture {
     const size_t tapeLength = 11;
     const size_t middlePos = 5;
-    TMTuringMachineTestFixture() : turingMachine(tapeLength) {
+    TMTuringMachineTestFixture() : turingMachine(tape, tapeLength) {
         turingMachine.alphabet->setAlphabet("#01$");
-    };
+    }
+    shared_ptr<TMTape> tape;
     TMTuringMachine turingMachine;
 };
 
@@ -19,15 +20,15 @@ BOOST_FIXTURE_TEST_SUITE(TMTuringMachine_integration, TMTuringMachineTestFixture
 BOOST_AUTO_TEST_CASE( execution_1_command_on_plain_tape ) {
     turingMachine.addToGraph("Start #/1;L next_cmd");
     turingMachine.doStep();
-    BOOST_CHECK_EQUAL((*turingMachine.tape)[middlePos], '1');
+    BOOST_CHECK_EQUAL((*tape)[middlePos], '1');
 }
 
 BOOST_AUTO_TEST_CASE( execution_2_commands_on_plain_tape ) {
     turingMachine.addToGraph("Start #/1;L next_cmd");
     turingMachine.addToGraph("next_cmd #/1;L next_next_cmd");
     for (int i=0;i<2;i++) turingMachine.doStep();
-    BOOST_CHECK_EQUAL((*turingMachine.tape)[middlePos], '1');
-    BOOST_CHECK_EQUAL((*turingMachine.tape)[middlePos-1], '1');
+    BOOST_CHECK_EQUAL((*tape)[middlePos], '1');
+    BOOST_CHECK_EQUAL((*tape)[middlePos-1], '1');
 }
 
 BOOST_AUTO_TEST_CASE( execution_chain_of_commands_on_plain_tape_with_some_overwrites_previous_changes ) {
@@ -38,10 +39,10 @@ BOOST_AUTO_TEST_CASE( execution_chain_of_commands_on_plain_tape_with_some_overwr
     turingMachine.addToGraph("cmd4 1/$;R cmd5");
     turingMachine.addToGraph("cmd5 #/0;r cmd6");
     for (int i=0;i<6;i++) turingMachine.doStep();
-    BOOST_CHECK_EQUAL((*turingMachine.tape)[middlePos-2], '$');
-    BOOST_CHECK_EQUAL((*turingMachine.tape)[middlePos-1], '0');
-    BOOST_CHECK_EQUAL((*turingMachine.tape)[middlePos], '$');
-    BOOST_CHECK_EQUAL((*turingMachine.tape)[middlePos+1], '0');
+    BOOST_CHECK_EQUAL((*tape)[middlePos-2], '$');
+    BOOST_CHECK_EQUAL((*tape)[middlePos-1], '0');
+    BOOST_CHECK_EQUAL((*tape)[middlePos], '$');
+    BOOST_CHECK_EQUAL((*tape)[middlePos+1], '0');
 }
 
 BOOST_AUTO_TEST_CASE( reaching_end_of_the_control_graph ) {
@@ -49,27 +50,27 @@ BOOST_AUTO_TEST_CASE( reaching_end_of_the_control_graph ) {
     turingMachine.addToGraph("next_cmd #/1;L Stop");
     turingMachine.doStep();
     BOOST_REQUIRE_THROW(turingMachine.doStep(), EndOfTheControlGraph);
-    BOOST_CHECK_EQUAL((*turingMachine.tape)[middlePos], '1');
-    BOOST_CHECK_EQUAL((*turingMachine.tape)[middlePos-1], '1');
-    BOOST_CHECK_EQUAL(turingMachine.tape->getHeadPosition(), middlePos-2);
+    BOOST_CHECK_EQUAL((*tape)[middlePos], '1');
+    BOOST_CHECK_EQUAL((*tape)[middlePos-1], '1');
+    BOOST_CHECK_EQUAL(tape->getHeadPosition(), middlePos-2);
 }
 
 BOOST_AUTO_TEST_CASE( execution_1_command_with_different_fromState_and_char_on_tape ) {
     turingMachine.addToGraph("Start 1/1;L next_cmd"); // under head is now '#'
     BOOST_REQUIRE_THROW(turingMachine.doStep(), CommandNotExist);
-    BOOST_CHECK_EQUAL((*turingMachine.tape)[middlePos], '#');
+    BOOST_CHECK_EQUAL((*tape)[middlePos], '#');
 }
 
 BOOST_AUTO_TEST_CASE( execution_1_command_with_no_Start_name ) {
     turingMachine.addToGraph("no-Start #/1;L next_cmd"); // under head is now '#'
     BOOST_REQUIRE_THROW(turingMachine.doStep(), CommandNotExist);
-    BOOST_CHECK_EQUAL((*turingMachine.tape)[middlePos], '#');
+    BOOST_CHECK_EQUAL((*tape)[middlePos], '#');
 }
 
 BOOST_AUTO_TEST_CASE( execution_1_command_with_no_Start_name_and_mismatch_fromState_and_char_on_tape ) {
     turingMachine.addToGraph("no-Start 1/1;L next_cmd"); // under head is now '#'
     BOOST_REQUIRE_THROW(turingMachine.doStep(), CommandNotExist);
-    BOOST_CHECK_EQUAL((*turingMachine.tape)[middlePos], '#');
+    BOOST_CHECK_EQUAL((*tape)[middlePos], '#');
 }
 
 BOOST_AUTO_TEST_CASE( backTheGraphToTheBeginning_test ) {

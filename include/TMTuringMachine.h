@@ -13,6 +13,7 @@ class TMTuringMachine
         const std::string endPhrase = "Stop";
     public:
         std::shared_ptr<TMAlphabet> alphabet;
+        std::unique_ptr<TMControlGraph> graph;
 
         TMTuringMachine(size_t length=1001);
         // this ctor shares ownership of the tape with tapePtr gave by reference
@@ -22,11 +23,10 @@ class TMTuringMachine
         std::shared_ptr<TMTape> getOwnershipOfTheTape() { return tape; };
         void addToGraph(const std::string& commandAsText);
         void doStep();
-        void instantExecution();
+        void executeGraphInstantly();
         void backTheGraphToTheBeginning(); // after it the current cmdName is 'Start'
     private:
         std::shared_ptr<TMTape> tape;
-        std::unique_ptr<TMControlGraph> graph;
         std::unique_ptr<TMCommandParser> parser;
         std::string currentCmdName;
 

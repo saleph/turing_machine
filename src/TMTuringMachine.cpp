@@ -32,7 +32,7 @@ void TMTuringMachine::checkIfTheGraphReachedEnd() const throw (EndOfTheControlGr
     if (currentCmdName == endPhrase) throw EndOfTheControlGraph();
 }
 
-void TMTuringMachine::instantExecution() {
+void TMTuringMachine::executeGraphInstantly() {
     try {
         for(;;) doStep();
     } catch (const EndOfTheControlGraph&) {}

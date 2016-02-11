@@ -7,14 +7,6 @@ TMTape::TMTape(size_t len, std::shared_ptr<TMAlphabet> alphaSPtr) throw (ZeroLon
     setAlphabetPtr(alphaSPtr);
 }
 
-TMTape::TMTape(size_t len, size_t headPos, std::shared_ptr<TMAlphabet> alphaSPtr)
-        throw (ZeroLongTape, HeadOutOfTape) : TMHead(headPos) {
-    setTapeLength(len);
-    checkHeadPosition();
-    initTape(len);
-    setAlphabetPtr(alphaSPtr);
-}
-
 void TMTape::setTapeLength(size_t len) throw (ZeroLongTape) {
     checkTapeLength(len);
     tapeLength = len;

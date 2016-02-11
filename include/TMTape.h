@@ -2,7 +2,6 @@
 #define TMTAPE_H
 
 #include <vector>
-#include <stdexcept>
 #include <memory>
 #include "TMHead.h"
 #include "TMAlphabet.h"
@@ -13,7 +12,6 @@ class TMTape : public TMHead
 {
     public:
         TMTape(size_t len, std::shared_ptr<TMAlphabet>) throw (ZeroLongTape);
-        TMTape(size_t len, size_t headPos, std::shared_ptr<TMAlphabet>) throw (ZeroLongTape, HeadOutOfTape);
         virtual ~TMTape();
 
         char& operator[] (size_t idx) { return tape[idx]; }
