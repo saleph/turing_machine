@@ -3,44 +3,49 @@
 
 #include <stdexcept>
 
-class MismatchCommandAndElementUnderHead : public std::invalid_argument {
+class TMException : public std::invalid_argument {
     public:
-        MismatchCommandAndElementUnderHead() : std::invalid_argument ( "Mismatch of command and the element under the head!" ) {};
+        TMException(const std::string& arg) : std::invalid_argument (arg) {}
 };
 
-class ZeroLongTape : public std::invalid_argument {
+class MismatchCommandAndElementUnderHead : public TMException {
     public:
-        ZeroLongTape() : std::invalid_argument ( "The tape cannot be zero-element-long!" ) {}
+        MismatchCommandAndElementUnderHead() : TMException ( "Mismatch of command and the element under the head!" ) {};
 };
 
-class HeadOutOfTape : public std::invalid_argument {
+class ZeroLongTape : public TMException {
     public:
-        HeadOutOfTape() : std::invalid_argument ( "The head position has cannot be larger than tapeSize - 1!" ) {}
+        ZeroLongTape() : TMException ( "The tape cannot be zero-element-long!" ) {}
 };
 
-class CharacterOutOfAlphabet : std::invalid_argument {
+class HeadOutOfTape : public TMException {
     public:
-        CharacterOutOfAlphabet() : std::invalid_argument ( "Character out of defined alphabet!" ) {}
+        HeadOutOfTape() : TMException ( "The head position has cannot be larger than tapeSize - 1!" ) {}
 };
 
-class InvalidCommandSyntax : std::invalid_argument {
+class CharacterOutOfAlphabet : TMException {
     public:
-        InvalidCommandSyntax() : std::invalid_argument ( "Invalid syntax of command!" ) {}
+        CharacterOutOfAlphabet() : TMException ( "Character out of defined alphabet!" ) {}
 };
 
-class CommandAlreadyExist : std::invalid_argument {
+class InvalidCommandSyntax : TMException {
     public:
-        CommandAlreadyExist() : std::invalid_argument ( "Command with this transition already exist!" ) {}
+        InvalidCommandSyntax() : TMException ( "Invalid syntax of command!" ) {}
 };
 
-class CommandNotExist : std::invalid_argument {
+class CommandAlreadyExist : TMException {
     public:
-        CommandNotExist() : std::invalid_argument ( "Command with this transition doesn't exist!" ) {}
+        CommandAlreadyExist() : TMException ( "Command with this transition already exist!" ) {}
 };
 
-class EndOfTheControlGraph : std::logic_error {
+class CommandNotExist : TMException {
     public:
-        EndOfTheControlGraph() : std::logic_error ( "End of the control graph (the machine reach state 'Stop'!" ) {}
+        CommandNotExist() : TMException ( "Command with this transition doesn't exist!" ) {}
+};
+
+class EndOfTheControlGraph : TMException {
+    public:
+        EndOfTheControlGraph() : TMException ( "End of the control graph (the machine reach state 'Stop'!" ) {}
 };
 
 
