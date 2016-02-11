@@ -17,12 +17,14 @@ class TMTape : public TMHead
         virtual ~TMTape();
 
         char& operator[] (size_t idx) { return tape[idx]; }
+
         using TapeIterator = std::vector<char>::iterator;
         TapeIterator begin() { return tape.begin(); }
         TapeIterator end() { return tape.end(); }
         using ConstTapeIterator = std::vector<char>::const_iterator;
-        const ConstTapeIterator cbegin() const { return tape.cbegin(); }
-        const ConstTapeIterator cend() const { return tape.cend(); }
+        ConstTapeIterator cbegin() const { return tape.cbegin(); }
+        ConstTapeIterator cend() const { return tape.cend(); }
+
         virtual void setHeadPosition(size_t pos) throw (HeadOutOfTape);
         virtual size_t getHeadPosition() const;
 
