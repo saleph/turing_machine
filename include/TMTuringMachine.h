@@ -18,8 +18,10 @@ class TMTuringMachine
         TMTuringMachine(size_t length=1001);
         virtual ~TMTuringMachine() {};
 
+        std::shared_ptr<TMTape> getOwnershipOfTheTape() { return tape; };
         void addToGraph(const std::string& commandAsText);
         void doStep();
+        void instantExecution();
         void backTheGraphToTheBeginning(); // after it the current cmdName is 'Start'
     private:
         std::unique_ptr<TMControlGraph> graph;
