@@ -7,9 +7,8 @@ using namespace std;
 int main() {
     TMInterface interface(11);
     interface.turingMachine.alphabet->setAlphabet("#10");
-    interface.turingMachine.addToGraph("Start #/1;L next");
-    interface.turingMachine.addToGraph("next #/1;L next2");
-    interface.turingMachine.addToGraph("next2 #/0;L Stop");
+    interface.insertGraph({"Start #/1;L next", "next #/1;L next2", "next2 #/0;L Stop"});
+    interface.compileInstertedGraph();
     interface.turingMachine.instantExecution();
     for (auto sign : *interface.turingMachine.tape) cout<<sign;
     return 0;
