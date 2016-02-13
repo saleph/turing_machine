@@ -12,7 +12,7 @@ void TMAPI::setHeadPosition(const size_t pos) {
     tape->setHeadPosition(pos);
 }
 
-void TMAPI::compileInstertedGraph() {
+void TMAPI::compileInsertedGraph() {
     turingMachine.graph->clear();
     for (const auto commandAsText : graphAsText) turingMachine.addToGraph(commandAsText);
 }
