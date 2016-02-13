@@ -23,30 +23,40 @@ class HeadOutOfTape : public TMException {
         HeadOutOfTape() : TMException ( "The head position has cannot be larger than tapeSize - 1!" ) {}
 };
 
-class CharacterOutOfAlphabet : TMException {
+class CharacterOutOfAlphabet : public TMException {
     public:
         CharacterOutOfAlphabet() : TMException ( "Character out of defined alphabet!" ) {}
 };
 
-class InvalidCommandSyntax : TMException {
+class InvalidCommandSyntax : public TMException {
     public:
         InvalidCommandSyntax() : TMException ( "Invalid syntax of command!" ) {}
 };
 
-class CommandAlreadyExist : TMException {
+class CommandAlreadyExist : public TMException {
     public:
         CommandAlreadyExist() : TMException ( "Command with this transition already exist!" ) {}
 };
 
-class CommandNotExist : TMException {
+class CommandNotExist : public TMException {
     public:
         CommandNotExist() : TMException ( "Command with this transition doesn't exist!" ) {}
 };
 
-class EndOfTheControlGraph : TMException {
+class EndOfTheControlGraph : public TMException {
     public:
         EndOfTheControlGraph() : TMException ( "End of the control graph (the machine reach state 'Stop'!" ) {}
 };
 
+
+class TMFileSyntaxException : public TMException {
+    public:
+        TMFileSyntaxException(const std::string& arg) : TMException ("File parsing error: " + arg) {}
+};
+/*
+class TMInvalidAlphabetSyntax : public TMFileSyntaxException {
+    public:
+        TMInvalidAlphabetSyntax : TMFileSyntaxException ( "Invalid alphabet syntax!" ) {}
+};*/
 
 #endif // TMEXCEPTIONS_H_INCLUDED

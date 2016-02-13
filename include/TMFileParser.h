@@ -1,6 +1,7 @@
 #ifndef TMFILEPARSER_H
 #define TMFILEPARSER_H
 
+#include "TMStateWatcher.h"
 #include <fstream>
 #include <regex>
 
@@ -28,8 +29,10 @@ class TMFileParser
     );
     const std::regex tapeContentPattern = std::regex (
     "^"        // start of line
+    "([0-9]+)" // tape length
+    "; "       // semicolon separating position and length
     "([0-9]+)" // where tape content should begin
-    ";"        // semicolon separating position and the content
+    "; "       // semicolon separating position and the content
     "(.*)"     // the content of the tape
     );
     const std::regex graphPattern = std::regex (
@@ -41,9 +44,17 @@ class TMFileParser
     ")"        // the end of matched group
     );
     public:
-        TMFileParser() = default;
-    protected:
+        TMFileParser(const std::string& fileName) : fileStream(fileName) {};
+
+        void parseToStateWatcher();
     private:
+        std::ifstream fileStream;
+        std::smatch regexTokens;
+        std::string currentLine;
+
+        void parseAlphabet();
+
+        std::ifstream& getLine();
 };
 
 #endif // TMFILEPARSER_H

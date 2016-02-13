@@ -25,6 +25,7 @@ TMTape::~TMTape() noexcept {}
 void TMTape::setHeadPosition(size_t pos) throw (HeadOutOfTape) {
     checkHeadPosition(pos);
     TMHead::setHeadPosition(pos);
+    updateHeadPointer();
 }
 
 void TMTape::checkHeadPosition(size_t pos) const throw (HeadOutOfTape) {
