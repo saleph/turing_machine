@@ -13,7 +13,7 @@ struct TMStateWatcher
     static std::shared_ptr<std::string> tapeContent;
     static std::shared_ptr<std::vector<std::string>> graphAsText;
 
-    static bool prepared() const {
+    static bool prepared() {
         return (alphabetAsString && headPosition && tapeLength
             && tapeContentPosition && tapeContent && graphAsText);
     }
