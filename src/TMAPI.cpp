@@ -8,7 +8,7 @@ void TMAPI::insertAlphabet(const std::string& alphabet) {
     *turingMachine.alphabet = alphabet;
 }
 
-void TMAPI::setHeadPosition(const size_t pos) {
+void TMAPI::setHeadPosition(const size_t& pos) {
     tape->setHeadPosition(pos);
 }
 

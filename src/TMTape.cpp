@@ -42,7 +42,7 @@ void TMTape::initTape(size_t len) {
 }
 
 void TMTape::updateHeadPointer() {
-    setPointerForCharUnderHead(&tape[getHeadPosition()]);
+    setPointerToCharUnderHead(&tape[getHeadPosition()]);
 }
 
 void TMTape::setAlphabetPtr(std::shared_ptr<TMAlphabet> alphaSPtr) {

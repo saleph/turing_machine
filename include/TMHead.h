@@ -8,17 +8,17 @@ class TMHead
 { // this class has to be derivided by TMTape
     public:
         TMHead() = default;
-        TMHead(size_t pos) : headPosition(pos) {};
+        TMHead(const size_t pos) : headPosition(pos) {};
         TMHead(const TMHead&) = default;
         TMHead(TMHead&&) = default;
         virtual ~TMHead() = default;
         TMHead& operator= (const TMHead&) = default;
         TMHead& operator= (TMHead&&) = default;
         size_t getHeadPosition() const { return headPosition; }
-        void setHeadPosition(size_t val) { headPosition = val; }
+        void setHeadPosition(const size_t val) { headPosition = val; }
         char getCharUnderHead() const { return *charUnderHead; }
         void setValueUnderHead(const char val) { *charUnderHead = val; }
-        void setPointerForCharUnderHead(char *val) { charUnderHead = val; }
+        void setPointerToCharUnderHead(char *val) { charUnderHead = val; }
 
         void moveHeadRight() { headPosition++; }
         void moveHeadLeft() { headPosition--; }

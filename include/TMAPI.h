@@ -12,7 +12,7 @@ class TMAPI
         TMAPI(const size_t len=1001) : turingMachine(tape, len) {};
 
         void insertAlphabet(const std::string& alphabet);
-        void setHeadPosition(const size_t pos);
+        void setHeadPosition(const size_t& pos);
         void insertGraph(const std::initializer_list<std::string>& graphAsList);
         void compileInstertedGraph();
         void doSingleStep();
