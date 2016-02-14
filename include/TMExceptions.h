@@ -48,15 +48,31 @@ class EndOfTheControlGraph : public TMException {
         EndOfTheControlGraph() : TMException ( "End of the control graph (the machine reach state 'Stop'!" ) {}
 };
 
+// === FILE PARSING EXCEPTIONS ===
 
 class TMFileSyntaxException : public TMException {
     public:
-        TMFileSyntaxException(const std::string& arg) : TMException ("File parsing error: " + arg) {}
+        TMFileSyntaxException(const std::string& arg) : TMException (arg) {}
 };
-/*
+
 class TMInvalidAlphabetSyntax : public TMFileSyntaxException {
     public:
         TMInvalidAlphabetSyntax : TMFileSyntaxException ( "Invalid alphabet syntax!" ) {}
-};*/
+};
+
+class TMInvalidHeadPositionSyntax : public TMFileSyntaxException {
+    public:
+        TMInvalidHeadPositionSyntax : TMFileSyntaxException ( "Invalid head position syntax!" ) {}
+};
+
+class TMInvalidTapeContentSyntax : public TMFileSyntaxException {
+    public:
+        TMInvalidTapeContentSyntax : TMFileSyntaxException ( "Invalid tape content syntax!" ) {}
+};
+
+class TMInvalidControlGraphSyntax : public TMFileSyntaxException {
+    public:
+        TMInvalidControlGraphSyntax : TMFileSyntaxException ( "Invalid tape content syntax!" ) {}
+};
 
 #endif // TMEXCEPTIONS_H_INCLUDED
