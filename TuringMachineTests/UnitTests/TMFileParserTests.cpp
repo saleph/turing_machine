@@ -7,6 +7,7 @@
 
 #define BOOST_TEST_NO_LIB
 #include <boost/test/unit_test.hpp>
+#include <boost/filesystem/fstream.hpp>
 using namespace std;
 
 BOOST_AUTO_TEST_SUITE(TMFileParser_test_suite)
@@ -27,7 +28,7 @@ struct TMFileParserTestFixtureProperties {
 // =========== PROPER FILE WITH COMMENTS ===========
 struct TMFileParserTestFixtureForProperFileWithComments : public TMFileParserTestFixtureProperties {
     TMFileParserTestFixtureForProperFileWithComments() {
-        ofstream fileStream (filename);
+        boost::filesystem::ofstream fileStream (filename);
         fileStream << "// Alphabet\n";
         fileStream << alphabetAsString << '\n';
         fileStream << "// Head position\n";
@@ -62,7 +63,7 @@ BOOST_FIXTURE_TEST_CASE(for_file_with_comments, TMFileParserTestFixtureForProper
 // =========== PROPER FILE WITHOUT COMMENTS ===========
 struct TMFileParserTestFixtureForProperFileWithoutComments : public TMFileParserTestFixtureProperties {
     TMFileParserTestFixtureForProperFileWithoutComments() {
-        ofstream fileStream (filename);
+        boost::filesystem::ofstream fileStream (filename);
         fileStream << alphabetAsString << '\n';
         fileStream << headPosition << '\n';
         fileStream << tapeLength << "; " << contentPos << "; " << tapeContent << '\n';
@@ -94,7 +95,7 @@ BOOST_FIXTURE_TEST_CASE(for_file_without_comments, TMFileParserTestFixtureForPro
 // =========== FILE WITHOUT ALPHABET (will be commented) ===========
 struct TMFileParserTestFixtureForFileWithoutAlphabet : public TMFileParserTestFixtureProperties {
     TMFileParserTestFixtureForFileWithoutAlphabet() {
-        ofstream fileStream (filename);
+        boost::filesystem::ofstream fileStream (filename);
         fileStream << "// " << alphabetAsString << '\n';
         fileStream << headPosition << '\n';
         fileStream << tapeLength << "; " << contentPos << "; " << tapeContent << '\n';
@@ -119,7 +120,7 @@ BOOST_FIXTURE_TEST_CASE(for_file_without_alphabet, TMFileParserTestFixtureForFil
 // =========== FILE WITHOUT HEAD POSITION (will be commented) ===========
 struct TMFileParserTestFixtureForFileWithoutHeadPosition : public TMFileParserTestFixtureProperties {
     TMFileParserTestFixtureForFileWithoutHeadPosition() {
-        ofstream fileStream (filename);
+        boost::filesystem::ofstream fileStream (filename);
         fileStream << alphabetAsString << '\n';
         fileStream << "// " << headPosition << '\n';
         fileStream << tapeLength << "; " << contentPos << "; " << tapeContent << '\n';
@@ -144,7 +145,7 @@ BOOST_FIXTURE_TEST_CASE(for_file_without_HeadPosition, TMFileParserTestFixtureFo
 // =========== FILE WITHOUT TAPE CONTENT (will be commented) ===========
 struct TMFileParserTestFixtureForFileWithoutTapeContent : public TMFileParserTestFixtureProperties {
     TMFileParserTestFixtureForFileWithoutTapeContent() {
-        ofstream fileStream (filename);
+        boost::filesystem::ofstream fileStream (filename);
         fileStream << alphabetAsString << '\n';
         fileStream <<  headPosition << '\n';
         fileStream << "// " << tapeLength << "; " << contentPos << "; " << tapeContent << '\n';
@@ -169,7 +170,7 @@ BOOST_FIXTURE_TEST_CASE(for_file_without_TapeContent, TMFileParserTestFixtureFor
 // =========== FILE WITHOUT CONTROL GRAPH (will be commented) ===========
 struct TMFileParserTestFixtureForFileWithoutControlGraph : public TMFileParserTestFixtureProperties {
     TMFileParserTestFixtureForFileWithoutControlGraph() {
-        ofstream fileStream (filename);
+        boost::filesystem::ofstream fileStream (filename);
         fileStream << alphabetAsString << '\n';
         fileStream <<  headPosition << '\n';
         fileStream << tapeLength << "; " << contentPos << "; " << tapeContent << '\n';

@@ -2,6 +2,7 @@
 #define TMFILEPARSER_H
 
 #include "TMStateWatcher.h"
+#include "TMExceptions.h"
 #include <fstream>
 #include <regex>
 
@@ -23,7 +24,6 @@ class TMFileParser
     const std::regex headPositionPattern = std::regex (
     "^"        // start of line
     "("        // start of matched group
-    "[^\\/]"   // but if occurs slash - DON'T match regexp
     "[0-9]+"   // head position as number
     ")"        // the end of matched group
     );
@@ -53,8 +53,21 @@ class TMFileParser
         std::string currentLine;
 
         void parseAlphabet();
-
-        std::ifstream& getLine();
+        std::istream& getLine();
+        bool isCurrentLineAComment() const;
+        void checkIfLineIsAlphabet() throw (TMInvalidAlphabetSyntax);
+        void putAlphabetIntoStateWatcher();
+        void parseHeadPosition();
+        void checkIfLineIsHeadPosition() throw (TMInvalidHeadPositionSyntax);
+        void putHeadPositionIntoStateWatcher();
+        size_t getSize_tNumberFrom(const std::string& str);
+        void parseTapeInfo();
+        void checkIfLineIsTapeInfo() throw (TMInvalidTapeContentSyntax);
+        void putTapeInfoIntoStateWatcher();
+        void parseControlGraph();
+        void initStateWatcherGraphAsText();
+        void checkIfLineIsCommand() throw (TMInvalidControlGraphSyntax);
+        void putCommandIntoStateWatcher();
 };
 
 #endif // TMFILEPARSER_H
