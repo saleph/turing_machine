@@ -40,7 +40,7 @@ class TMFileParser
     "("        // start of matched group
     "[\\/]?"   // first, optional slash, the at the start of command name
     "[^\\/]"   // but if occurs second slash - DON'T match regexp
-    ".+"       // rest of the command's body
+    ".*"       // rest of the command's body
     ")"        // the end of matched group
     );
     public:
@@ -51,6 +51,7 @@ class TMFileParser
         std::ifstream fileStream;
         std::smatch regexTokens;
         std::string currentLine;
+        std::vector<std::string> graphAsText;
 
         void parseAlphabet();
         std::istream& getLine();
@@ -65,9 +66,9 @@ class TMFileParser
         void checkIfLineIsTapeInfo() throw (TMInvalidTapeContentSyntax);
         void putTapeInfoIntoStateWatcher();
         void parseControlGraph();
-        void initStateWatcherGraphAsText();
         void checkIfLineIsCommand() throw (TMInvalidControlGraphSyntax);
-        void putCommandIntoStateWatcher();
+        void putCommandIntoGraphAsText();
+        void putGraphAsTextIntoStateWatcher();
 };
 
 #endif // TMFILEPARSER_H
