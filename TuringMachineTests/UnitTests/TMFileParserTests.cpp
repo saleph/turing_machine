@@ -23,13 +23,13 @@ struct TMFileParserTestFixtureProperties {
     const string tapeContent = "101#00";
     const vector<string> graphAsText = {"Start #/1;L next", "next #/1;L next2", "next2 #/0;L Stop"};
 
-    void resetStateWatcher() {
-        TMStateWatcher::alphabetAsString.reset();
-        TMStateWatcher::graphAsText.reset();
-        TMStateWatcher::headPosition.reset();
-        TMStateWatcher::tapeContent.reset();
-        TMStateWatcher::tapeContentPosition.reset();
-        TMStateWatcher::tapeLength.reset();
+    void resetStateWatcher() { // these shared_ptr only pointing to unique_ptrs with content
+        (*TMStateWatcher::alphabetAsString).reset();
+        (*TMStateWatcher::graphAsText).reset();
+        (*TMStateWatcher::headPosition).reset();
+        (*TMStateWatcher::tapeContent).reset();
+        (*TMStateWatcher::tapeContentPosition).reset();
+        (*TMStateWatcher::tapeLength).reset();
     }
 };
 
@@ -60,12 +60,12 @@ struct TMFileParserTestFixtureForProperFileWithComments : public TMFileParserTes
 BOOST_FIXTURE_TEST_CASE(for_file_with_comments, TMFileParserTestFixtureForProperFileWithComments) {
     fileParser->parseToStateWatcher();
     BOOST_REQUIRE(TMStateWatcher::prepared());
-    BOOST_CHECK_EQUAL(*TMStateWatcher::alphabetAsString, alphabetAsString);
-    BOOST_CHECK_EQUAL(*TMStateWatcher::headPosition, headPosition);
-    BOOST_CHECK_EQUAL(*TMStateWatcher::tapeLength, tapeLength);
-    BOOST_CHECK_EQUAL(*TMStateWatcher::tapeContentPosition, contentPos);
-    BOOST_CHECK_EQUAL(*TMStateWatcher::tapeContent, tapeContent);
-    BOOST_CHECK_EQUAL_COLLECTIONS(TMStateWatcher::graphAsText->begin(), TMStateWatcher::graphAsText->end(),
+    BOOST_CHECK_EQUAL(**TMStateWatcher::alphabetAsString, alphabetAsString);
+    BOOST_CHECK_EQUAL(**TMStateWatcher::headPosition, headPosition);
+    BOOST_CHECK_EQUAL(**TMStateWatcher::tapeLength, tapeLength);
+    BOOST_CHECK_EQUAL(**TMStateWatcher::tapeContentPosition, contentPos);
+    BOOST_CHECK_EQUAL(**TMStateWatcher::tapeContent, tapeContent);
+    BOOST_CHECK_EQUAL_COLLECTIONS((*TMStateWatcher::graphAsText)->begin(), (*TMStateWatcher::graphAsText)->end(),
                                   graphAsText.begin(), graphAsText.end());
 }
 
@@ -91,12 +91,12 @@ struct TMFileParserTestFixtureForProperFileWithoutComments : public TMFileParser
 BOOST_FIXTURE_TEST_CASE(for_file_without_comments, TMFileParserTestFixtureForProperFileWithoutComments) {
     fileParser->parseToStateWatcher();
     BOOST_REQUIRE(TMStateWatcher::prepared());
-    BOOST_CHECK_EQUAL(*TMStateWatcher::alphabetAsString, alphabetAsString);
-    BOOST_CHECK_EQUAL(*TMStateWatcher::headPosition, headPosition);
-    BOOST_CHECK_EQUAL(*TMStateWatcher::tapeLength, tapeLength);
-    BOOST_CHECK_EQUAL(*TMStateWatcher::tapeContentPosition, contentPos);
-    BOOST_CHECK_EQUAL(*TMStateWatcher::tapeContent, tapeContent);
-    BOOST_CHECK_EQUAL_COLLECTIONS(TMStateWatcher::graphAsText->begin(), TMStateWatcher::graphAsText->end(),
+    BOOST_CHECK_EQUAL(**TMStateWatcher::alphabetAsString, alphabetAsString);
+    BOOST_CHECK_EQUAL(**TMStateWatcher::headPosition, headPosition);
+    BOOST_CHECK_EQUAL(**TMStateWatcher::tapeLength, tapeLength);
+    BOOST_CHECK_EQUAL(**TMStateWatcher::tapeContentPosition, contentPos);
+    BOOST_CHECK_EQUAL(**TMStateWatcher::tapeContent, tapeContent);
+    BOOST_CHECK_EQUAL_COLLECTIONS((*TMStateWatcher::graphAsText)->begin(), (*TMStateWatcher::graphAsText)->end(),
                                   graphAsText.begin(), graphAsText.end());
 }
 

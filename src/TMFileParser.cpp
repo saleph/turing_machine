@@ -29,7 +29,7 @@ void TMFileParser::checkIfLineIsAlphabet() throw (TMInvalidAlphabetSyntax) {
 }
 
 void TMFileParser::putAlphabetIntoStateWatcher() {
-    TMStateWatcher::alphabetAsString = std::make_shared<std::string>(regexTokens[1]);
+    *TMStateWatcher::alphabetAsString = regexTokens[1];
 }
 
 void TMFileParser::parseHeadPosition() {
@@ -47,7 +47,7 @@ void TMFileParser::checkIfLineIsHeadPosition() throw (TMInvalidHeadPositionSynta
 
 void TMFileParser::putHeadPositionIntoStateWatcher() {
     const size_t headPosition = getSize_tNumberFrom(regexTokens[1]);
-    TMStateWatcher::headPosition = std::make_shared<size_t>(headPosition);
+    *TMStateWatcher::headPosition = headPosition;
 }
 
 size_t TMFileParser::getSize_tNumberFrom(const std::string& str) {
@@ -69,10 +69,10 @@ void TMFileParser::checkIfLineIsTapeInfo() throw (TMInvalidTapeContentSyntax) {
 
 void TMFileParser::putTapeInfoIntoStateWatcher() {
     const size_t tapeLength = getSize_tNumberFrom(regexTokens[1]);
-    TMStateWatcher::tapeLength = std::make_shared<size_t>(tapeLength);
+    *TMStateWatcher::tapeLength = tapeLength;
     const size_t tapeContentPosition = getSize_tNumberFrom(regexTokens[2]);
-    TMStateWatcher::tapeContentPosition = std::make_shared<size_t>(tapeContentPosition);
-    TMStateWatcher::tapeContent = std::make_shared<std::string>(regexTokens[3]);
+    *TMStateWatcher::tapeContentPosition = tapeContentPosition;
+    *TMStateWatcher::tapeContent = regexTokens[3];
 }
 
 void TMFileParser::parseControlGraph() {
@@ -95,5 +95,5 @@ void TMFileParser::putCommandIntoGraphAsText() {
 }
 
 void TMFileParser::putGraphAsTextIntoStateWatcher() {
-    TMStateWatcher::graphAsText = std::make_shared<std::vector<std::string>>(graphAsText);
+    *TMStateWatcher::graphAsText = graphAsText;
 }
