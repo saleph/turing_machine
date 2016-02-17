@@ -48,6 +48,11 @@ class EndOfTheControlGraph : public TMException {
         EndOfTheControlGraph() : TMException ( "End of the control graph (the machine reach state 'Stop'!" ) {}
 };
 
+class DataFromFileDoesntInserted : public TMException {
+    public:
+        DataFromFileDoesntInserted() : TMException ( "Data doesn't loaded properly!" ) {}
+};
+
 // === FILE PARSING EXCEPTIONS ===
 
 class TMFileSyntaxException : public TMException {

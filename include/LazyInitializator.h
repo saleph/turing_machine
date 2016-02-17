@@ -15,6 +15,10 @@ class LazyInitializator : public std::unique_ptr<T> {
             **this = val; // use of assingment provided by T - no unneccessary mem allocation
             return *this;
         }
+        LazyInitializator& operator() (const T& val) {
+            LazyInitializator::operator= (val);
+            return *this;
+        }
 };
 
 #endif // LAZYINITIALIZATOR_H_INCLUDED

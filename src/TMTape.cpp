@@ -1,18 +1,18 @@
 #include "TMTape.h"
 
 // without setting headPosition the head go to the middle of tape
-TMTape::TMTape(size_t len, std::shared_ptr<TMAlphabet> alphaSPtr) throw (ZeroLongTape) : TMHead (len/2u) {
+TMTape::TMTape(size_t len, std::shared_ptr<TMAlphabet>& alphaSPtr) throw (ZeroLongTape) : TMHead (len/2u) {
     setTapeLength(len);
     initTape(len);
     setAlphabetPtr(alphaSPtr);
 }
 
-void TMTape::setTapeLength(size_t len) throw (ZeroLongTape) {
+void TMTape::setTapeLength(const size_t len) throw (ZeroLongTape) {
     checkTapeLength(len);
     tapeLength = len;
 }
 
-void TMTape::checkTapeLength(size_t len) const throw (ZeroLongTape) {
+void TMTape::checkTapeLength(const size_t len) const throw (ZeroLongTape) {
     if (len == 0u) throw ZeroLongTape();
 }
 
@@ -22,13 +22,13 @@ void TMTape::checkHeadPosition() const throw (HeadOutOfTape) {
 
 TMTape::~TMTape() noexcept {}
 
-void TMTape::setHeadPosition(size_t pos) throw (HeadOutOfTape) {
+void TMTape::setHeadPosition(const size_t pos) throw (HeadOutOfTape) {
     checkHeadPosition(pos);
     TMHead::setHeadPosition(pos);
     updateHeadPointer();
 }
 
-void TMTape::checkHeadPosition(size_t pos) const throw (HeadOutOfTape) {
+void TMTape::checkHeadPosition(const size_t pos) const throw (HeadOutOfTape) {
     if (pos > tapeLength - 1) throw HeadOutOfTape();
 }
 
@@ -36,7 +36,7 @@ size_t TMTape::getHeadPosition() const {
     return TMHead::getHeadPosition();
 }
 
-void TMTape::initTape(size_t len) {
+void TMTape::initTape(const size_t len) {
     tape.insert(tape.begin(), len, '#');
     updateHeadPointer();
 }
@@ -85,4 +85,22 @@ void TMTape::reset() {
 
 void TMTape::fillTheTapeWithHashes() {
     std::fill(tape.begin(), tape.end(), '#');
+}
+
+void TMTape::setNewTapeLength(const size_t len) {
+    setTapeLength(len);
+    updateTapeSize();
+    fillTheTapeWithHashes();
+    setHeadPosition(tapeLength/2);
+}
+
+void TMTape::updateTapeSize() {
+    tape.resize(tapeLength, '#');
+}
+
+void TMTape::insertContentAt(const size_t pos, std::string& content) {
+    auto from = tape.begin() + pos;
+    auto numberOfElements = content.length();
+    tape.erase(from, from + numberOfElements);
+    tape.insert(from, content.begin(), content.end());
 }

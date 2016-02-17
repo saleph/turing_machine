@@ -28,3 +28,47 @@ void TMAPI::executeGraphInstantly() {
 void TMAPI::turnBackGraphToStartPosition() {
     turingMachine.backTheGraphToTheBeginning();
 }
+
+void TMAPI::getDataFromFile(const std::string& filename) {
+    initializeFileParser(filename);
+    fileParser->parseToStateWatcher();
+    checkIfDataWasInserted();
+    getDataFromStateWatcher();
+}
+
+void TMAPI::initializeFileParser(const std::string& filename) {
+    fileParser = std::make_unique<TMFileParser>(filename);
+}
+
+void TMAPI::checkIfDataWasInserted() const throw (DataFromFileDoesntInserted) {
+    if (!TMStateWatcher::prepared())
+        throw DataFromFileDoesntInserted();
+}
+
+void TMAPI::getDataFromStateWatcher() {
+    setAlphabetWithValueFromStateWatcher();
+    setTapeLengthWithValueFromStateWatcher();
+    setHeadPositionWithValueFromStateWatcher();
+    setTapeContentWithValueFromStateWatcher();
+    setGraphAsTextWithValueFromStateWatcher();
+}
+
+void TMAPI::setAlphabetWithValueFromStateWatcher() {
+    insertAlphabet(**TMStateWatcher::alphabetAsString);
+}
+
+void TMAPI::setTapeLengthWithValueFromStateWatcher() {
+    tape->setNewTapeLength(**TMStateWatcher::tapeLength);
+}
+
+void TMAPI::setHeadPositionWithValueFromStateWatcher() {
+    setHeadPosition(**TMStateWatcher::headPosition);
+}
+
+void TMAPI::setTapeContentWithValueFromStateWatcher() {
+    tape->insertContentAt(**TMStateWatcher::tapeContentPosition, **TMStateWatcher::tapeContent);
+}
+
+void TMAPI::setGraphAsTextWithValueFromStateWatcher() {
+    graphAsText = std::move(**TMStateWatcher::graphAsText);
+}
