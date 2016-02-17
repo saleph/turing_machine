@@ -1,8 +1,10 @@
 #include "TMAPI.h"
 #include "TMExceptions.h"
+#include <cstdio>
 
 #define BOOST_TEST_NO_LIB
 #include <boost/test/unit_test.hpp>
+#include <boost/filesystem/fstream.hpp>
 using namespace std;
 
 struct TMAPITestFixture {
@@ -82,6 +84,57 @@ BOOST_AUTO_TEST_CASE( execution_without_the_graph ) {
     BOOST_CHECK_THROW(api.executeGraphInstantly(), CommandNotExist);
     BOOST_CHECK_THROW(api.doSingleStep(), CommandNotExist);
     BOOST_CHECK_EQUAL(api.tape->getHeadPosition(), startHeadPosition);
+}
+
+BOOST_AUTO_TEST_SUITE_END()
+
+struct FileProperties {
+    FileProperties() : filename(tmpnam(nullptr)) { TMStateWatcher::reset(); }
+    unique_ptr<TMFileParser> fileParser; // ptr because it has to be init as the end of ctor
+    const string filename;
+    const string alphabetAsString = "#01";
+    const size_t headPosition = 13;
+    const size_t tapeLength = 15;
+    const size_t contentPos = 1;
+    const string tapeContent = "10";
+    const vector<string> graphAsText = {"Start #/1;L next", "next #/1;L next2", "next2 #/0;L Stop"};
+};
+
+
+struct TMAPITestFixtureForLoadingDataFromFile : public FileProperties {
+    TMAPITestFixtureForLoadingDataFromFile() : api(11) {
+        boost::filesystem::ofstream fileStream (filename);
+        fileStream << "// Alphabet\n";
+        fileStream << alphabetAsString << '\n';
+        fileStream << "// Head position\n";
+        fileStream << headPosition << '\n';
+        fileStream << "// Tape: [len];[contentPos];[tapeContent]\n";
+        fileStream << tapeLength << "; " << contentPos << "; " << tapeContent << '\n';
+        fileStream << "// Control graph\n";
+        fileStream << graphAsText[0] << '\n';
+        fileStream << graphAsText[1] << '\n';
+        fileStream << graphAsText[2] << '\n';
+        fileStream.close();
+    }
+
+    ~TMAPITestFixtureForLoadingDataFromFile() {
+        remove(filename.c_str());
+    }
+
+    TMAPI api;
+};
+BOOST_FIXTURE_TEST_SUITE(TMAPI_loading_data_from_file, TMAPITestFixtureForLoadingDataFromFile)
+
+BOOST_AUTO_TEST_CASE( checking_state_of_machine_after_load_and_execution_loaded_graph ) {
+    api.getDataFromFile(filename);
+    BOOST_CHECK_EQUAL(api.tape->getHeadPosition(), headPosition);
+    array<char, 15> tape = {'#', '1', '0', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'};
+    BOOST_CHECK_EQUAL_COLLECTIONS(api.tape->begin(), api.tape->end(), tape.begin(), tape.end());
+    api.compileInsertedGraph();
+    api.executeGraphInstantly();
+    array<char, 15> tapeAfterExecution = {'#', '1', '0', '#', '#', '#', '#', '#', '#', '#', '#', '0', '1', '1', '#'};
+    BOOST_CHECK_EQUAL_COLLECTIONS(api.tape->begin(), api.tape->end(), tapeAfterExecution.begin(), tapeAfterExecution.end());
+    BOOST_CHECK_EQUAL(api.tape->getHeadPosition(), headPosition - 3);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
