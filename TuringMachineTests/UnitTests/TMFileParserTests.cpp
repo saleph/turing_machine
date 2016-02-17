@@ -13,7 +13,7 @@ using namespace std;
 BOOST_AUTO_TEST_SUITE(TMFileParser_test_suite)
 
 struct TMFileParserTestFixtureProperties {
-    TMFileParserTestFixtureProperties() : filename(tmpnam(nullptr)) { resetStateWatcher(); }
+    TMFileParserTestFixtureProperties() : filename(tmpnam(nullptr)) { TMStateWatcher::reset(); }
     unique_ptr<TMFileParser> fileParser; // ptr because it has to be init as the end of ctor
     const string filename;
     const string alphabetAsString = "#01";
@@ -22,15 +22,6 @@ struct TMFileParserTestFixtureProperties {
     const size_t contentPos = 2;
     const string tapeContent = "101#00";
     const vector<string> graphAsText = {"Start #/1;L next", "next #/1;L next2", "next2 #/0;L Stop"};
-
-    void resetStateWatcher() { // these shared_ptr only pointing to unique_ptrs with content
-        (*TMStateWatcher::alphabetAsString).reset();
-        (*TMStateWatcher::graphAsText).reset();
-        (*TMStateWatcher::headPosition).reset();
-        (*TMStateWatcher::tapeContent).reset();
-        (*TMStateWatcher::tapeContentPosition).reset();
-        (*TMStateWatcher::tapeLength).reset();
-    }
 };
 
 

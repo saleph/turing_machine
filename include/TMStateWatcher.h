@@ -8,6 +8,7 @@
 
 struct TMStateWatcher
 {
+    TMStateWatcher() = delete;
     static std::shared_ptr<LazyInitializator<std::string>> alphabetAsString;
     static std::shared_ptr<LazyInitializator<size_t>> headPosition;
     static std::shared_ptr<LazyInitializator<size_t>> tapeLength;
@@ -18,6 +19,15 @@ struct TMStateWatcher
     static bool prepared() { // dereference because shared_ptr contains unique_ptr with content
         return (*alphabetAsString && *headPosition && *tapeLength
             && *tapeContentPosition && *tapeContent && *graphAsText);
+    }
+
+    static void reset() { // members of StateWatcher are only pointers to unique_ptr, so -> is neccessary
+        alphabetAsString->reset();
+        graphAsText->reset();
+        headPosition->reset();
+        tapeContent->reset();
+        tapeContentPosition->reset();
+        tapeLength->reset();
     }
 };
 
