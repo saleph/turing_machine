@@ -1,6 +1,6 @@
-- FileParser (regex is done, a few methods is lacking)
+-[D] FileParser (regex is done, a few methods is lacking)
 - StateDumper (dumping current machine state to txt file)
-- join FileParser and StateDumper with API
-- adapt the whole project to StateWatcher class
-- MAKEFILE (in the future - cmake)
-- a bunch of integration tests
+- join FileParser[D] and StateDumper with API
+-[D] adapt the whole project to StateWatcher class
+-[D] MAKEFILE (in the future - cmake)
+-[D] a bunch of integration tests
