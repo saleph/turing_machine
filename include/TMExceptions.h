@@ -77,7 +77,7 @@ class TMInvalidTapeContentSyntax : public TMFileSyntaxException {
 
 class TMInvalidControlGraphSyntax : public TMFileSyntaxException {
     public:
-        TMInvalidControlGraphSyntax() : TMFileSyntaxException ( "Invalid tape content syntax!" ) {}
+        TMInvalidControlGraphSyntax() : TMFileSyntaxException ( "Invalid control graph syntax!" ) {}
 };
 
 #endif // TMEXCEPTIONS_H_INCLUDED

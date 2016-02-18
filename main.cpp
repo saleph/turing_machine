@@ -1,15 +1,50 @@
 #include <iostream>
-#include "TMTape.h"
-#include "TMAlphabet.h"
+#include <cstring>
 #include "TMAPI.h"
 using namespace std;
 
-int main() {
+void showHelp();
+
+int main(int argc, char* argv[]) {
+    if (argc <= 1)
+        throw std::invalid_argument("Filepath not entered! Try again.");
+    if (!std::strcmp(argv[1], "help")) {
+        showHelp();
+        cout << "Run simulator once again with path to file!\n";
+        abort();
+    }
     TMAPI api(11);
-    api.insertAlphabet("#10");
-    api.insertGraph({"Start #/1;L next", "next #/1;L next2", "next2 #/0;L Stop"});
+    api.getDataFromFile(argv[1]);
     api.compileInsertedGraph();
+    cout << "Before execution:\n";
+    for (auto sign : *api.tape) cout << sign;
+    cout << "; " << api.tape->getHeadPosition() << '\n';
+    for (size_t i = 0; i < api.tape->getHeadPosition(); i++) cout<<' ';
+    cout << "^\n" << endl;
+
     api.executeGraphInstantly();
+
+    cout << "After execution:\n";
     for (auto sign : *api.tape) cout<<sign;
+    cout << "; " << api.tape->getHeadPosition() << '\n';
+    for (size_t i = 0; i < api.tape->getHeadPosition(); i++) cout<<' ';
+    cout << "^" << endl;
+
     return 0;
+}
+
+
+void showHelp() {
+    cout << "Example use: $ ./tm fileWithGraph.txt\n";
+    cout << "Example file:\n";
+    cout << "// Alphabet\n";
+    cout << "#01\n";
+    cout << "// Head position on tape\n";
+    cout << "4\n";
+    cout << "// [tapeLength]; [contentPosition]; [tapeContent]\n";
+    cout << "16; 8; 111111\n";
+    cout << "// CONTROL GRAPH:\n";
+    cout << "Start #/0;L next\n";
+    cout << "next #/1;L next2\n";
+    cout << "next2 #/0;L Stop\n";
 }

@@ -1,0 +1,10 @@
+// Alphabet
+#01
+// Start head position
+59
+// [tapeLength]; [tapeContentStartingPosition]; [tapeContent]
+100; 9; 10#01110
+// Control Graph
+Start #/0;L next
+next #/1;L next2
+next2 #/0;L Stop
