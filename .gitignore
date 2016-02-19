@@ -1,11 +1,6 @@
-#CodeBlocks stuff
+# QtCreator stuff
+*.user
 *.layout
-*.depend
-*.cbp
-
-# bin dir
-bin/*
-TuringMachineTests/bin/*
 
 # Compiled Object files
 *.slo
