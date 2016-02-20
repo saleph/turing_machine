@@ -14,7 +14,8 @@ class TMTape : public TMHead
         TMTape(size_t len, std::shared_ptr<TMAlphabet>&) throw (ZeroLongTape);
         virtual ~TMTape();
 
-        char& operator[] (const size_t idx) { return tape[idx]; }
+        char& operator[] (const size_t idx) { return tape.at(idx); }
+        char& at(const size_t idx) { return tape.at(idx); }
 
         using TapeIterator = std::vector<char>::iterator;
         TapeIterator begin() { return tape.begin(); }
