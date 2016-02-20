@@ -12,7 +12,7 @@ class TMAPI
     public:
         // this tape pointer will get ownership of the tape at turingMachine construction
         std::shared_ptr<TMTape> tape;
-        TMAPI(const size_t len=1001) : turingMachine(tape, len) {};
+        TMAPI(const size_t len=1001) : turingMachine(tape, len) {}
 
         void insertAlphabet(const std::string& alphabet);
         void setHeadPosition(const size_t& pos);
