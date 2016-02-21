@@ -15,16 +15,20 @@ protected:
     void keyPressEvent(QKeyEvent *key);
 
 private:
+    void handleAddingAndRemovingRows(QKeyEvent *key);
     bool isEnterOrReturnKey(QKeyEvent *key) const;
+    void handleEnterReturnKey();
     void insertNewRowAfterCurrent();
     void setCurrentRowToNextRow();
     void updateRowsLabels();
     bool isBackspaceOrDelKey(QKeyEvent *key) const;
-    bool isBackspaceKey(QKeyEvent *key) const;
-    bool isDelKey(QKeyEvent *key) const;
+    void handleBackspaceDelKey();
     bool isCurrentRowEmpty() const;
     void setCurrentRowToPreviousRow();
     bool isRowCountGreaterThan1() const;
+    void processRemovingRow();
+    void setCurrentRowAfterRemove();
+    bool isLastRow(const int row) const;
 };
 
 #endif // GRAPHTABLEWIDGET_H
