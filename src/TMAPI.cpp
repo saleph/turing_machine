@@ -4,6 +4,10 @@ void TMAPI::insertGraph(const std::initializer_list<std::string>& graphAsList) {
     graphAsText = graphAsList;
 }
 
+void TMAPI::insertGraph(const std::vector<std::__cxx11::string> &graphAsVector) {
+    graphAsText = graphAsVector;
+}
+
 void TMAPI::insertAlphabet(const std::string& alphabet) {
     *turingMachine.alphabet = alphabet;
 }

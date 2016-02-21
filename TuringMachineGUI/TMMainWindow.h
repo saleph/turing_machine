@@ -18,11 +18,19 @@ public:
     explicit TMMainWindow(QWidget *parent = 0);
     ~TMMainWindow();
 
+private slots:
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
 private:
     Ui::TMMainWindow *ui;
     TMAPI api;
 
     void setupTapeWidget();
+    void updateTape();
+    void setTapeWidgetCharacterAt(const size_t pos, const char sign);
+    void setCurrentPositionInTapeWidgetAt(const size_t pos);
 };
 
 #endif // TMMAINWINDOW_H

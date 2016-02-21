@@ -17,6 +17,7 @@ class TMAPI
         void insertAlphabet(const std::string& alphabet);
         void setHeadPosition(const size_t& pos);
         void insertGraph(const std::initializer_list<std::string>& graphAsList);
+        void insertGraph(const std::vector<std::string>& graphAsVector);
         void compileInsertedGraph();
         void doSingleStep();
         void executeGraphInstantly();
