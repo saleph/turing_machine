@@ -23,9 +23,11 @@ SOURCES += main.cpp \
         ../src/TMTuringMachine.cpp \
         ../src/TMCommandParser.cpp \
         ../src/TMControlGraph.cpp \
-        ../src/TMAlphabet.cpp
+        ../src/TMAlphabet.cpp \
+    GraphTableWidget.cpp
 
-HEADERS  += TMMainWindow.h
+HEADERS  += TMMainWindow.h \
+    GraphTableWidget.h
 
 INCLUDEPATH += ../include
 

@@ -4,7 +4,7 @@
 TMMainWindow::TMMainWindow(QWidget *parent) :
         QMainWindow(parent),
         ui(new Ui::TMMainWindow),
-        api(6) {
+        api(TAPELENGTH) {
     ui->setupUi(this);
     setupTapeWidget();
 }
@@ -14,6 +14,4 @@ TMMainWindow::~TMMainWindow() {
 }
 
 void TMMainWindow::setupTapeWidget() {
-    ui->tapeWidget->setColumnCount(TAPELENGTH);
-    ui->tapeWidget->setRowCount(1);
 }
