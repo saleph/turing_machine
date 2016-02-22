@@ -32,31 +32,53 @@ void TMMainWindow::setCurrentPositionInTapeWidgetAt(const size_t pos) {
     ui->tapeWidget->setCurrentCell(0, pos);
 }
 
-void TMMainWindow::on_pushButton_clicked() {
+void TMMainWindow::on_compileButton_clicked() {
     try {
-        api.insertAlphabet(ui->lineEdit->text().toStdString());
-        std::vector<std::string> controlGraph;
-        controlGraph.reserve(ui->graphWidget->rowCount());
-        for (int i = 0; i < ui->graphWidget->rowCount(); i++) {
-            if (ui->graphWidget->item(i, 0))
-                controlGraph.push_back(ui->graphWidget->item(i, 0)->text().toStdString());
-        }
-        api.insertGraph(std::move(controlGraph));
+        insertAlphabetToApi();
+        insertGraphFromWidgetToApi();
         api.compileInsertedGraph();
     } catch (const TMException& e) {
-        exceptionDialog = new TMExceptionDialog(this, QString::fromStdString(e.what()));
-        exceptionDialog->setModal(true);
-        exceptionDialog->show();
+        throwExceptionDialogWith(e.what());
     }
 }
 
-void TMMainWindow::on_pushButton_2_clicked() {
+void TMMainWindow::insertAlphabetToApi() {
+    const std::string alphabet = ui->alphabetLineEdit->text().toStdString();
+    api.insertAlphabet(alphabet);
+}
+
+void TMMainWindow::insertGraphFromWidgetToApi() {
+    const int rowCount = ui->graphWidget->rowCount();
+    std::vector<std::string> controlGraph;
+    controlGraph.reserve(rowCount);
+    for (int i = 0; i < rowCount; i++) {
+        QTableWidgetItem *item = ui->graphWidget->item(i, 0);
+        if (item)
+            controlGraph.push_back(item->text().toStdString());
+    }
+    api.insertGraph(std::move(controlGraph));
+}
+
+void TMMainWindow::throwExceptionDialogWith(const std::__cxx11::string &msg) {
+    exceptionDialog = new TMExceptionDialog(this, QString::fromStdString(msg));
+    exceptionDialog->setModal(true);
+    exceptionDialog->show();
+}
+
+void TMMainWindow::on_executeButton_clicked() {
     try {
         api.executeGraphInstantly();
         updateTape();
     } catch (const TMException& e) {
-        exceptionDialog = new TMExceptionDialog(this, QString::fromStdString(e.what()));
-        exceptionDialog->setModal(true);
-        exceptionDialog->show();
+        throwExceptionDialogWith(e.what());
+    }
+}
+
+void TMMainWindow::on_loadButton_clicked() {
+    QString filename = QFileDialog::getOpenFileName(this, tr("Load file"));
+    try {
+        api.getDataFromFile(filename.toStdString());
+    } catch (const TMException& e) {
+        throwExceptionDialogWith(e.what());
     }
 }

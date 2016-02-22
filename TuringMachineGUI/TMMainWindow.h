@@ -2,6 +2,7 @@
 #define TMMAINWINDOW_H
 
 #include <QMainWindow>
+#include <QFileDialog>
 #include "TMExceptionDialog.h"
 #include "TMExceptions.h"
 #include "TMAPI.h"
@@ -21,9 +22,11 @@ public:
     ~TMMainWindow();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_compileButton_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_executeButton_clicked();
+
+    void on_loadButton_clicked();
 
 private:
     Ui::TMMainWindow *ui;
@@ -34,6 +37,9 @@ private:
     void updateTape();
     void setTapeWidgetCharacterAt(const size_t pos, const char sign);
     void setCurrentPositionInTapeWidgetAt(const size_t pos);
+    void insertAlphabetToApi();
+    void insertGraphFromWidgetToApi();
+    void throwExceptionDialogWith(const std::string& msg);
 };
 
 #endif // TMMAINWINDOW_H
