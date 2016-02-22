@@ -8,8 +8,16 @@ void TMAPI::insertGraph(const std::vector<std::__cxx11::string> &graphAsVector) 
     graphAsText = std::move(graphAsVector);
 }
 
+const std::vector<std::string>& TMAPI::getGraphAsVector() const {
+    return graphAsText;
+}
+
 void TMAPI::insertAlphabet(const std::string& alphabet) {
     *turingMachine.alphabet = alphabet;
+}
+
+std::string TMAPI::getAlphabet() const {
+    return turingMachine.alphabet->getAlphabet();
 }
 
 void TMAPI::setHeadPosition(const size_t& pos) {

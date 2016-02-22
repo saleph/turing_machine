@@ -40,6 +40,9 @@ private:
     void insertAlphabetToApi();
     void insertGraphFromWidgetToApi();
     void throwExceptionDialogWith(const std::string& msg);
+    void updateWholeMainWindow();
+    void updateAlphabetWidget();
+    void updateGraphWidget();
 };
 
 #endif // TMMAINWINDOW_H

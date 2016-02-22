@@ -11,6 +11,8 @@ class GraphTableWidget : public QTableWidget
 public:
     GraphTableWidget(QWidget*& qWidget) : QTableWidget(qWidget) {}
 
+    void updateRowsLabels();
+
 protected:
     void keyPressEvent(QKeyEvent *key);
 
@@ -20,7 +22,6 @@ private:
     void handleEnterReturnKey();
     void insertNewRowAfterCurrent();
     void setCurrentRowToNextRow();
-    void updateRowsLabels();
     bool isBackspaceOrDelKey(QKeyEvent *key) const;
     void handleBackspaceDelKey();
     bool isCurrentRowEmpty() const;

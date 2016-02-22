@@ -81,4 +81,25 @@ void TMMainWindow::on_loadButton_clicked() {
     } catch (const TMException& e) {
         throwExceptionDialogWith(e.what());
     }
+    updateWholeMainWindow();
+}
+
+void TMMainWindow::updateWholeMainWindow() {
+    updateTape();
+    updateAlphabetWidget();
+    updateGraphWidget();
+}
+
+void TMMainWindow::updateAlphabetWidget() {
+    ui->alphabetLineEdit->setText(QString::fromStdString(api.getAlphabet()));
+}
+
+void TMMainWindow::updateGraphWidget() {
+    ui->graphWidget->setRowCount(0);
+    const std::vector<std::string> graphAsText = api.getGraphAsVector();
+    for (size_t i = 0; i < graphAsText.size(); i++) {
+        ui->graphWidget->insertRow(i);
+        ui->graphWidget->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(graphAsText[i])));
+    }
+    ui->graphWidget->updateRowsLabels();
 }
