@@ -2,6 +2,8 @@
 #define TMMAINWINDOW_H
 
 #include <QMainWindow>
+#include "TMExceptionDialog.h"
+#include "TMExceptions.h"
 #include "TMAPI.h"
 
 namespace Ui {
@@ -25,6 +27,7 @@ private slots:
 
 private:
     Ui::TMMainWindow *ui;
+    TMExceptionDialog *exceptionDialog;
     TMAPI api;
 
     void setupTapeWidget();

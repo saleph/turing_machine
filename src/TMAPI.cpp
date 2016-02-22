@@ -5,7 +5,7 @@ void TMAPI::insertGraph(const std::initializer_list<std::string>& graphAsList) {
 }
 
 void TMAPI::insertGraph(const std::vector<std::__cxx11::string> &graphAsVector) {
-    graphAsText = graphAsVector;
+    graphAsText = std::move(graphAsVector);
 }
 
 void TMAPI::insertAlphabet(const std::string& alphabet) {

@@ -24,11 +24,14 @@ SOURCES += main.cpp \
         ../src/TMCommandParser.cpp \
         ../src/TMControlGraph.cpp \
         ../src/TMAlphabet.cpp \
-    GraphTableWidget.cpp
+    GraphTableWidget.cpp \
+    TMExceptionDialog.cpp
 
 HEADERS  += TMMainWindow.h \
-    GraphTableWidget.h
+    GraphTableWidget.h \
+    TMExceptionDialog.h
 
 INCLUDEPATH += ../include
 
-FORMS    += TMMainWindow.ui
+FORMS    += TMMainWindow.ui \
+    TMExceptionDialog.ui

@@ -10,7 +10,7 @@ class TMException : public std::invalid_argument {
 
 class MismatchCommandAndElementUnderHead : public TMException {
     public:
-        MismatchCommandAndElementUnderHead() : TMException ( "Mismatch of command and the element under the head!" ) {};
+        MismatchCommandAndElementUnderHead() : TMException ( "Mismatch of command and the element under the head!" ) {}
 };
 
 class ZeroLongTape : public TMException {

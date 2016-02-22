@@ -33,17 +33,30 @@ void TMMainWindow::setCurrentPositionInTapeWidgetAt(const size_t pos) {
 }
 
 void TMMainWindow::on_pushButton_clicked() {
-    api.insertAlphabet(ui->lineEdit->text().toStdString());
-    std::vector<std::string> controlGraph;
-    controlGraph.reserve(ui->graphWidget->rowCount());
-    for (int i = 0; i < ui->graphWidget->rowCount(); i++) {
-        controlGraph.push_back(ui->graphWidget->item(i, 0)->text().toStdString());
+    try {
+        api.insertAlphabet(ui->lineEdit->text().toStdString());
+        std::vector<std::string> controlGraph;
+        controlGraph.reserve(ui->graphWidget->rowCount());
+        for (int i = 0; i < ui->graphWidget->rowCount(); i++) {
+            if (ui->graphWidget->item(i, 0))
+                controlGraph.push_back(ui->graphWidget->item(i, 0)->text().toStdString());
+        }
+        api.insertGraph(std::move(controlGraph));
+        api.compileInsertedGraph();
+    } catch (const TMException& e) {
+        exceptionDialog = new TMExceptionDialog(this, QString::fromStdString(e.what()));
+        exceptionDialog->setModal(true);
+        exceptionDialog->show();
     }
-    api.insertGraph(controlGraph);
-    api.compileInsertedGraph();
 }
 
 void TMMainWindow::on_pushButton_2_clicked() {
-    api.executeGraphInstantly();
-    updateTape();
+    try {
+        api.executeGraphInstantly();
+        updateTape();
+    } catch (const TMException& e) {
+        exceptionDialog = new TMExceptionDialog(this, QString::fromStdString(e.what()));
+        exceptionDialog->setModal(true);
+        exceptionDialog->show();
+    }
 }
