@@ -38,7 +38,7 @@ class HeadOutOfTape : public TMException {
 class CharacterOutOfAlphabet : public TMException {
     public:
         CharacterOutOfAlphabet(const char& arg)
-            : TMException ( "Character on tape out of defined alphabet", std::to_string(arg) )
+            : TMException ( "Character on tape out of defined alphabet", std::string(&arg, 1) )
         {}
 };
 
@@ -59,7 +59,7 @@ class CommandAlreadyExist : public TMException {
 class CommandNotExist : public TMException {
     public:
         CommandNotExist(const char& arg)
-            : TMException ( "Command with this transition doesn't exist", std::to_string(arg) )
+            : TMException ( "Command with this transition doesn't exist", std::string(&arg, 1) )
         {}
 };
 
