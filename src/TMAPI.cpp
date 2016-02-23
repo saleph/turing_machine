@@ -12,6 +12,10 @@ const std::vector<std::string>& TMAPI::getGraphAsVector() const {
     return graphAsText;
 }
 
+int TMAPI::getLocationOfLastCommand() const {
+    return turingMachine.getLocationOfLastCommand();
+}
+
 void TMAPI::insertAlphabet(const std::string& alphabet) {
     *turingMachine.alphabet = alphabet;
 }
@@ -26,7 +30,8 @@ void TMAPI::setHeadPosition(const size_t& pos) {
 
 void TMAPI::compileInsertedGraph() {
     turingMachine.graph->clear();
-    for (const auto commandAsText : graphAsText) turingMachine.addToGraph(commandAsText);
+    for (size_t i = 0; i < graphAsText.size(); i++)
+        turingMachine.addToGraph(graphAsText[i], i);
 }
 
 void TMAPI::doSingleStep() {

@@ -72,6 +72,12 @@ void TMMainWindow::on_executeButton_clicked() {
     } catch (const TMException& e) {
         throwExceptionDialogWith(e.what());
     }
+    updateRowSelectedInGraphWidget();
+}
+
+void TMMainWindow::updateRowSelectedInGraphWidget() {
+    int lastCommandPosition = api.getLocationOfLastCommand();
+    ui->graphWidget->setCurrentCell(lastCommandPosition, 0);
 }
 
 void TMMainWindow::on_loadButton_clicked() {

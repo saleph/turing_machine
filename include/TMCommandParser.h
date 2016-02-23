@@ -30,14 +30,15 @@ class TMCommandParser
         "$"           // end of command
         );
     public:
-        std::pair<std::string, TMCommand> parseToCommandWithItsName(const std::string& line) throw (InvalidCommandSyntax);
+        std::pair<std::string, TMCommand> parseToCommandWithItsName(const std::string& line, const int& location=-1)
+                throw (InvalidCommandSyntax);
     private:
         std::smatch tokens;
 
         void getTokensFrom(const std::string&);
-        void checkIfRegexMatched() const throw (InvalidCommandSyntax);
+        void checkIfRegexMatched(const std::string& line) const throw (InvalidCommandSyntax);
         std::string getCommandName() const;
-        TMCommand constructNewCommand() const;
+        TMCommand constructNewCommand(const int &location) const;
         char getFromState() const;
         char getFirstCharOf(const std::string&) const;
         char getToState() const;

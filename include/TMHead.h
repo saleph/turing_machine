@@ -8,7 +8,7 @@ class TMHead
 { // this class has to be derivided by TMTape
     public:
         TMHead() = default;
-        TMHead(const size_t pos) : headPosition(pos) {};
+        TMHead(const size_t pos) : headPosition(pos) {}
         TMHead(const TMHead&) = default;
         TMHead(TMHead&&) = default;
         virtual ~TMHead() = default;

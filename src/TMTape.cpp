@@ -71,7 +71,7 @@ void TMTape::moveHeadToThe(TMHeadMoveType direction) {
 
 void TMTape::checkIfBelongsToAlphabet(const char character) const throw (CharacterOutOfAlphabet) {
     std::shared_ptr<TMAlphabet> alpha (alphabet);
-    if (!alpha->has(character)) throw CharacterOutOfAlphabet();
+    if (!alpha->has(character)) throw CharacterOutOfAlphabet(character);
 }
 
 void TMTape::checkIfMatchWithCharOnTape(const char character) const throw (MismatchCommandAndElementUnderHead) {

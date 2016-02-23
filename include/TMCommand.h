@@ -8,10 +8,10 @@
 class TMCommand {
     public:
         TMCommand() {}
-        TMCommand(char from, char to, TMHeadMoveType moveType, std::string& name)
-            : fromState(from), toState(to), headMove(moveType), nextCommandName(name) {}
-        TMCommand(char from, char to, TMHeadMoveType moveType, const char* name)
-            : fromState(from), toState(to), headMove(moveType), nextCommandName(name) {}
+        TMCommand(char from, char to, TMHeadMoveType moveType, std::string& name, int loc=-1)
+            : fromState(from), toState(to), headMove(moveType), nextCommandName(name), locationOfCommand(loc) {}
+        TMCommand(char from, char to, TMHeadMoveType moveType, const char* name, int loc=-1)
+            : fromState(from), toState(to), headMove(moveType), nextCommandName(name), locationOfCommand(loc) {}
         TMCommand(const TMCommand&) = default;
         TMCommand(TMCommand&&) = default;
         TMCommand& operator= (const TMCommand&) = default;
@@ -22,6 +22,7 @@ class TMCommand {
         char getToState() const { return toState; }
         const TMHeadMoveType& getHeadMove() const { return headMove; }
         const std::string& getNextCommandName() const { return nextCommandName; }
+        int getLocationOfCommand() const { return locationOfCommand; }
 
         bool operator== (const TMCommand& other) const {
             return fromState == other.fromState;
@@ -35,6 +36,7 @@ class TMCommand {
         char toState;
         TMHeadMoveType headMove;
         std::string nextCommandName;
+        int locationOfCommand;
 };
 
 #endif // TMCOMMAND_H

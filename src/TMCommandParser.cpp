@@ -1,29 +1,31 @@
 #include "TMCommandParser.h"
 
-std::pair<std::string, TMCommand> TMCommandParser::parseToCommandWithItsName(const std::string& line) throw (InvalidCommandSyntax) {
+std::pair<std::string, TMCommand> TMCommandParser::parseToCommandWithItsName
+        (const std::string& line, const int &location)
+        throw (InvalidCommandSyntax) {
     getTokensFrom(line);
-    checkIfRegexMatched();
-    return {getCommandName(), constructNewCommand()};
+    checkIfRegexMatched(line);
+    return {getCommandName(), constructNewCommand(location)};
 }
 
 void TMCommandParser::getTokensFrom(const std::string& str) {
     std::regex_match(str, tokens, CMD_PATTERN);
 }
 
-void TMCommandParser::checkIfRegexMatched() const throw (InvalidCommandSyntax) {
-    if (!tokens.size()) throw InvalidCommandSyntax();
+void TMCommandParser::checkIfRegexMatched(const std::__cxx11::string &line) const throw (InvalidCommandSyntax) {
+    if (!tokens.size()) throw InvalidCommandSyntax(line);
 }
 
 std::string TMCommandParser::getCommandName() const {
     return tokens[CMD_NAME_POS];
 }
 
-TMCommand TMCommandParser::constructNewCommand() const {
+TMCommand TMCommandParser::constructNewCommand(const int& location) const {
     char fromState = getFromState();
     char toState = getToState();
     TMHeadMoveType moveType = getMoveType();
     std::string nextCommandName = getNextCommandName();
-    return TMCommand(fromState, toState, moveType, nextCommandName);
+    return TMCommand(fromState, toState, moveType, nextCommandName, location);
 }
 
 char TMCommandParser::getFromState() const {

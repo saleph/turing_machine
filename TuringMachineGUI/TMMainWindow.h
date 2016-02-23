@@ -39,6 +39,7 @@ private:
     void setCurrentPositionInTapeWidgetAt(const size_t pos);
     void insertAlphabetToApi();
     void insertGraphFromWidgetToApi();
+    void updateRowSelectedInGraphWidget();
     void throwExceptionDialogWith(const std::string& msg);
     void updateWholeMainWindow();
     void updateAlphabetWidget();

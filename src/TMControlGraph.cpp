@@ -4,7 +4,8 @@ const TMCommand& TMControlGraph::operator[] (const TMStringCharPair& val) const 
     try {
         return graph.at(val);
     } catch (const std::out_of_range&) {
-        throw CommandNotExist();
+        const char currentCharOnTape = val.character;
+        throw CommandNotExist(currentCharOnTape);
     }
 }
 
@@ -22,7 +23,13 @@ void TMControlGraph::addNewCmd(const std::pair<std::string, TMCommand>& cmd) thr
 
 void TMControlGraph::checkIfIsUnique(const TMStringCharPair& cmdNameAndFromState) throw (CommandAlreadyExist) {
     size_t numberOfOccurences = graph.count(cmdNameAndFromState);
-    if (numberOfOccurences >= 1) throw CommandAlreadyExist();
+    if (numberOfOccurences >= 1) {
+        std::string cmd = "Command name: ";
+        cmd += cmdNameAndFromState.name;
+        cmd += ", from state: ";
+        cmd += cmdNameAndFromState.character;
+        throw CommandAlreadyExist(cmd);
+    }
 }
 
 void TMControlGraph::appendCmd(TMStringCharPair& cmdNameAndFromState, TMCommand& commandBody) {

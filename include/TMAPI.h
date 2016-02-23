@@ -20,6 +20,7 @@ class TMAPI
         void insertGraph(const std::initializer_list<std::string>& graphAsList);
         void insertGraph(const std::vector<std::string>& graphAsVector);
         const std::vector<std::string>& getGraphAsVector() const;
+        int getLocationOfLastCommand() const;
         void compileInsertedGraph();
         void doSingleStep();
         void executeGraphInstantly();

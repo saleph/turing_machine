@@ -6,10 +6,11 @@ TMTuringMachine::TMTuringMachine(size_t length) {
     parser = std::make_unique<TMCommandParser>();
     graph = std::make_unique<TMControlGraph>();
     currentCmdName = startPhrase;
+    currentCmdLocation = -1;
 }
 
-void TMTuringMachine::addToGraph(const std::string& commandAsText) {
-    *graph += parser->parseToCommandWithItsName(commandAsText);
+void TMTuringMachine::addToGraph(const std::string& commandAsText, const int& location) {
+    *graph += parser->parseToCommandWithItsName(commandAsText, location);
 }
 
 void TMTuringMachine::doStep() {
@@ -26,6 +27,7 @@ void TMTuringMachine::doCommandOnTheTape(const TMCommand& cmd) {
     TMHeadMoveType headMove = cmd.getHeadMove();
     tape->doCmd(fromState, toState, headMove);
     currentCmdName = cmd.getNextCommandName();
+    currentCmdLocation = cmd.getLocationOfCommand();
 }
 
 void TMTuringMachine::checkIfTheGraphReachedEnd() const throw (EndOfTheControlGraph) {
@@ -40,4 +42,8 @@ void TMTuringMachine::executeGraphInstantly() {
 
 void TMTuringMachine::backTheGraphToTheBeginning() {
     currentCmdName = startPhrase;
+}
+
+int TMTuringMachine::getLocationOfLastCommand() const {
+    return currentCmdLocation;
 }
