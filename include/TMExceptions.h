@@ -79,6 +79,13 @@ class DataFromFileDoesntInserted : public TMException {
 
 // === FILE PARSING EXCEPTIONS ===
 
+class TMFileOpeningError : public TMException {
+    public:
+       TMFileOpeningError(const std::string& arg)
+           : TMException ( "File doesn't exist/file was damaged", arg )
+       {}
+};
+
 class TMFileSyntaxException : public TMException {
     public:
         TMFileSyntaxException(const std::string& arg)

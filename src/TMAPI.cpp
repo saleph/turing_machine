@@ -32,6 +32,7 @@ void TMAPI::compileInsertedGraph() {
     turingMachine.graph->clear();
     for (size_t i = 0; i < graphAsText.size(); i++)
         turingMachine.addToGraph(graphAsText[i], i);
+    turingMachine.backTheGraphToTheBeginning();
 }
 
 void TMAPI::doSingleStep() {

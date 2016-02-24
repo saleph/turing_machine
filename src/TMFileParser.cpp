@@ -1,5 +1,15 @@
 #include "TMFileParser.h"
 
+TMFileParser::TMFileParser(const std::__cxx11::string &fileName)
+        : fileStream(fileName) {
+    checkIfFileWasOpenedProperly(fileName);
+}
+
+void TMFileParser::checkIfFileWasOpenedProperly(const std::string& fileName) const
+        throw (TMFileOpeningError) {
+    if (!fileStream.is_open()) throw TMFileOpeningError(fileName);
+}
+
 void TMFileParser::parseToStateWatcher() {
     parseAlphabet();
     parseHeadPosition();

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
+#include <QTime>
 #include "TMExceptionDialog.h"
 #include "TMExceptions.h"
 #include "TMAPI.h"
@@ -28,6 +29,12 @@ private slots:
 
     void on_loadButton_clicked();
 
+    void on_singleStepButton_clicked();
+
+    void on_backToStartButton_clicked();
+
+    void on_autoStepButton_clicked();
+
 private:
     Ui::TMMainWindow *ui;
     TMExceptionDialog *exceptionDialog;
@@ -41,6 +48,7 @@ private:
     void insertGraphFromWidgetToApi();
     void updateRowSelectedInGraphWidget();
     void throwExceptionDialogWith(const std::string& msg);
+    void putToStatusBar(const QString& msg);
     void updateWholeMainWindow();
     void updateAlphabetWidget();
     void updateGraphWidget();

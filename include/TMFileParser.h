@@ -44,7 +44,7 @@ class TMFileParser
     ")"        // the end of matched group
     );
     public:
-        TMFileParser(const std::string& fileName) : fileStream(fileName) {};
+        TMFileParser(const std::string& fileName);
 
         void parseToStateWatcher();
     private:
@@ -53,6 +53,7 @@ class TMFileParser
         std::string currentLine;
         std::vector<std::string> graphAsText;
 
+        void checkIfFileWasOpenedProperly(const std::string& fileName) const throw (TMFileOpeningError);
         void parseAlphabet();
         std::istream& getLine();
         bool isCurrentLineAComment() const;

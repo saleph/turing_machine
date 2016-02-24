@@ -37,6 +37,7 @@ void TMMainWindow::on_compileButton_clicked() {
         insertAlphabetToApi();
         insertGraphFromWidgetToApi();
         api.compileInsertedGraph();
+        putToStatusBar(tr("Compiled successfully"));
     } catch (const TMException& e) {
         throwExceptionDialogWith(e.what());
     }
@@ -65,10 +66,15 @@ void TMMainWindow::throwExceptionDialogWith(const std::__cxx11::string &msg) {
     exceptionDialog->show();
 }
 
+void TMMainWindow::putToStatusBar(const QString &msg) {
+    ui->statusBar->showMessage(msg, 1500);
+}
+
 void TMMainWindow::on_executeButton_clicked() {
     try {
         api.executeGraphInstantly();
         updateTape();
+        putToStatusBar(tr("Executed successfully"));
     } catch (const TMException& e) {
         throwExceptionDialogWith(e.what());
     }
@@ -84,6 +90,7 @@ void TMMainWindow::on_loadButton_clicked() {
     QString filename = QFileDialog::getOpenFileName(this, tr("Load file"));
     try {
         api.getDataFromFile(filename.toStdString());
+        putToStatusBar(tr("File loaded"));
     } catch (const TMException& e) {
         throwExceptionDialogWith(e.what());
     }
@@ -108,4 +115,39 @@ void TMMainWindow::updateGraphWidget() {
         ui->graphWidget->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(graphAsText[i])));
     }
     ui->graphWidget->updateRowsLabels();
+}
+
+void TMMainWindow::on_singleStepButton_clicked() {
+    try {
+        api.doSingleStep();
+    } catch (const TMException& e) {
+        throwExceptionDialogWith(e.what());
+    }
+    updateTape(); // TODO: OPTIMIZATION!!!
+    updateRowSelectedInGraphWidget();
+}
+
+void TMMainWindow::on_backToStartButton_clicked() {
+    api.turnBackGraphToStartPosition();
+    updateRowSelectedInGraphWidget();
+}
+
+void TMMainWindow::on_autoStepButton_clicked() {
+    try {
+        while (ui->autoStepButton->isChecked()) {
+            int timer = ui->stepTimeSpinBox->value();
+            QTime dieTime = QTime::currentTime().addMSecs(timer);
+            while (QTime::currentTime() < dieTime) {
+                QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+            }
+            api.doSingleStep();
+            updateTape(); // TODO: OPTIMIZATION!!!
+            updateRowSelectedInGraphWidget();
+        }
+    } catch (const TMException& e) {
+        ui->autoStepButton->setChecked(false);
+        throwExceptionDialogWith(e.what());
+    }
+    updateTape(); // TODO: OPTIMIZATION!!!
+    updateRowSelectedInGraphWidget();
 }
