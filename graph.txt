@@ -1,10 +1,69 @@
 // Alphabet
-#01
+#1RMW$
 // Start head position
-50
+500
 // [tapeLength]; [tapeContentStartingPosition]; [tapeContent]
-1001; 40; 10#01110
+1001; 493; 1111111#1111111111
 // Control Graph
-Start #/0;L next
-next #/1;L next2
-next2 #/0;L Stop
+Start #/#;L k1
+k1 #/#;R k2
+k2 #/#;R k3
+k3 #/#;L zera
+zera #/R;L zakoncz
+zakoncz #/#;R Stop
+k3 1/1;L 2_wieksza
+2_wieksza #/M;L zakoncz
+k1 1/$;R k4
+k4 #/#;R k5
+k5 #/#;L  brak_prawej
+brak_prawej #/#;L brk_praw
+brk_praw $/1;R brk_praw_1
+brk_praw_1 #/W;R brk_praw_2
+brk_praw_2 #/#;L Stop
+b1 $/1;L b1
+b1 1/1;R b1
+b1 #/W;L b2
+b2 1/1;R Stop
+k5 1/$;L k6
+k6 #/#;L k7
+k7 $/$;L k7
+k7 #/#;L k10
+k10 $/$;L k10
+k10 1/$;R k8
+k10 #/#;R k11
+k11 #/#;R prawa
+k11 $/1;R prawa
+prawa $/1;R prawa
+prawa #/M;R praw_czysc
+praw_czysc $/1;R praw_czysc
+praw_czysc 1/1;L praw_wroc
+praw_czysc #/#;L rowne
+praw_wroc 1/1;L praw_wroc
+praw_wroc #/M;L praw_zak
+praw_wroc M/M;R praw_wroc2
+praw_wroc2 1/1;L Stop
+praw_zak 1/1;R praw_zak
+praw_zak #/R;L praw_stop
+praw_stop 1/1;R Stop
+praw_zak M/M;R praw_zak2
+praw_zak2 1/1;L Stop
+rowne 1/1;L rowne
+rowne #/R;R row_zak
+rowne M/R;R rowne2
+rowne2 1/1;L Stop
+row_zak 1/1;L Stop
+row_zak $/1;L Stop
+k7 1/$;R k8
+k8 $/$;R k8
+k8 #/#;R k9
+k9 $/$;R k9
+k9 1/$;L k7
+k9 #/#;L lewa
+lewa $/1;L lewa
+lewa #/W;L lew_czysc
+lew_czysc $/1;L lew_czysc
+lew_czysc #/#;R lew_wroc
+lew_czysc 1/1;R lew_wroc
+lew_wroc 1/1;R lew_wroc
+lew_wroc W/W;R lew_zak
+lew_zak 1/1;L Stop

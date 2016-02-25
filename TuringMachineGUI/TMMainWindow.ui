@@ -1193,7 +1193,7 @@
           <item row="1" column="3">
            <widget class="QSlider" name="stepTimeSlider">
             <property name="minimum">
-             <number>100</number>
+             <number>10</number>
             </property>
             <property name="maximum">
              <number>1500</number>
@@ -1212,6 +1212,9 @@
             </property>
             <property name="orientation">
              <enum>Qt::Vertical</enum>
+            </property>
+            <property name="tickInterval">
+             <number>0</number>
             </property>
            </widget>
           </item>
@@ -1334,7 +1337,7 @@
             <item>
              <widget class="QSpinBox" name="stepTimeSpinBox">
               <property name="minimum">
-               <number>100</number>
+               <number>10</number>
               </property>
               <property name="maximum">
                <number>1500</number>
@@ -1463,9 +1466,6 @@
      </layout>
     </item>
    </layout>
-   <zorder>tapeWidget</zorder>
-   <zorder>horizontalSpacer_2</zorder>
-   <zorder>horizontalSpacer_4</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -1508,12 +1508,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>258</x>
-     <y>374</y>
+     <x>617</x>
+     <y>398</y>
     </hint>
     <hint type="destinationlabel">
-     <x>293</x>
-     <y>379</y>
+     <x>708</x>
+     <y>397</y>
     </hint>
    </hints>
   </connection>
@@ -1524,14 +1524,33 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>291</x>
-     <y>395</y>
+     <x>708</x>
+     <y>397</y>
     </hint>
     <hint type="destinationlabel">
-     <x>261</x>
-     <y>331</y>
+     <x>617</x>
+     <y>398</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>stepTimeSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>TMMainWindow</receiver>
+   <slot>setStepTimerInterval(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>661</x>
+     <y>388</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>652</x>
+     <y>416</y>
     </hint>
    </hints>
   </connection>
  </connections>
+ <slots>
+  <slot>setStepTimerInterval(int)</slot>
+ </slots>
 </ui>

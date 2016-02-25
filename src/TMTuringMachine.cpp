@@ -25,9 +25,15 @@ void TMTuringMachine::doCommandOnTheTape(const TMCommand& cmd) {
     char fromState = cmd.getFromState();
     char toState = cmd.getToState();
     TMHeadMoveType headMove = cmd.getHeadMove();
+    // start Head position get here due to possibility of exception in doCmd
+    const size_t tapePositionOnWhichCommandDoWork = tape->getHeadPosition();
+
     tape->doCmd(fromState, toState, headMove);
+
     currentCmdName = cmd.getNextCommandName();
     currentCmdLocation = cmd.getLocationOfCommand();
+    lastTapeChangePosition = tapePositionOnWhichCommandDoWork;
+    lastChangedCharacter = toState;
 }
 
 void TMTuringMachine::checkIfTheGraphReachedEnd() const throw (EndOfTheControlGraph) {
@@ -46,4 +52,12 @@ void TMTuringMachine::backTheGraphToTheBeginning() {
 
 int TMTuringMachine::getLocationOfLastCommand() const {
     return currentCmdLocation;
+}
+
+size_t TMTuringMachine::getLastTapeChangePosition() const {
+    return lastTapeChangePosition;
+}
+
+char TMTuringMachine::getLastChangedCharacter() const {
+    return lastChangedCharacter;
 }

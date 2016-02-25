@@ -21,6 +21,7 @@ class TMAPI
         void insertGraph(const std::vector<std::string>& graphAsVector);
         const std::vector<std::string>& getGraphAsVector() const;
         int getLocationOfLastCommand() const;
+        std::pair<size_t, char> getPositionAndCharacterRecentlyChangedByStep() const;
         void compileInsertedGraph();
         void doSingleStep();
         void executeGraphInstantly();

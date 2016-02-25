@@ -4,8 +4,11 @@
 TMMainWindow::TMMainWindow(QWidget *parent) :
         QMainWindow(parent),
         ui(new Ui::TMMainWindow),
-        api(TAPELENGTH) {
+        api(TAPE_LENGTH){
     ui->setupUi(this);
+    stepTimer = new QTimer(this);
+    connect(stepTimer, SIGNAL(timeout()), this, SLOT(proccessSingleStep()));
+    setStepTimerInterval(ui->stepTimeSpinBox->value());
     setupTapeWidget();
 }
 
@@ -13,12 +16,16 @@ TMMainWindow::~TMMainWindow() {
     delete ui;
 }
 
+void TMMainWindow::setStepTimerInterval(int interval) {
+    stepTimer->setInterval(interval);
+}
+
 void TMMainWindow::setupTapeWidget() {
     updateTape();
 }
 
 void TMMainWindow::updateTape() {
-    for (size_t i = 0; i < TAPELENGTH; i++) {
+    for (size_t i = 0; i < TAPE_LENGTH; i++) {
         setTapeWidgetCharacterAt(i, api.tape->at(i));
     }
     setCurrentPositionInTapeWidgetAt(api.tape->getHeadPosition());
@@ -37,6 +44,7 @@ void TMMainWindow::on_compileButton_clicked() {
         insertAlphabetToApi();
         insertGraphFromWidgetToApi();
         api.compileInsertedGraph();
+        api.turnBackGraphToStartPosition();
         putToStatusBar(tr("Compiled successfully"));
     } catch (const TMException& e) {
         throwExceptionDialogWith(e.what());
@@ -123,8 +131,14 @@ void TMMainWindow::on_singleStepButton_clicked() {
     } catch (const TMException& e) {
         throwExceptionDialogWith(e.what());
     }
-    updateTape(); // TODO: OPTIMIZATION!!!
+    updateTapeWithOnlyRecentlyDidStep();
     updateRowSelectedInGraphWidget();
+}
+
+void TMMainWindow::updateTapeWithOnlyRecentlyDidStep() {
+    std::pair<size_t, char> recentChange = api.getPositionAndCharacterRecentlyChangedByStep();
+    setTapeWidgetCharacterAt(recentChange.first, recentChange.second);
+    setCurrentPositionInTapeWidgetAt(api.tape->getHeadPosition());
 }
 
 void TMMainWindow::on_backToStartButton_clicked() {
@@ -133,21 +147,23 @@ void TMMainWindow::on_backToStartButton_clicked() {
 }
 
 void TMMainWindow::on_autoStepButton_clicked() {
+    if (ui->autoStepButton->isChecked()) {
+        stepTimer->start();
+    } else {
+        stepTimer->stop();
+    }
+}
+
+void TMMainWindow::proccessSingleStep() {
     try {
-        while (ui->autoStepButton->isChecked()) {
-            int timer = ui->stepTimeSpinBox->value();
-            QTime dieTime = QTime::currentTime().addMSecs(timer);
-            while (QTime::currentTime() < dieTime) {
-                QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
-            }
-            api.doSingleStep();
-            updateTape(); // TODO: OPTIMIZATION!!!
-            updateRowSelectedInGraphWidget();
-        }
+        api.doSingleStep();
+        updateTapeWithOnlyRecentlyDidStep();
+        updateRowSelectedInGraphWidget();
     } catch (const TMException& e) {
         ui->autoStepButton->setChecked(false);
+        stepTimer->stop();
+        updateTapeWithOnlyRecentlyDidStep();
+        updateRowSelectedInGraphWidget();
         throwExceptionDialogWith(e.what());
     }
-    updateTape(); // TODO: OPTIMIZATION!!!
-    updateRowSelectedInGraphWidget();
 }

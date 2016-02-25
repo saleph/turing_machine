@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
-#include <QTime>
+#include <QTimer>
 #include "TMExceptionDialog.h"
 #include "TMExceptions.h"
 #include "TMAPI.h"
@@ -14,13 +14,13 @@ class TMMainWindow;
 
 class TMMainWindow : public QMainWindow
 {
-    const size_t TAPELENGTH = 1001;
+    const size_t TAPE_LENGTH = 1001;
 
     Q_OBJECT
 
 public:
     explicit TMMainWindow(QWidget *parent = 0);
-    ~TMMainWindow();
+    ~TMMainWindow();  
 
 private slots:
     void on_compileButton_clicked();
@@ -35,10 +35,15 @@ private slots:
 
     void on_autoStepButton_clicked();
 
+    void setStepTimerInterval(int);
+
+    void proccessSingleStep();
+
 private:
     Ui::TMMainWindow *ui;
     TMExceptionDialog *exceptionDialog;
     TMAPI api;
+    QTimer *stepTimer;
 
     void setupTapeWidget();
     void updateTape();
@@ -52,6 +57,7 @@ private:
     void updateWholeMainWindow();
     void updateAlphabetWidget();
     void updateGraphWidget();
+    void updateTapeWithOnlyRecentlyDidStep();
 };
 
 #endif // TMMAINWINDOW_H

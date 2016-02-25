@@ -16,6 +16,10 @@ int TMAPI::getLocationOfLastCommand() const {
     return turingMachine.getLocationOfLastCommand();
 }
 
+std::pair<size_t, char> TMAPI::getPositionAndCharacterRecentlyChangedByStep() const {
+    return { turingMachine.getLastTapeChangePosition(), turingMachine.getLastChangedCharacter() };
+}
+
 void TMAPI::insertAlphabet(const std::string& alphabet) {
     *turingMachine.alphabet = alphabet;
 }

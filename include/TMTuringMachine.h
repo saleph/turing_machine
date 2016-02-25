@@ -26,11 +26,16 @@ class TMTuringMachine
         void executeGraphInstantly();
         void backTheGraphToTheBeginning(); // after it the current cmdName is 'Start'
         int getLocationOfLastCommand() const;
-    private:
+        size_t getLastTapeChangePosition() const;
+        char getLastChangedCharacter() const;
+private:
         std::shared_ptr<TMTape> tape;
         std::unique_ptr<TMCommandParser> parser;
         std::string currentCmdName;
+
         int currentCmdLocation;
+        size_t lastTapeChangePosition;
+        char lastChangedCharacter;
 
         void doCommandOnTheTape(const TMCommand&);
         void checkIfTheGraphReachedEnd() const throw (EndOfTheControlGraph);
