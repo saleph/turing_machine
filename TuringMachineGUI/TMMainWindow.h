@@ -7,6 +7,8 @@
 #include "TMExceptionDialog.h"
 #include "TMExceptions.h"
 #include "TMAPI.h"
+#include "TMTape.h"
+#include "LazyInitializator.h"
 
 namespace Ui {
 class TMMainWindow;
@@ -39,11 +41,16 @@ private slots:
 
     void proccessSingleStep();
 
+    void on_copyTapeButton_clicked();
+
+    void on_pasteTapeButton_clicked();
+
 private:
     Ui::TMMainWindow *ui;
     TMExceptionDialog *exceptionDialog;
     TMAPI api;
     QTimer *stepTimer;
+    LazyInitializator<std::vector<char>> cachedTape;
 
     void setupTapeWidget();
     void updateTape();

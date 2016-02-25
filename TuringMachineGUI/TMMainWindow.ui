@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>768</width>
-    <height>574</height>
+    <width>741</width>
+    <height>697</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1148,7 +1148,7 @@
            <widget class="QLineEdit" name="alphabetLineEdit">
             <property name="minimumSize">
              <size>
-              <width>75</width>
+              <width>45</width>
               <height>0</height>
              </size>
             </property>
@@ -1173,6 +1173,27 @@
             </property>
            </spacer>
           </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QPushButton" name="pasteTapeButton">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Paste tape</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="copyTapeButton">
+              <property name="text">
+               <string>Copy tape</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
          </layout>
         </item>
         <item>
@@ -1193,7 +1214,7 @@
           <item row="1" column="3">
            <widget class="QSlider" name="stepTimeSlider">
             <property name="minimum">
-             <number>10</number>
+             <number>1</number>
             </property>
             <property name="maximum">
              <number>1500</number>
@@ -1337,7 +1358,7 @@
             <item>
              <widget class="QSpinBox" name="stepTimeSpinBox">
               <property name="minimum">
-               <number>10</number>
+               <number>1</number>
               </property>
               <property name="maximum">
                <number>1500</number>
@@ -1472,7 +1493,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>768</width>
+     <width>741</width>
      <height>22</height>
     </rect>
    </property>
@@ -1508,12 +1529,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>617</x>
-     <y>398</y>
+     <x>497</x>
+     <y>368</y>
     </hint>
     <hint type="destinationlabel">
-     <x>708</x>
-     <y>397</y>
+     <x>588</x>
+     <y>367</y>
     </hint>
    </hints>
   </connection>
@@ -1524,12 +1545,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>708</x>
-     <y>397</y>
+     <x>588</x>
+     <y>367</y>
     </hint>
     <hint type="destinationlabel">
-     <x>617</x>
-     <y>398</y>
+     <x>497</x>
+     <y>368</y>
     </hint>
    </hints>
   </connection>
@@ -1540,8 +1561,8 @@
    <slot>setStepTimerInterval(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>661</x>
-     <y>388</y>
+     <x>588</x>
+     <y>367</y>
     </hint>
     <hint type="destinationlabel">
      <x>652</x>

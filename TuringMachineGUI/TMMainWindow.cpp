@@ -167,3 +167,14 @@ void TMMainWindow::proccessSingleStep() {
         throwExceptionDialogWith(e.what());
     }
 }
+
+void TMMainWindow::on_copyTapeButton_clicked() {
+    ui->pasteTapeButton->setProperty("enabled", true);
+    cachedTape = { api.tape->begin(), api.tape->end() };
+}
+
+void TMMainWindow::on_pasteTapeButton_clicked() {
+    for (size_t i = 0; i < TAPE_LENGTH; i++) {
+        setTapeWidgetCharacterAt(i, cachedTape->at(i));
+    }
+}
