@@ -36,6 +36,19 @@ void TMControlGraph::appendCmd(TMStringCharPair& cmdNameAndFromState, TMCommand&
     graph[cmdNameAndFromState] = commandBody;
 }
 
+std::string TMControlGraph::getCommandNameWith(int location) const {
+    for (auto it = graph.cbegin(); it != graph.cend(); it++) {
+        const auto cmd = it->second;
+        if (cmd.getLocationOfCommand() == location) {
+            const TMStringCharPair stringCharPair = it->first;
+            const std::string cmdName = stringCharPair.name;
+            return std::move(cmdName);
+        }
+    }
+    // if location wasn't found
+    return std::string("Start");
+}
+
 void TMControlGraph::clear() {
     graph.clear();
 }

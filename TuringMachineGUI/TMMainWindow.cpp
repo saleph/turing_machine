@@ -40,6 +40,11 @@ void TMMainWindow::setCurrentPositionInTapeWidgetAt(const size_t pos) {
 }
 
 void TMMainWindow::on_compileButton_clicked() {
+    handleGraphCompilation();
+    handleTurningBackGraphToStartPosition();
+}
+
+void TMMainWindow::handleGraphCompilation() {
     try {
         insertAlphabetToApi();
         insertGraphFromWidgetToApi();
@@ -98,11 +103,13 @@ void TMMainWindow::on_loadButton_clicked() {
     QString filename = QFileDialog::getOpenFileName(this, tr("Load file"));
     try {
         api.getDataFromFile(filename.toStdString());
+        updateWholeMainWindow();
         putToStatusBar(tr("File loaded"));
+        handleGraphCompilation();
+        handleTurningBackGraphToStartPosition();
     } catch (const TMException& e) {
         throwExceptionDialogWith(e.what());
     }
-    updateWholeMainWindow();
 }
 
 void TMMainWindow::updateWholeMainWindow() {
@@ -142,7 +149,15 @@ void TMMainWindow::updateTapeWithOnlyRecentlyDidStep() {
 }
 
 void TMMainWindow::on_backToStartButton_clicked() {
-    api.turnBackGraphToStartPosition();
+    handleTurningBackGraphToStartPosition();
+}
+
+void TMMainWindow::handleTurningBackGraphToStartPosition() {
+    try {
+        api.turnBackGraphToStartPosition();
+    } catch (const TMException& e) {
+        throwExceptionDialogWith(e.what());
+    }
     updateRowSelectedInGraphWidget();
 }
 
@@ -174,7 +189,14 @@ void TMMainWindow::on_copyTapeButton_clicked() {
 }
 
 void TMMainWindow::on_pasteTapeButton_clicked() {
-    for (size_t i = 0; i < TAPE_LENGTH; i++) {
-        setTapeWidgetCharacterAt(i, cachedTape->at(i));
-    }
+    *api.tape = *cachedTape;
+    updateTape();
+}
+
+void TMMainWindow::on_graphWidget_cellClicked(int row, int column) {
+    api.makeCurrentCmdACommandWithLocation(row);
+}
+
+void TMMainWindow::on_tapeWidget_cellClicked(int row, int column) {
+    api.setHeadPosition(column);
 }

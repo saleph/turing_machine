@@ -26,6 +26,7 @@ class TMAPI
         void doSingleStep();
         void executeGraphInstantly();
         void turnBackGraphToStartPosition();
+        void makeCurrentCmdACommandWithLocation(int loc);
 
         void getDataFromFile(const std::string& filename);
     private:

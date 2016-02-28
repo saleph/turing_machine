@@ -15,6 +15,7 @@ class TMControlGraph
 
         const TMCommand& operator[] (const TMStringCharPair&) const throw (CommandNotExist);
         void operator+= (const std::pair<std::string, TMCommand>& cmd) throw (CommandAlreadyExist);
+        std::string getCommandNameWith(int location) const;
         void clear();
     private:
         std::unordered_map<TMStringCharPair, TMCommand> graph;

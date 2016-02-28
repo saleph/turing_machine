@@ -51,6 +51,10 @@ void TMAPI::turnBackGraphToStartPosition() {
     turingMachine.backTheGraphToTheBeginning();
 }
 
+void TMAPI::makeCurrentCmdACommandWithLocation(int loc) {
+    turingMachine.makeCurrentCmdACommandWith(loc);
+}
+
 void TMAPI::getDataFromFile(const std::string& filename) {
     initializeFileParser(filename);
     fileParser->parseToStateWatcher();

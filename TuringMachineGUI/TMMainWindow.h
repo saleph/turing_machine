@@ -45,6 +45,10 @@ private slots:
 
     void on_pasteTapeButton_clicked();
 
+    void on_graphWidget_cellClicked(int row, int column);
+
+    void on_tapeWidget_cellClicked(int row, int column);
+
 private:
     Ui::TMMainWindow *ui;
     TMExceptionDialog *exceptionDialog;
@@ -56,6 +60,7 @@ private:
     void updateTape();
     void setTapeWidgetCharacterAt(const size_t pos, const char sign);
     void setCurrentPositionInTapeWidgetAt(const size_t pos);
+    void handleGraphCompilation();
     void insertAlphabetToApi();
     void insertGraphFromWidgetToApi();
     void updateRowSelectedInGraphWidget();
@@ -65,6 +70,7 @@ private:
     void updateAlphabetWidget();
     void updateGraphWidget();
     void updateTapeWithOnlyRecentlyDidStep();
+    void handleTurningBackGraphToStartPosition();
 };
 
 #endif // TMMAINWINDOW_H

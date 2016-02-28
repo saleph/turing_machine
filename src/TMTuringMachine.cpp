@@ -48,6 +48,15 @@ void TMTuringMachine::executeGraphInstantly() {
 
 void TMTuringMachine::backTheGraphToTheBeginning() {
     currentCmdName = startPhrase;
+    char currentState = tape->getCharUnderHead();
+    TMStringCharPair currentCmdIndex (currentCmdName, currentState);
+    TMCommand currentCmd = (*graph)[currentCmdIndex];
+    currentCmdLocation = currentCmd.getLocationOfCommand();
+}
+
+void TMTuringMachine::makeCurrentCmdACommandWith(int location) {
+    currentCmdName = graph->getCommandNameWith(location);
+    currentCmdLocation = location;
 }
 
 int TMTuringMachine::getLocationOfLastCommand() const {
