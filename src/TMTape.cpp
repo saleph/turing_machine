@@ -25,6 +25,7 @@ TMTape::~TMTape() noexcept {}
 
 TMTape& TMTape::operator= (const std::vector<char>& otherVec) {
     tape = otherVec;
+    return *this;
 }
 
 void TMTape::setHeadPosition(const size_t pos) throw (HeadOutOfTape) {

@@ -193,10 +193,10 @@ void TMMainWindow::on_pasteTapeButton_clicked() {
     updateTape();
 }
 
-void TMMainWindow::on_graphWidget_cellClicked(int row, int column) {
+void TMMainWindow::on_graphWidget_cellClicked(int row, int) {
     api.makeCurrentCmdACommandWithLocation(row);
 }
 
-void TMMainWindow::on_tapeWidget_cellClicked(int row, int column) {
+void TMMainWindow::on_tapeWidget_cellClicked(int, int column) {
     api.setHeadPosition(column);
 }
