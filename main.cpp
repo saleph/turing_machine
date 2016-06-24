@@ -5,6 +5,17 @@ using namespace std;
 
 void showHelp();
 
+/*
+ * Todo:
+ * - dumping into file
+ * - shorten tape decryptor
+ * - in TMTuringMachine - ability to use and compare two tapes (for unit testing purposes)
+ * - new class - StateDumper, which will use TuringMachine method to transfer its state into TMStateWatcher
+ * and then dump all data into a file
+ * - UNIT TESTING - method of TMAPI gets 2 shorten tapes as strings, builds 2 tapes from it and do the comparison;
+ * should return a pair of vector of booleans (passed/not) and vector of EXCEPTIONS - for futer use in e.what()
+ */
+
 int main(int argc, char* argv[]) {
     if (argc <= 1)
         throw std::invalid_argument("Filepath not entered! Try again.");
