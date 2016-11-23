@@ -3,8 +3,8 @@
 TMTuringMachine::TMTuringMachine(size_t length) {
     alphabet = std::make_shared<TMAlphabet>();
     tape = std::make_shared<TMTape>(length, alphabet);
-    parser = std::make_unique<TMCommandParser>();
-    graph = std::make_unique<TMControlGraph>();
+    parser = std::unique_ptr<TMCommandParser>(new TMCommandParser);
+    graph = std::unique_ptr<TMControlGraph>(new TMControlGraph);
     currentCmdName = startPhrase;
     currentCmdLocation = -1;
 }

@@ -63,7 +63,7 @@ void TMAPI::getDataFromFile(const std::string& filename) {
 }
 
 void TMAPI::initializeFileParser(const std::string& filename) {
-    fileParser = std::make_unique<TMFileParser>(filename);
+    fileParser = std::unique_ptr<TMFileParser>(new TMFileParser(filename));
 }
 
 void TMAPI::checkIfDataWasInserted() const throw (DataFromFileDoesntInserted) {

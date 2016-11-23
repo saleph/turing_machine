@@ -12,12 +12,12 @@ class LazyInitializator : public std::unique_ptr<T> {
         {}
         template<class T_t>
         LazyInitializator(T_t&& val) // for normal construction
-            : std::unique_ptr<T> (std::make_unique<T>(std::forward<T_t>(val)))
+            : std::unique_ptr<T> (std::unique_ptr<T>(std::forward<T_t>(val)))
         {}
         template<class T_t>
         LazyInitializator& operator= (T_t&& val) { // for r-value
             if (!std::unique_ptr<T>::operator bool())
-                std::unique_ptr<T>::operator= (std::make_unique<T>(std::forward<T_t>(val)));
+                std::unique_ptr<T>::operator= (std::unique_ptr<T>(new T(std::forward<T_t>(val))));
             **this = val;
             return *this;
         }

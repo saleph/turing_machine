@@ -185,7 +185,7 @@ void TMMainWindow::proccessSingleStep() {
 
 void TMMainWindow::on_copyTapeButton_clicked() {
     ui->pasteTapeButton->setProperty("enabled", true);
-    cachedTape = std::vector<char>( api.tape->begin(), api.tape->end() );
+    cachedTape = std::vector<char>(api.tape->begin(), api.tape->end());
 }
 
 void TMMainWindow::on_pasteTapeButton_clicked() {
