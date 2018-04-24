@@ -49,12 +49,25 @@ private slots:
 
     void on_tapeWidget_cellClicked(int row, int column);
 
+    void on_actionCompile_triggered();
+
+    void on_actionBack_to_start_triggered();
+
+    void on_actionExecute_instantly_triggered();
+
+    void on_actionSingle_step_triggered();
+
+    void on_actionAuto_step_triggered();
+
+    void on_action_Load_triggered();
+
 private:
     Ui::TMMainWindow *ui;
     TMExceptionDialog *exceptionDialog;
     TMAPI api;
     QTimer *stepTimer;
     LazyInitializator<std::vector<char>> cachedTape;
+    bool autoStepActive = false;
 
     void setupTapeWidget();
     void updateTape();

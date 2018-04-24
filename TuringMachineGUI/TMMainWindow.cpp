@@ -162,7 +162,8 @@ void TMMainWindow::handleTurningBackGraphToStartPosition() {
 }
 
 void TMMainWindow::on_autoStepButton_clicked() {
-    if (ui->autoStepButton->isChecked()) {
+    autoStepActive = !autoStepActive;
+    if (autoStepActive) {
         stepTimer->start();
     } else {
         stepTimer->stop();
@@ -175,7 +176,7 @@ void TMMainWindow::proccessSingleStep() {
         updateTapeWithOnlyRecentlyDidStep();
         updateRowSelectedInGraphWidget();
     } catch (const TMException& e) {
-        ui->autoStepButton->setChecked(false);
+        autoStepActive = false;
         stepTimer->stop();
         updateTapeWithOnlyRecentlyDidStep();
         updateRowSelectedInGraphWidget();
@@ -184,7 +185,6 @@ void TMMainWindow::proccessSingleStep() {
 }
 
 void TMMainWindow::on_copyTapeButton_clicked() {
-    ui->pasteTapeButton->setProperty("enabled", true);
     cachedTape = std::vector<char>(api.tape->begin(), api.tape->end());
 }
 
@@ -199,4 +199,34 @@ void TMMainWindow::on_graphWidget_cellClicked(int row, int) {
 
 void TMMainWindow::on_tapeWidget_cellClicked(int, int column) {
     api.setHeadPosition(column);
+}
+
+void TMMainWindow::on_actionCompile_triggered()
+{
+    on_compileButton_clicked();
+}
+
+void TMMainWindow::on_actionBack_to_start_triggered()
+{
+    on_backToStartButton_clicked();
+}
+
+void TMMainWindow::on_actionExecute_instantly_triggered()
+{
+    on_executeButton_clicked();
+}
+
+void TMMainWindow::on_actionSingle_step_triggered()
+{
+    on_singleStepButton_clicked();
+}
+
+void TMMainWindow::on_actionAuto_step_triggered()
+{
+    on_autoStepButton_clicked();
+}
+
+void TMMainWindow::on_action_Load_triggered()
+{
+    on_loadButton_clicked();
 }

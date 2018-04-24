@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>TMExceptionDialog</class>
  <widget class="QDialog" name="TMExceptionDialog">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,7 +20,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Exception!</string>
+   <string>State machine info</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
