@@ -41,15 +41,17 @@ void TMMainWindow::setCurrentPositionInTapeWidgetAt(const size_t pos) {
 
 void TMMainWindow::on_compileButton_clicked() {
     handleGraphCompilation();
-    handleTurningBackGraphToStartPosition();
 }
 
 void TMMainWindow::handleGraphCompilation() {
     try {
         insertAlphabetToApi();
-        insertGraphFromWidgetToApi();
+//        insertGraphFromWidgetToApi();
+        insertTextEditGraphToApi();
+        updateGraphWidget();
         api.compileInsertedGraph();
         api.turnBackGraphToStartPosition();
+        handleTurningBackGraphToStartPosition();
         putToStatusBar(tr("Compiled successfully"));
     } catch (const TMException& e) {
         throwExceptionDialogWith(e.what());
@@ -71,6 +73,17 @@ void TMMainWindow::insertGraphFromWidgetToApi() {
             controlGraph.push_back(item->text().toStdString());
     }
     api.insertGraph(std::move(controlGraph));
+}
+
+void TMMainWindow::insertTextEditGraphToApi() {
+    std::istringstream graphAsPlainText(ui->graphTextEdit->toPlainText().toStdString());
+    std::string line;
+    std::vector<std::string> graphAsVector;
+    while(std::getline(graphAsPlainText, line)) {
+        if(line.size() > 0)
+            graphAsVector.push_back(line);
+    }
+    api.insertGraph(std::move(graphAsVector));
 }
 
 void TMMainWindow::throwExceptionDialogWith(const std::__cxx11::string &msg) {
@@ -116,6 +129,7 @@ void TMMainWindow::updateWholeMainWindow() {
     updateTape();
     updateAlphabetWidget();
     updateGraphWidget();
+    updateTextEditWidget();
 }
 
 void TMMainWindow::updateAlphabetWidget() {
@@ -130,6 +144,16 @@ void TMMainWindow::updateGraphWidget() {
         ui->graphWidget->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(graphAsText[i])));
     }
     ui->graphWidget->updateRowsLabels();
+}
+
+void TMMainWindow::updateTextEditWidget() {
+    const std::vector<std::string> graphAsTextLines = api.getGraphAsVector();
+    QString graphAsText;
+    for (auto &&line : graphAsTextLines) {
+        graphAsText.append(QString::fromStdString(line));
+        graphAsText.append("\n");
+    }
+    ui->graphTextEdit->setText(graphAsText);
 }
 
 void TMMainWindow::on_singleStepButton_clicked() {

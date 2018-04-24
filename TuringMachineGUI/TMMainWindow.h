@@ -3,7 +3,10 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
+#include <string>
+#include <iostream>
 #include <QTimer>
+#include <sstream>
 #include "TMExceptionDialog.h"
 #include "TMExceptions.h"
 #include "TMAPI.h"
@@ -76,7 +79,9 @@ private:
     void handleGraphCompilation();
     void insertAlphabetToApi();
     void insertGraphFromWidgetToApi();
+    void insertTextEditGraphToApi();
     void updateRowSelectedInGraphWidget();
+    void updateTextEditWidget();
     void throwExceptionDialogWith(const std::string& msg);
     void putToStatusBar(const QString& msg);
     void updateWholeMainWindow();
