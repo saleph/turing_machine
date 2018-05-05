@@ -16,6 +16,12 @@ TMMainWindow::~TMMainWindow() {
     delete ui;
 }
 
+void TMMainWindow::resizeEvent(QResizeEvent *event)
+{
+    QMainWindow::resizeEvent(event);
+    setCurrentPositionInTapeWidgetAt(api.tape->getHeadPosition());
+}
+
 void TMMainWindow::setStepTimerInterval(int interval) {
     stepTimer->setInterval(interval);
 }
@@ -39,7 +45,7 @@ void TMMainWindow::setCurrentPositionInTapeWidgetAt(const size_t pos) {
     ui->tapeWidget->setCurrentCell(0, pos);
 }
 
-void TMMainWindow::on_compileButton_clicked() {
+void TMMainWindow::handleCompilation() {
     handleGraphCompilation();
 }
 
@@ -96,7 +102,7 @@ void TMMainWindow::putToStatusBar(const QString &msg) {
     ui->statusBar->showMessage(msg, 1500);
 }
 
-void TMMainWindow::on_executeButton_clicked() {
+void TMMainWindow::handleExecution() {
     try {
         api.executeGraphInstantly();
         updateTape();
@@ -112,7 +118,7 @@ void TMMainWindow::updateRowSelectedInGraphWidget() {
     ui->graphWidget->setCurrentCell(lastCommandPosition, 0);
 }
 
-void TMMainWindow::on_loadButton_clicked() {
+void TMMainWindow::handleLoadingFromFile() {
     QString filename = QFileDialog::getOpenFileName(this, tr("Load file"));
     try {
         api.getDataFromFile(filename.toStdString());
@@ -156,7 +162,7 @@ void TMMainWindow::updateTextEditWidget() {
     ui->graphTextEdit->setText(graphAsText);
 }
 
-void TMMainWindow::on_singleStepButton_clicked() {
+void TMMainWindow::handleSingleStepping() {
     try {
         api.doSingleStep();
     } catch (const TMException& e) {
@@ -172,7 +178,7 @@ void TMMainWindow::updateTapeWithOnlyRecentlyDidStep() {
     setCurrentPositionInTapeWidgetAt(api.tape->getHeadPosition());
 }
 
-void TMMainWindow::on_backToStartButton_clicked() {
+void TMMainWindow::handleBackToStart() {
     handleTurningBackGraphToStartPosition();
 }
 
@@ -185,7 +191,7 @@ void TMMainWindow::handleTurningBackGraphToStartPosition() {
     updateRowSelectedInGraphWidget();
 }
 
-void TMMainWindow::on_autoStepButton_clicked() {
+void TMMainWindow::handleAutoStepping() {
     autoStepActive = !autoStepActive;
     if (autoStepActive) {
         stepTimer->start();
@@ -208,11 +214,11 @@ void TMMainWindow::proccessSingleStep() {
     }
 }
 
-void TMMainWindow::on_copyTapeButton_clicked() {
+void TMMainWindow::handleCopyingTape() {
     cachedTape = std::vector<char>(api.tape->begin(), api.tape->end());
 }
 
-void TMMainWindow::on_pasteTapeButton_clicked() {
+void TMMainWindow::handlePastingTape() {
     *api.tape = *cachedTape;
     updateTape();
 }
@@ -227,30 +233,35 @@ void TMMainWindow::on_tapeWidget_cellClicked(int, int column) {
 
 void TMMainWindow::on_actionCompile_triggered()
 {
-    on_compileButton_clicked();
+    handleCompilation();
 }
 
 void TMMainWindow::on_actionBack_to_start_triggered()
 {
-    on_backToStartButton_clicked();
+    handleBackToStart();
 }
 
 void TMMainWindow::on_actionExecute_instantly_triggered()
 {
-    on_executeButton_clicked();
+    handleExecution();
 }
 
 void TMMainWindow::on_actionSingle_step_triggered()
 {
-    on_singleStepButton_clicked();
+    handleSingleStepping();
 }
 
 void TMMainWindow::on_actionAuto_step_triggered()
 {
-    on_autoStepButton_clicked();
+    handleAutoStepping();
 }
 
 void TMMainWindow::on_action_Load_triggered()
 {
-    on_loadButton_clicked();
+    handleLoadingFromFile();
+}
+
+void TMMainWindow::on_tapeWidget_itemChanged(QTableWidgetItem *item)
+{
+    api.tape->operator [](item->column()) = item->text().at(0).toLatin1();
 }

@@ -1094,7 +1094,7 @@
          <widget class="QTextEdit" name="graphTextEdit">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>1</horstretch>
+            <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
@@ -1209,7 +1209,7 @@
            <widget class="GraphTableWidget" name="graphWidget">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>2</horstretch>
+              <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
@@ -1381,12 +1381,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>497</x>
-     <y>368</y>
+     <x>734</x>
+     <y>135</y>
     </hint>
     <hint type="destinationlabel">
-     <x>588</x>
-     <y>367</y>
+     <x>620</x>
+     <y>142</y>
     </hint>
    </hints>
   </connection>
@@ -1397,12 +1397,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>588</x>
-     <y>367</y>
+     <x>620</x>
+     <y>142</y>
     </hint>
     <hint type="destinationlabel">
-     <x>497</x>
-     <y>368</y>
+     <x>734</x>
+     <y>135</y>
     </hint>
    </hints>
   </connection>
@@ -1413,8 +1413,8 @@
    <slot>setStepTimerInterval(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>588</x>
-     <y>367</y>
+     <x>620</x>
+     <y>142</y>
     </hint>
     <hint type="destinationlabel">
      <x>652</x>

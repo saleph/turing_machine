@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include <string>
 #include <iostream>
+#include <QTableWidgetItem>
 #include <QTimer>
 #include <sstream>
 #include "TMExceptionDialog.h"
@@ -25,28 +26,15 @@ class TMMainWindow : public QMainWindow
 
 public:
     explicit TMMainWindow(QWidget *parent = 0);
-    ~TMMainWindow();  
+    ~TMMainWindow();
+
+protected:
+    void resizeEvent(QResizeEvent *event) override;
 
 private slots:
-    void on_compileButton_clicked();
-
-    void on_executeButton_clicked();
-
-    void on_loadButton_clicked();
-
-    void on_singleStepButton_clicked();
-
-    void on_backToStartButton_clicked();
-
-    void on_autoStepButton_clicked();
-
     void setStepTimerInterval(int);
 
     void proccessSingleStep();
-
-    void on_copyTapeButton_clicked();
-
-    void on_pasteTapeButton_clicked();
 
     void on_graphWidget_cellClicked(int row, int column);
 
@@ -63,6 +51,8 @@ private slots:
     void on_actionAuto_step_triggered();
 
     void on_action_Load_triggered();
+
+    void on_tapeWidget_itemChanged(QTableWidgetItem *item);
 
 private:
     Ui::TMMainWindow *ui;
@@ -89,6 +79,14 @@ private:
     void updateGraphWidget();
     void updateTapeWithOnlyRecentlyDidStep();
     void handleTurningBackGraphToStartPosition();
+    void handleCompilation();
+    void handleExecution();
+    void handleLoadingFromFile();
+    void handleSingleStepping();
+    void handleBackToStart();
+    void handleAutoStepping();
+    void handleCopyingTape();
+    void handlePastingTape();
 };
 
 #endif // TMMAINWINDOW_H
