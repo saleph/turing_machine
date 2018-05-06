@@ -1,5 +1,5 @@
 #include "TMTape.h"
-
+#include <iostream>
 // without setting headPosition the head go to the middle of tape
 TMTape::TMTape(size_t len, std::shared_ptr<TMAlphabet>& alphaSPtr) throw (ZeroLongTape) : TMHead (len/2u) {
     setTapeLength(len);
@@ -67,12 +67,14 @@ void TMTape::doCmd(const char before, const char after, TMHeadMoveType headMove)
 
 void TMTape::changeCharUnderHeadTo(const char character) {
     setValueUnderHead(character);
+    tapeEditNotifier(getHeadPosition(), getHeadPosition());
 }
 
 void TMTape::moveHeadToThe(TMHeadMoveType direction) {
     if (direction == TMHeadMoveType::LEFT) moveHeadLeft();
     if (direction == TMHeadMoveType::RIGHT) moveHeadRight();
     updateHeadPointer();
+    headEditNotifier();
 }
 
 void TMTape::checkIfBelongsToAlphabet(const char character) const throw (CharacterOutOfAlphabet) {
@@ -107,6 +109,9 @@ void TMTape::updateTapeSize() {
 void TMTape::insertContentAt(const size_t pos, std::string& content) {
     auto from = tape.begin() + pos;
     auto numberOfElements = content.length();
+
     tape.erase(from, from + numberOfElements);
     tape.insert(from, content.begin(), content.end());
+
+    tapeEditNotifier(pos, pos + numberOfElements);
 }

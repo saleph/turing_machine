@@ -29,10 +29,13 @@ class TMAPI
         void makeCurrentCmdACommandWithLocation(int loc);
 
         void getDataFromFile(const std::string& filename);
+
+        void installGraphChangeNotifier(std::function<void()> n) { graphNotifier = n; }
     private:
         TMTuringMachine turingMachine;
         std::unique_ptr<TMFileParser> fileParser;
         std::vector<std::string> graphAsText;
+        std::function<void()> graphNotifier = []{};
 
         void initializeFileParser(const std::string& filename);
         void checkIfDataWasInserted() const throw (DataFromFileDoesntInserted);

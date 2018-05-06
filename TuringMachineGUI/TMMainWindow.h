@@ -13,6 +13,7 @@
 #include "TMAPI.h"
 #include "TMTape.h"
 #include "LazyInitializator.h"
+#include "tmtapemodel.h"
 
 namespace Ui {
 class TMMainWindow;
@@ -61,6 +62,7 @@ private:
     QTimer *stepTimer;
     LazyInitializator<std::vector<char>> cachedTape;
     bool autoStepActive = false;
+    TMTapeModel tapeModel;
 
     void setupTapeWidget();
     void updateTape();

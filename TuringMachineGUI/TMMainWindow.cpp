@@ -4,8 +4,11 @@
 TMMainWindow::TMMainWindow(QWidget *parent) :
         QMainWindow(parent),
         ui(new Ui::TMMainWindow),
-        api(TAPE_LENGTH){
+        api(TAPE_LENGTH),
+        tapeModel(nullptr, api.tape)
+{
     ui->setupUi(this);
+    ui->tapeWidget->horizontalHeader()->hide();
     stepTimer = new QTimer(this);
     connect(stepTimer, SIGNAL(timeout()), this, SLOT(proccessSingleStep()));
     setStepTimerInterval(ui->stepTimeSpinBox->value());
@@ -27,7 +30,8 @@ void TMMainWindow::setStepTimerInterval(int interval) {
 }
 
 void TMMainWindow::setupTapeWidget() {
-    updateTape();
+    //updateTape();
+    ui->tapeWidget->setModel(&tapeModel);
 }
 
 void TMMainWindow::updateTape() {
@@ -38,11 +42,11 @@ void TMMainWindow::updateTape() {
 }
 
 void TMMainWindow::setTapeWidgetCharacterAt(const size_t pos, const char sign) {
-    ui->tapeWidget->setItem(0, pos, new QTableWidgetItem(QString(sign)));
+    //ui->tapeWidget->setItem(0, pos, new QTableWidgetItem(QString(sign)));
 }
 
 void TMMainWindow::setCurrentPositionInTapeWidgetAt(const size_t pos) {
-    ui->tapeWidget->setCurrentCell(0, pos);
+    //ui->tapeWidget->setCurrentCell(0, pos);
 }
 
 void TMMainWindow::handleCompilation() {

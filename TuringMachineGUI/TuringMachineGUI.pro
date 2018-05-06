@@ -25,11 +25,13 @@ SOURCES += main.cpp \
         ../src/TMControlGraph.cpp \
         ../src/TMAlphabet.cpp \
     GraphTableWidget.cpp \
-    TMExceptionDialog.cpp
+    TMExceptionDialog.cpp \
+    tmtapemodel.cpp
 
 HEADERS  += TMMainWindow.h \
     GraphTableWidget.h \
-    TMExceptionDialog.h
+    TMExceptionDialog.h \
+    tmtapemodel.h
 
 INCLUDEPATH += ../include
 
