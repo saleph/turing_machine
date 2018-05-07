@@ -5,20 +5,20 @@ TMGraphModel::TMGraphModel(QObject *parent)
 {
 }
 
-//QVariant TMGraphModel::headerData(int section, Qt::Orientation orientation, int role) const
-//{
-//    // FIXME: Implement me!
-//}
+QVariant TMGraphModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    // FIXME: Implement me!
+}
 
-//bool TMGraphModel::setHeaderData(int section, Qt::Orientation orientation, const QVariant &value, int role)
-//{
-//    if (value != headerData(section, orientation, role)) {
-//        // FIXME: Implement me!
-//        emit headerDataChanged(orientation, section, section);
-//        return true;
-//    }
-//    return false;
-//}
+bool TMGraphModel::setHeaderData(int section, Qt::Orientation orientation, const QVariant &value, int role)
+{
+    if (value != headerData(section, orientation, role)) {
+        // FIXME: Implement me!
+        emit headerDataChanged(orientation, section, section);
+        return true;
+    }
+    return false;
+}
 
 int TMGraphModel::rowCount(const QModelIndex &parent) const
 {

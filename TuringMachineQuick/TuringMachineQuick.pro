@@ -22,11 +22,13 @@ SOURCES += \
     ../src/TMCommandParser.cpp \
     ../src/TMControlGraph.cpp \
     ../src/TMAlphabet.cpp\
-    tmtapemodel.cpp
+    tmtapemodel.cpp \
+    tmgraphmodel.cpp
 
 HEADERS += \
     tmtapemodel.h \
-    main.h
+    main.h \
+    tmgraphmodel.h
 
 INCLUDEPATH += ../include
 
