@@ -7,7 +7,7 @@ import QtQuick.Window 2.1
 ApplicationWindow {
     id: applicationWindow
     visible: true
-    width: 640
+    width: 800
     height: 480
     title: qsTr("Turing Machine Simulator")
     signal openFileRequest(var url)
@@ -113,33 +113,44 @@ ApplicationWindow {
     }
 
     ScrollView {
+        property int graphWidth: 300
         id: graphScrollView
         x: 391
         y: 140
-        width: 200
+        width: graphWidth
         height: 291
+        clip: true
 
         ListView {
             id: graphView
+            highlightMoveDuration: 2
             anchors.fill: parent
             objectName: "graphView"
             model: graphModel
-            delegate: Rectangle {
-                    height: 25
-                    width: 100
-                    Text { text: modelData }
+            delegate: TextEdit {
+                height: 25
+                width: graphScrollView.width
+                color: "transparent"
+                Text { text: modelData }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: graphView.currentIndex = index
                 }
-//            delegate: TextField {
-//                x: 5
-//                width: 80
-//                height: 40
-//                Row {
-//                    Text {
-//                        text: modelData
-//                        anchors.verticalCenter: parent.verticalCenter
-//                    }
-//                }
-//            }
+            }
+
+            highlight: Rectangle {
+                height: 25
+                width: graphScrollView.width
+                color: "lightblue"
+                clip: true
+            }
+
+            Connections {
+                target: controllerObject
+                onCommandIdChangeInGraph: {
+                    graphView.currentIndex = newIndex
+                }
+            }
         }
     }
 

@@ -22,12 +22,15 @@ public:
     TMMain(int argc, char *argv[])
         : app(argc, argv), tapeModel(nullptr, api.tape)
     {
+        graphModel << "unod" << "duo";
         QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
         engine.rootContext()->setContextProperty("tapeModel", &tapeModel);
+        engine.rootContext()->setContextProperty("controllerObject", this);
         engine.rootContext()->setContextProperty("graphModel", QVariant::fromValue(graphModel));
         engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
         if (engine.rootObjects().isEmpty())
             exit(-1);
+
 
         QObject *root = engine.rootObjects().first();
         QObject::connect(root, SIGNAL(openFileRequest(QVariant)), this, SLOT(handleLoadingFromFile(QVariant)));
@@ -38,6 +41,9 @@ public:
     int exec() {
         return app.exec();
     }
+signals:
+    void commandIdChangeInGraph(int newIndex);
+
 public slots:
     void handleLoadingFromFile(QVariant name) {
         QString filename = name.toUrl().path();
@@ -45,8 +51,8 @@ public slots:
             auto fn = filename.toStdString();
             api.getDataFromFile(fn);
             updateWholeMainWindow();
-//            handleGraphCompilation();
-//            handleTurningBackGraphToStartPosition();
+            handleGraphCompilation();
+            handleTurningBackGraphToStartPosition();
         } catch (const TMException& e) {
             throwExceptionDialogWith(e.what());
             qDebug() << "elo2";
@@ -63,8 +69,8 @@ public slots:
         } catch (const TMException& e) {
             throwExceptionDialogWith(e.what());
         }
-        updateTapeWithOnlyRecentlyDidStep();
-//        updateRowSelectedInGraphWidget();
+//        updateTapeWithOnlyRecentlyDidStep();
+        updateRowSelectedInGraphWidget();
     }
 
 private:
@@ -128,7 +134,18 @@ private:
                 Q_ARG(QVariant, QVariant(QString::fromStdString(msg))));
     }
 
+    void updateRowSelectedInGraphWidget() {
+        emit commandIdChangeInGraph(api.getLocationOfLastCommand());
+    }
 
+    void handleTurningBackGraphToStartPosition() {
+        try {
+            api.turnBackGraphToStartPosition();
+        } catch (const TMException& e) {
+            throwExceptionDialogWith(e.what());
+        }
+        updateRowSelectedInGraphWidget();
+    }
     void updateTapeWithOnlyRecentlyDidStep() {
 //        std::pair<size_t, char> recentChange = api.getPositionAndCharacterRecentlyChangedByStep();
 //        setTapeWidgetCharacterAt(recentChange.first, recentChange.second);
