@@ -22,7 +22,6 @@ public:
     TMMain(int argc, char *argv[])
         : app(argc, argv), tapeModel(nullptr, api.tape)
     {
-        graphModel << "unod" << "duo";
         QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
         engine.rootContext()->setContextProperty("tapeModel", &tapeModel);
         engine.rootContext()->setContextProperty("controllerObject", this);
@@ -36,6 +35,7 @@ public:
         QObject::connect(root, SIGNAL(openFileRequest(QVariant)), this, SLOT(handleLoadingFromFile(QVariant)));
         QObject::connect(root, SIGNAL(compileAction()), this, SLOT(handleCompilation()));
         QObject::connect(root, SIGNAL(singleStepAction()), this, SLOT(handleSingleStepping()));
+        QObject::connect(root, SIGNAL(headMoved(QVariant)), this, SLOT(headMovedOnGui(QVariant)));
     }
     ~TMMain() { }
     int exec() {
@@ -43,6 +43,7 @@ public:
     }
 signals:
     void commandIdChangeInGraph(int newIndex);
+    void headPositionChanged(int newIndex);
 
 public slots:
     void handleLoadingFromFile(QVariant name) {
@@ -69,14 +70,19 @@ public slots:
         } catch (const TMException& e) {
             throwExceptionDialogWith(e.what());
         }
-//        updateTapeWithOnlyRecentlyDidStep();
+        updateTapeWithOnlyRecentlyDidStep();
         updateRowSelectedInGraphWidget();
+    }
+
+    void headMovedOnGui(QVariant position) {
+        api.setHeadPosition(position.toInt());
     }
 
 private:
     void updateWholeMainWindow() {
         updateGraphTextEdit();
         updateGraphWidget();
+        updateAlphabetFromApi();
     }
 
     void updateGraphTextEdit() {
@@ -96,24 +102,29 @@ private:
         engine.rootContext()->setContextProperty("graphModel", QVariant::fromValue(graphModel));
     }
 
+    void updateAlphabetFromApi() {
+        QObject *alphabetEdit = engine.rootObjects().first()->findChild<QObject*>("alphabetEdit");
+        QVariant alphabet = QString::fromStdString(api.getAlphabet());
+        alphabetEdit->setProperty("text", alphabet);
+    }
+
     void handleGraphCompilation() {
         try {
             insertAlphabetToApi();
-    //        insertGraphFromWidgetToApi();
             insertTextEditGraphToApi();
             updateGraphWidget();
             api.compileInsertedGraph();
             api.turnBackGraphToStartPosition();
-//            handleTurningBackGraphToStartPosition();
-//            putToStatusBar(tr("Compiled successfully"));
+            handleTurningBackGraphToStartPosition();
         } catch (const TMException& e) {
             throwExceptionDialogWith(e.what());
         }
     }
 
     void insertAlphabetToApi() {
-//        const std::string alphabet = ui->alphabetLineEdit->text().toStdString();
-//        api.insertAlphabet(alphabet);
+        QObject *alphabetEdit = engine.rootObjects().first()->findChild<QObject*>("alphabetEdit");
+        const std::string alphabet = alphabetEdit->property("text").toString().toStdString();
+        api.insertAlphabet(alphabet);
     }
 
     void insertTextEditGraphToApi() {
@@ -145,11 +156,10 @@ private:
             throwExceptionDialogWith(e.what());
         }
         updateRowSelectedInGraphWidget();
+        updateTapeWithOnlyRecentlyDidStep();
     }
     void updateTapeWithOnlyRecentlyDidStep() {
-//        std::pair<size_t, char> recentChange = api.getPositionAndCharacterRecentlyChangedByStep();
-//        setTapeWidgetCharacterAt(recentChange.first, recentChange.second);
-//        setCurrentPositionInTapeWidgetAt(api.tape->getHeadPosition());
+        emit headPositionChanged(api.tape->getHeadPosition());
     }
 };
 

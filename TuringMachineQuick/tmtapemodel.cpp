@@ -40,7 +40,7 @@ QVariant TMTapeModel::data(const QModelIndex &index, int role) const
     if (!index.isValid())
         return QVariant();
 
-    if (role == Qt::DisplayRole || role == Qt::EditRole) {
+    if (role == Qt::DisplayRole) {
         auto pos = index.row();
         return QVariant(QString(tape->at(pos)));
     }
